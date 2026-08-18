@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/valto/capability-documentation/schema/capability-definition.schema.json",
+  "title": "Capability Definition",
+  "description": "Draft 0.1 machine-readable representation of the required Capability Documentation core.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "definition",
+    "capabilityPurpose",
+    "boundaries",
+    "meaningfulOutcome",
+    "interactionContracts",
+    "rulesInvariants",
+    "recommendedDefaults",
+    "unknowns"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri-reference",
+      "description": "Optional schema reference for a structured instance."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable concise capability name."
+    },
+    "definition": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Implementation-agnostic description of the ability."
+    },
+    "capabilityPurpose": {
+      "type": "string",
+      "minLength": 1,
+      "description": "General outcome the ability exists to enable."
+    },
+    "boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["includes", "excludes"],
+      "properties": {
+        "includes": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        },
+        "excludes": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "meaningfulOutcome": {
+      "type": "string",
+      "minLength": 1
+    },
+    "interactionContracts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/interactionContract"}
+    },
+    "rulesInvariants": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/statement"}
+    },
+    "recommendedDefaults": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/statement"}
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "terms": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "realizations": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/realization"}
+    },
+    "provenance": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/statement"}
+    }
+  },
+  "$defs": {
+    "interactionContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "actor",
+        "commandIntent",
+        "currentState",
+        "policiesInvariants",
+        "transition",
+        "result",
+        "eventsEffects"
+      ],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "actor": {"type": "string", "minLength": 1},
+        "commandIntent": {"type": "string", "minLength": 1},
+        "currentState": {"type": "string", "minLength": 1},
+        "policiesInvariants": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/statement"}
+        },
+        "transition": {"type": "string", "minLength": 1},
+        "result": {"type": "string", "minLength": 1},
+        "eventsEffects": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        },
+        "unknowns": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "statement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "semanticClass", "evidenceStatus"],
+      "properties": {
+        "text": {"type": "string", "minLength": 1},
+        "semanticClass": {
+          "type": "string",
+          "enum": [
+            "capability-purpose",
+            "rationale-intent",
+            "rule-invariant",
+            "recommended-default",
+            "example",
+            "implementation-choice",
+            "operational-constraint",
+            "unknown-unresolved"
+          ]
+        },
+        "evidenceStatus": {
+          "type": "string",
+          "enum": ["explicit-fact", "reasonable-inference", "unknown-unresolved"]
+        },
+        "source": {"type": "string"}
+      }
+    },
+    "realization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "kind"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "kind": {
+          "type": "string",
+          "enum": ["software", "agent", "software-agent", "agent-built-software", "unknown"]
+        },
+        "rationaleIntent": {"type": "string"},
+        "operationalConstraints": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/statement"}
+        },
+        "exposure": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["ui", "api", "mcp", "tool", "event", "workflow", "internal"]
+          },
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}

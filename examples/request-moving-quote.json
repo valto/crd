@@ -1,0 +1,117 @@
+{
+  "$schema": "../schema/capability-definition.schema.json",
+  "name": "Request a moving quote",
+  "definition": "Enable a prospective customer or authorized caller to submit sufficient moving details for a provider to begin the quote process.",
+  "capabilityPurpose": "Enable a move to be presented to a provider for quote consideration.",
+  "boundaries": {
+    "includes": [
+      "Collecting and submitting move details",
+      "Validating the request",
+      "Communicating the immediate submission outcome"
+    ],
+    "excludes": [
+      "Calculating the final price",
+      "Accepting a quote",
+      "Scheduling a move",
+      "Payment",
+      "Ongoing quote-status tracking"
+    ]
+  },
+  "meaningfulOutcome": "A quote request is accepted for processing, rejected with an intelligible reason, or identified as requiring more information.",
+  "interactionContracts": [
+    {
+      "name": "Create draft quote request",
+      "actor": "Prospective customer or authorized agent",
+      "commandIntent": "Begin a quote request",
+      "currentState": "No draft request exists for this interaction",
+      "policiesInvariants": [],
+      "transition": "No request to draft quote request",
+      "result": "Draft request available for completion",
+      "eventsEffects": ["QuoteRequestDraftCreated (example)"],
+      "unknowns": ["Draft retention", "Identity requirements"]
+    },
+    {
+      "name": "Validate quote request",
+      "actor": "Prospective customer, authorized agent, or system",
+      "commandIntent": "Validate supplied move details",
+      "currentState": "Draft quote request",
+      "policiesInvariants": [
+        {
+          "text": "A request requires sufficient contact and move details.",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "reasonable-inference",
+          "source": "Illustrative example"
+        }
+      ],
+      "transition": "Draft request remains draft with validation result",
+      "result": "Valid, missing information, or unsupported move",
+      "eventsEffects": [],
+      "unknowns": ["Exact required fields", "Service-area definition"]
+    },
+    {
+      "name": "Submit quote request",
+      "actor": "Prospective customer or authorized agent",
+      "commandIntent": "Submit a valid quote request",
+      "currentState": "Valid draft quote request",
+      "policiesInvariants": [
+        {
+          "text": "The request must satisfy applicable validation rules.",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "reasonable-inference",
+          "source": "Illustrative example"
+        }
+      ],
+      "transition": "Valid draft to submitted request",
+      "result": "Submission confirmation or intelligible rejection",
+      "eventsEffects": ["QuoteRequestSubmitted", "Confirmation delivery may be requested"],
+      "unknowns": ["Idempotency", "Routing", "Confirmation channel"]
+    }
+  ],
+  "rulesInvariants": [
+    {
+      "text": "A submission requires sufficient information to identify the requester and proposed move.",
+      "semanticClass": "rule-invariant",
+      "evidenceStatus": "reasonable-inference",
+      "source": "Illustrative example"
+    }
+  ],
+  "recommendedDefaults": [
+    {
+      "text": "Preserve the draft when validation finds missing information.",
+      "semanticClass": "recommended-default",
+      "evidenceStatus": "reasonable-inference",
+      "source": "Illustrative example"
+    }
+  ],
+  "unknowns": [
+    "Exact data schema",
+    "Provider rules",
+    "Authorization model",
+    "Operational workflow"
+  ],
+  "terms": ["quote request", "move details", "serviceable route", "submission outcome"],
+  "realizations": [
+    {
+      "name": "Illustrative provider realization",
+      "kind": "software-agent",
+      "rationaleIntent": "A provider may implement this to obtain qualified leads; this is not part of the reusable capability purpose.",
+      "operationalConstraints": [
+        {
+          "text": "The provider may serve only configured geographic areas.",
+          "semanticClass": "operational-constraint",
+          "evidenceStatus": "reasonable-inference",
+          "source": "Illustrative example"
+        }
+      ],
+      "exposure": ["ui", "api", "tool"]
+    }
+  ],
+  "provenance": [
+    {
+      "text": "This instance is illustrative and not a specification for a particular provider.",
+      "semanticClass": "example",
+      "evidenceStatus": "explicit-fact",
+      "source": "examples/request-moving-quote.json"
+    }
+  ]
+}
