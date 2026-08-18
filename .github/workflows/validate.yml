@@ -1,0 +1,17 @@
+name: Validate Capability Documentation
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Validate structured examples
+        run: python3 scripts/validate.py
