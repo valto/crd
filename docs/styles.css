@@ -49,6 +49,11 @@ h3 { font-size: 1.18rem; }
 .primary:hover { background: var(--accent-dark); color: #fff; }
 .secondary { border: 1px solid var(--line); color: var(--ink); }
 .secondary:hover { border-color: var(--accent); color: var(--accent-dark); }
+.positioning-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 58px; }
+.positioning-grid article { padding: 22px 23px; border-top: 3px solid var(--accent); background: var(--surface); }
+.positioning-grid .eyebrow { margin-bottom: 9px; }
+.positioning-grid h2 { font-size: 1.2rem; letter-spacing: -.025em; }
+.positioning-grid p:last-child { margin: 11px 0 0; color: var(--muted); font-size: .95rem; }
 
 .section { padding: 86px 0; }
 .section-intro { max-width: 690px; margin-bottom: 39px; }
@@ -113,6 +118,7 @@ h3 { font-size: 1.18rem; }
   .header-content { min-height: 62px; }
   nav { gap: 14px; font-size: .87rem; }
   .hero { padding: 78px 16px 72px; margin-left: 0; }
+  .positioning-grid { grid-template-columns: 1fr; margin-top: 40px; }
   .model-flow { grid-template-columns: 1fr; }
   .arrow { justify-self: center; transform: rotate(90deg); }
   .split, .callout { grid-template-columns: 1fr; gap: 26px; }
