@@ -1,11 +1,11 @@
 cff-version: 1.2.0
-message: "If you use Capability Requirements Documentation (CRD), please cite it as below."
-title: "Capability Requirements Documentation (CRD)"
-version: "0.2.0"
+message: "If you use Capability Documentation or its CRD specification, please cite it as below."
+title: "Capability Documentation: CRD Specification"
+version: "0.3.0"
 date-released: 2026-08-20
 license: "CC-BY-4.0"
 authors:
   - family-names: "Loikkanen"
     given-names: "Valto"
-repository-code: "https://github.com/valto/capability-requirements-documentation"
-url: "https://github.com/valto/capability-requirements-documentation"
+repository-code: "https://github.com/valto/crd"
+url: "https://github.com/valto/crd"

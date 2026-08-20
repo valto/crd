@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0 — 2026-08-20
+
+- Refined the vocabulary: **Capability Documentation** is the framework; **Capability Requirements Document (CRD)** is the canonical artifact for one Capability MLE.
+- Added Capability Inventory and Operational Capability Documentation as distinct concepts.
+- Clarified that a CRD can exist independently of a PRD in a reusable or open inventory.
+
 ## 0.2.0 — 2026-08-20
 
 - Renamed the project from the working name “Capability Documentation” to **Capability Requirements Documentation (CRD)**.

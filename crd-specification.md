@@ -1,10 +1,12 @@
-# Capability Requirements Documentation (CRD) Specification
+# Capability Documentation: CRD Specification
 
-Status: Draft 0.2
+Status: Draft 0.3
 
 ## 1. Purpose
 
-Capability Requirements Documentation (CRD) is the common, implementation- and technology-agnostic way to express the requirements of a complete capability. A **Capability Requirements Document (CRD)** gives humans, agents, applications, and developers a shared basis to understand, use, build, compose, and operate that capability.
+**Capability Documentation** is the common, implementation- and technology-agnostic framework through which humans, agents, applications, and developers can understand, use, build, compose, and operate capabilities.
+
+Its canonical per-capability artifact is a **Capability Requirements Document (CRD)**: the requirement document for one Capability MLE. A CRD defines what must remain meaningful and true regardless of whether the capability is realized through software, an agent, MCP, an API, UI, or a future mechanism.
 
 This specification preserves the Minimum Logical Element (MLE) principle: the document requires only the information necessary for a capability to retain contextual logical meaning. Detail that belongs to a particular implementation is optional.
 
@@ -36,7 +38,13 @@ An interaction contract is independent of whether it is exposed through a UI, AP
 
 A realization is a particular operational implementation of a capability or interaction contract. A capability can have zero, one, or many realizations. A realization can be software, an agent, software plus agents, or agent-built software.
 
-### 3.4 Cardinality
+**Operational Capability Documentation** describes the current realization of a CRD in a particular service or system. It records realization-specific rationale, constraints, exposures, dependencies, evidence, and operating context without changing the reusable CRD itself.
+
+### 3.4 Capability Inventory
+
+A Capability Inventory is a catalogue of available or planned Capability MLEs. Each entry SHOULD link to a CRD when one exists. A CRD MAY exist independently in a reusable or open inventory; it does not require a Product Requirements Document (PRD) above it.
+
+### 3.5 Cardinality
 
 A capability MAY have one or many interaction contracts. A contract MAY have one or many realizations. The same component, endpoint, function, or tool MAY support multiple capabilities. No one-to-one mapping is implied.
 

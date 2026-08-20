@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Capability Inventory for Capability Documentation and CRDs" />
+    <title>Capability Inventory — Capability Documentation</title><link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  </head>
+  <body>
+    <header class="site-header"><div class="shell header-content"><a class="brand" href="index.html"><img class="brand-mark" src="assets/crd-mark.png" alt="" /><span>Capability Documentation</span></a><nav aria-label="Primary navigation"><a href="specification.html">CRD Specification</a><a href="template.html">CRD Template</a><a href="https://github.com/valto/crd">Repository</a></nav></div></header>
+    <main>
+      <section class="doc-hero"><div class="shell"><p class="eyebrow">Catalogue</p><h1>Capability Inventory</h1><p class="lede">A discoverable catalogue of available or planned Capability MLEs. It links to CRDs when they exist but does not require a Product Requirements Document above it.</p><div class="meta-links"><a href="https://github.com/valto/crd/blob/main/capability-inventory.md">View Markdown source ↗</a></div></div></section>
+      <article class="doc-content">
+        <section><h2>Purpose</h2><p>An inventory makes reusable and planned capabilities visible across products, services, agents, and applications. A CRD may be linked from a product or PRD, but it can also stand alone in an open inventory.</p></section>
+        <section><h2>Inventory entry</h2><table><thead><tr><th>Field</th><th>Meaning</th></tr></thead><tbody><tr><td><code>id</code></td><td>Stable identifier.</td></tr><tr><td><code>name</code></td><td>Capability MLE name.</td></tr><tr><td><code>status</code></td><td>planned, draft, active, deprecated, or unknown.</td></tr><tr><td><code>purpose</code></td><td>One-line general outcome enabled by the capability.</td></tr><tr><td><code>CRD</code></td><td>Link or reference to the Capability Requirements Document, if available.</td></tr><tr><td><code>realization status</code></td><td>Available, partial, planned, deprecated, or unknown.</td></tr><tr><td><code>notes</code></td><td>Important discovery, boundary, or unknown note.</td></tr></tbody></table></section>
+        <section><h2>Illustrative entry</h2><table><thead><tr><th>id</th><th>name</th><th>status</th><th>purpose</th><th>CRD</th><th>realization</th></tr></thead><tbody><tr><td><code>moving.quote.request</code></td><td>Request a moving quote</td><td>draft</td><td>Enable a move to be presented to a provider for quote consideration.</td><td><a href="examples/request-moving-quote.html">Example CRD</a></td><td>illustrative</td></tr></tbody></table></section>
+        <section><h2>Independent reuse</h2><div class="note"><p><strong>Schedule a meeting</strong> can have one reusable CRD and be realized differently by many products. The inventory makes that common capability discoverable without making any one product’s PRD its owner.</p></div></section>
+      </article>
+    </main>
+    <footer class="site-footer"><div class="shell footer-content"><p>Capability Documentation by Valto Loikkanen.</p><p><a href="https://github.com/valto/crd/blob/main/LICENSE">CC BY 4.0</a> · <a href="index.html">Home</a></p></div></footer>
+  </body>
+</html>

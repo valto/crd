@@ -1,26 +1,36 @@
-# Capability Requirements Documentation (CRD)
+# Capability Documentation
 
-Draft 0.2 — a technology- and implementation-agnostic method for defining capability requirements so that humans, agents, applications, and developers can understand, use, build, compose, and operate complete capabilities.
+Draft 0.3 — an open, technology- and implementation-agnostic framework for defining, cataloguing, and operating complete capabilities.
+
+The canonical artifact is a **Capability Requirements Document (CRD)**: the requirement document for one Capability MLE. A CRD can be created before implementation or derived from existing systems, and it remains independent of whether the capability is realized through software, agents, MCP, APIs, UI, or a future mechanism.
 
 This is an early, reviewable specification draft. It is not a software runtime, a required product-management process, or an attempt to replace domain-specific documentation.
 
 ## Core model
 
 ```text
-Product / Service / Application
-  └─ Capability MLE
-       └─ one or more Interaction Contract MLEs
-            └─ one or more Realizations
+Capability Documentation
+  ├─ Capability Inventory
+  │    └─ Capability MLE
+  │         └─ Capability Requirements Document (CRD)
+  │              ├─ one or more Interaction Contract MLEs
+  │              └─ Operational Capability Documentation
+  │                   └─ one or more Realizations
 ```
 
+- **Capability Documentation**: the overall methodology, open standard, and resource.
+- **Capability Inventory**: a catalogue of available or planned Capability MLEs and their CRDs.
 - **Capability MLE**: the smallest complete, contextually meaningful ability that produces a meaningful outcome.
+- **Capability Requirements Document (CRD)**: the canonical technology- and implementation-agnostic specification of one Capability MLE.
 - **Interaction Contract MLE**: the smallest contextually meaningful executable behaviour.
+- **Operational Capability Documentation**: documentation of a CRD’s current realization in a particular service or system.
 - **Realization**: a software, agent, or combined implementation of a capability or interaction contract.
 
 ## Package
 
 - [CRD Specification](crd-specification.md) — semantic model and conformance rules.
 - [CRD template](crd-template.md) — minimal document form with optional extensions.
+- [Capability Inventory](capability-inventory.md) — a lightweight catalogue form for available or planned Capability MLEs.
 - [Agent transformation instructions](agent-transformation-instructions.md) — derive documentation from existing material without inventing facts.
 - [Worked example](examples/request-moving-quote.md) — an illustrative CRD and realization.
 - [JSON Schema](schema/crd.schema.json) — portable machine-readable representation of the required core.
@@ -45,4 +55,4 @@ The initial draft deliberately does not prescribe a single serialization format,
 
 ## Compatibility note
 
-The draft was originally published under the working name **Capability Documentation**. It now uses **Capability Requirements Documentation (CRD)**; prior repository links redirect to the new location.
+The project was briefly published under the name **Capability Requirements Documentation (CRD)**. The refined vocabulary restores **Capability Documentation** as the overall framework and reserves **CRD** for the canonical per-capability artifact.
