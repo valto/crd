@@ -84,6 +84,21 @@
     "provenance": {
       "type": "array",
       "items": {"$ref": "#/$defs/statement"}
+    },
+    "sharedElements": {
+      "type": "array",
+      "description": "Optional provenance and approved-reuse declarations for shared lower-level elements.",
+      "items": {"$ref": "#/$defs/sharedElement"}
+    },
+    "agenticMappings": {
+      "type": "array",
+      "description": "Optional mappings between this capability and agentic skills or tools.",
+      "items": {"$ref": "#/$defs/agenticMapping"}
+    },
+    "audienceProjections": {
+      "type": "array",
+      "description": "Optional links or references to audience-specific views derived from this CRD.",
+      "items": {"$ref": "#/$defs/audienceProjection"}
     }
   },
   "$defs": {
@@ -133,6 +148,7 @@
             "capability-purpose",
             "rationale-intent",
             "rule-invariant",
+            "implementation-requirement",
             "recommended-default",
             "example",
             "implementation-choice",
@@ -150,7 +166,7 @@
     "realization": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["name", "kind"],
+      "required": ["name", "kind", "executionMode"],
       "properties": {
         "name": {"type": "string", "minLength": 1},
         "kind": {
@@ -158,6 +174,19 @@
           "enum": ["software", "agent", "software-agent", "agent-built-software", "unknown"]
         },
         "rationaleIntent": {"type": "string"},
+        "executionMode": {
+          "type": "string",
+          "enum": [
+            "software-primary",
+            "agent-primary-using-software",
+            "software-primary-calling-agents",
+            "unknown"
+          ]
+        },
+        "implementationRequirements": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/statement"}
+        },
         "operationalConstraints": {
           "type": "array",
           "items": {"$ref": "#/$defs/statement"}
@@ -170,6 +199,57 @@
           },
           "uniqueItems": true
         }
+      }
+    },
+    "sharedElement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "createdFor", "approvedReuse"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "kind": {
+          "type": "string",
+          "enum": ["component", "schema", "prompt", "workflow", "tool", "skill", "test", "other"]
+        },
+        "createdFor": {"type": "string", "minLength": 1},
+        "approvedReuse": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "notes": {"type": "string"}
+      }
+    },
+    "agenticMapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "relationship"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "kind": {"type": "string", "enum": ["skill", "tool"]},
+        "relationship": {
+          "type": "string",
+          "enum": ["realizes-capability", "bundles-capabilities", "supports-contract", "supports-capability", "unknown"]
+        },
+        "capabilityRefs": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "notes": {"type": "string"}
+      }
+    },
+    "audienceProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["audience", "reference"],
+      "properties": {
+        "audience": {
+          "type": "string",
+          "enum": ["business-domain", "ux", "frontend", "backend", "api-mcp-tools", "agent", "operations"]
+        },
+        "reference": {"type": "string", "minLength": 1},
+        "notes": {"type": "string"}
       }
     }
   }

@@ -94,7 +94,16 @@
     {
       "name": "Illustrative provider realization",
       "kind": "software-agent",
+      "executionMode": "software-primary-calling-agents",
       "rationaleIntent": "A provider may implement this to obtain qualified leads; this is not part of the reusable capability purpose.",
+      "implementationRequirements": [
+        {
+          "text": "The provider must validate the service area before accepting a submission.",
+          "semanticClass": "implementation-requirement",
+          "evidenceStatus": "reasonable-inference",
+          "source": "Illustrative example"
+        }
+      ],
       "operationalConstraints": [
         {
           "text": "The provider may serve only configured geographic areas.",
@@ -104,6 +113,30 @@
         }
       ],
       "exposure": ["ui", "api", "tool"]
+    }
+  ],
+  "sharedElements": [
+    {
+      "id": "customer-identity-validation",
+      "kind": "tool",
+      "createdFor": "customer-onboarding",
+      "approvedReuse": ["request-moving-quote"],
+      "notes": "Illustrative reuse declaration; actual approval must be evidenced."
+    }
+  ],
+  "agenticMappings": [
+    {
+      "id": "moving-quote-assistant",
+      "kind": "skill",
+      "relationship": "realizes-capability",
+      "capabilityRefs": ["request-moving-quote"],
+      "notes": "Illustrative skill mapping."
+    },
+    {
+      "id": "submit-quote-request",
+      "kind": "tool",
+      "relationship": "supports-contract",
+      "notes": "Illustrative tool mapping for Submit quote request."
     }
   ],
   "provenance": [

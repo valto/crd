@@ -41,6 +41,15 @@ def validate_example(schema: dict[str, object], path: Path) -> None:
     contract_required = definitions["interactionContract"]["required"]
     statement_classes = set(definitions["statement"]["properties"]["semanticClass"]["enum"])
     evidence_statuses = set(definitions["statement"]["properties"]["evidenceStatus"]["enum"])
+    realization_schema = definitions["realization"]
+    execution_modes = set(realization_schema["properties"]["executionMode"]["enum"])
+    shared_schema = definitions["sharedElement"]
+    shared_kinds = set(shared_schema["properties"]["kind"]["enum"])
+    mapping_schema = definitions["agenticMapping"]
+    mapping_kinds = set(mapping_schema["properties"]["kind"]["enum"])
+    mapping_relationships = set(mapping_schema["properties"]["relationship"]["enum"])
+    projection_schema = definitions["audienceProjection"]
+    audiences = set(projection_schema["properties"]["audience"]["enum"])
 
     contracts = instance["interactionContracts"]
     if not isinstance(contracts, list) or not contracts:
@@ -50,12 +59,43 @@ def validate_example(schema: dict[str, object], path: Path) -> None:
             raise ValueError(f"{path.relative_to(ROOT)}: interaction contract {index} must be an object")
         assert_fields(contract, contract_required, f"{path.relative_to(ROOT)} contract {index}")
 
+    realizations = instance.get("realizations", [])
+    if not isinstance(realizations, list):
+        raise ValueError(f"{path.relative_to(ROOT)}: realizations must be an array")
+    for realization in realizations:
+        if not isinstance(realization, dict):
+            raise ValueError(f"{path.relative_to(ROOT)}: realization must be an object")
+        if "executionMode" in realization and realization["executionMode"] not in execution_modes:
+            raise ValueError(f"{path.relative_to(ROOT)}: unsupported execution mode")
+
+    for element in instance.get("sharedElements", []):
+        if not isinstance(element, dict):
+            raise ValueError(f"{path.relative_to(ROOT)}: shared element must be an object")
+        assert_fields(element, shared_schema["required"], str(path.relative_to(ROOT)))
+        if element["kind"] not in shared_kinds:
+            raise ValueError(f"{path.relative_to(ROOT)}: unsupported shared-element kind")
+
+    for mapping in instance.get("agenticMappings", []):
+        if not isinstance(mapping, dict):
+            raise ValueError(f"{path.relative_to(ROOT)}: agentic mapping must be an object")
+        assert_fields(mapping, mapping_schema["required"], str(path.relative_to(ROOT)))
+        if mapping["kind"] not in mapping_kinds or mapping["relationship"] not in mapping_relationships:
+            raise ValueError(f"{path.relative_to(ROOT)}: unsupported agentic mapping")
+
+    for projection in instance.get("audienceProjections", []):
+        if not isinstance(projection, dict):
+            raise ValueError(f"{path.relative_to(ROOT)}: audience projection must be an object")
+        assert_fields(projection, projection_schema["required"], str(path.relative_to(ROOT)))
+        if projection["audience"] not in audiences:
+            raise ValueError(f"{path.relative_to(ROOT)}: unsupported audience projection")
+
     statement_groups = [
         instance["rulesInvariants"],
         instance["recommendedDefaults"],
         instance.get("provenance", []),
         *(contract["policiesInvariants"] for contract in contracts),
-        *(realization.get("operationalConstraints", []) for realization in instance.get("realizations", [])),
+        *(realization.get("operationalConstraints", []) for realization in realizations),
+        *(realization.get("implementationRequirements", []) for realization in realizations),
     ]
     for group in statement_groups:
         if not isinstance(group, list):

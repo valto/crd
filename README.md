@@ -1,6 +1,6 @@
 # Capability Documentation
 
-Draft 0.3 — an open, technology- and implementation-agnostic framework for defining, cataloguing, and operating complete capabilities.
+Draft 0.4 — an open, technology- and implementation-agnostic framework for defining, cataloguing, and operating complete capabilities.
 
 The canonical artifact is a **Capability Requirements Document (CRD)**: the requirement document for one Capability MLE. A capability may belong to a product, service, system, agent, or reusable open inventory; a CRD can be created before implementation or derived from existing systems, and it remains independent of any one realization mechanism.
 
@@ -46,9 +46,11 @@ Capability Documentation
 - [CRD Specification](crd-specification.md) — semantic model and conformance rules.
 - [CRD template](crd-template.md) — minimal document form with optional extensions.
 - [Minimum Logical Element (MLE)](minimum-logical-element.md) — origin, rationale, and the conceptual path to CRDs.
+- [Working with CRDs](working-with-crds.md) — precedence, shared-element reuse, skill/tool mapping, audience projections, and why CRD is not merely a feature.
 - [Capability Inventory](capability-inventory.md) — a lightweight catalogue form for available or planned Capability MLEs.
 - [Agent transformation instructions](agent-transformation-instructions.md) — derive documentation from existing material without inventing facts.
 - [Worked example](examples/request-moving-quote.md) — an illustrative CRD and realization.
+- [Internal-capability example](examples/reconcile-payments.md) — an illustrative internal CRD with a software-primary realization.
 - [JSON Schema](schema/crd.schema.json) — portable machine-readable representation of the required core.
 - [JSON example](examples/request-moving-quote.json) — schema-conforming illustrative instance.
 

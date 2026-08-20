@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.0 — 2026-08-20
+
+- Added explicit realization execution modes, including the distinction between agent-primary and software-primary control.
+- Added the standard decision-precedence order for CRD consumers and agents.
+- Added optional shared-element provenance and approved-reuse declarations.
+- Added skill/tool relationship guidance and optional agentic mappings.
+- Added audience-projection guidance for business, UX, frontend, backend, API/MCP/tools, agents, and operations.
+- Added an internal `Reconcile payments` CRD example.
+- Added the Working with CRDs guide explaining why CRD is not merely a feature, PRD, API document, skill, or MCP tool.
+
 ## 0.3.0 — 2026-08-20
 
 - Refined the vocabulary: **Capability Documentation** is the framework; **Capability Requirements Document (CRD)** is the canonical artifact for one Capability MLE.

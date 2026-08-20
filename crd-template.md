@@ -39,6 +39,18 @@ Use this template for a reusable Capability Requirements Document (CRD). Remove 
 
 -
 
+### Decision precedence
+
+Apply the standard order unless a higher-level governing policy explicitly establishes another order:
+
+```text
+Rule / invariant
+→ explicit implementation requirement
+→ explicit owner or user choice
+→ recommended default
+→ agent judgment
+```
+
 ## Unknown / unresolved
 
 -
@@ -46,6 +58,7 @@ Use this template for a reusable Capability Requirements Document (CRD). Remove 
 ## Optional: operational realization
 
 - **Realization name and status:**
+- **Execution mode:** software-primary | agent-primary-using-software | software-primary-calling-agents | unknown
 - **Implementation/business rationale:**
 - **Owner / operating context:**
 - **Operational constraints:**
@@ -56,6 +69,23 @@ Use this template for a reusable Capability Requirements Document (CRD). Remove 
 - **Telemetry / audit:**
 - **Authority, grounding, approval gates:**
 - **Provenance:**
+
+## Optional: shared elements and approved reuse
+
+| Shared element | Kind | Created for capability | Approved reuse by capabilities | Notes |
+|---|---|---|---|---|
+|  | tool |  |  |  |
+
+## Optional: agentic mappings
+
+| Element | Kind | Relationship to this Capability MLE | Notes |
+|---|---|---|---|
+|  | skill | realizes one capability |  |
+|  | tool | executable primitive used by a contract |  |
+
+## Optional: audience projections
+
+List or link projections for business/domain, UX, frontend, backend, API/MCP/tools, agents, or operations. Each projection must trace back to this CRD and must not create divergent requirements.
 
 ## Statement provenance
 
