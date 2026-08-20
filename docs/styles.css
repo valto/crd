@@ -36,6 +36,10 @@ a:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; border-ra
 .brand-mark { display: block; width: 29px; height: 29px; object-fit: contain; }
 nav { display: flex; gap: 22px; font-size: .94rem; }
 nav a { text-decoration: none; }
+.github-link { display: inline-grid; width: 24px; height: 24px; place-items: center; color: var(--ink); }
+.github-link:hover { color: var(--accent); }
+.github-link svg { width: 20px; height: 20px; fill: currentColor; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
 .hero { padding: 112px 0 96px; max-width: 880px; margin-left: max(24px, calc((100% - var(--max)) / 2)); }
 .eyebrow { margin: 0 0 13px; color: var(--accent); font-size: .76rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
