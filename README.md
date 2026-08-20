@@ -53,12 +53,13 @@ Capability Documentation
 - [Internal-capability example](examples/reconcile-payments.md) — an illustrative internal CRD with a software-primary realization.
 - [JSON Schema](schema/crd.schema.json) — portable machine-readable representation of the required core.
 - [JSON example](examples/request-moving-quote.json) — schema-conforming illustrative instance.
+- [CRD Author skill](skills/crd-author/SKILL.md) — a packaged agent skill that writes CRDs (Define mode) or extracts them from existing material (Extract mode) and maintains a Capability Inventory.
 
 ## Quick start
 
 1. Read the [CRD Specification](crd-specification.md).
 2. Copy the [CRD template](crd-template.md) for a reusable capability.
-3. Use the [Agent transformation instructions](agent-transformation-instructions.md) to derive documentation from existing material without inventing facts.
+3. Use the [Agent transformation instructions](agent-transformation-instructions.md) to derive documentation from existing material without inventing facts. An agent can also run this end to end via the [CRD Author skill](skills/crd-author/SKILL.md).
 4. Validate a structured representation against the JSON Schema where machine interchange is useful.
 
 ## License and attribution

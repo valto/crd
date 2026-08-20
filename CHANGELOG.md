@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Added the CRD Author agent skill (`skills/crd-author/SKILL.md`): Define mode for new reusable CRDs, Extract mode for deriving CRDs from existing material, and a shared Capability Inventory registration step.
+
 ## 0.4.0 — 2026-08-20
 
 - Added explicit realization execution modes, including the distinction between agent-primary and software-primary control.
