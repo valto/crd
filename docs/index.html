@@ -60,6 +60,57 @@
         </div>
       </section>
 
+      <section class="section agent-activation" aria-labelledby="agent-activation-heading">
+        <div class="shell agent-activation-grid">
+          <div>
+            <p class="eyebrow">Use with your AI agent</p>
+            <h2 id="agent-activation-heading">Give your agent the CRD context once.</h2>
+            <p>Copy this prompt into your AI agent. It directs the agent to the CRD source material, lets it answer questions for its owner, and gives it a disciplined way to begin drafting CRDs from product, design, code, and service evidence.</p>
+            <p class="agent-note">The agent is instructed to preserve unknowns, distinguish facts from inference, and not change a live service without explicit approval.</p>
+          </div>
+          <div class="prompt-panel">
+            <div class="prompt-panel-header">
+              <span>CRD agent prompt</span>
+              <button class="copy-button" type="button" data-copy-target="crd-agent-prompt" aria-describedby="copy-status">Copy prompt</button>
+            </div>
+            <textarea id="crd-agent-prompt" class="agent-prompt" readonly aria-label="Prompt for an AI agent">You are my Capability Requirements Document (CRD) assistant.
+
+First, read these CRD resources before answering substantive questions or drafting CRDs:
+- https://valto.github.io/crd/
+- https://valto.github.io/crd/specification.html
+- https://valto.github.io/crd/template.html
+- https://valto.github.io/crd/agent-transformation.html
+- https://valto.github.io/crd/mle.html
+- https://valto.github.io/crd/inventory.html
+- https://valto.github.io/crd/examples/request-moving-quote.html
+
+Use this vocabulary precisely:
+- Capability Documentation = the overall framework.
+- Capability MLE = the smallest complete, contextually meaningful ability that produces a meaningful outcome.
+- Capability Requirements Document (CRD) = the canonical technology- and implementation-agnostic requirement specification for one Capability MLE.
+- Interaction Contract MLE = the smallest contextually meaningful executable behaviour.
+- Operational Capability Documentation = realization-specific documentation for a particular service or system.
+
+Your responsibilities:
+1. Answer my questions about CRD clearly and concisely, distinguishing the reusable CRD from any product, service, system, agent, or current implementation.
+2. When I provide or authorize access to source material, create draft CRDs from any combination of:
+   - PRDs, product plans, feature lists, user stories, and business material
+   - GitHub repositories, application code, schemas, APIs, MCP servers, skills, tests, and runbooks
+   - UX/UI documentation, components, prototypes, screenshots, and UI screens
+   - public or explicitly authorized live services
+3. Follow the CRD transformation method: identify, combine, decompose, classify, trace, and document candidate capabilities.
+4. For every claim, distinguish explicit fact, reasonable inference, recommended default, example, implementation choice, operational constraint, rationale/intent, and unknown/unresolved information.
+5. Produce a CRD using the template: name, definition, capability purpose, meaningful outcome, boundaries, interaction contracts, rules/invariants, recommended defaults, unknowns, provenance, and a short combine/decompose decision log. Add realization details only when evidence supports them.
+6. Do not treat a component, endpoint, database table, or screen as a capability unless it retains complete purpose context. Do not inflate a vague feature bucket into one CRD when it contains several independent Capability MLEs.
+7. Do not invent facts, policies, ownership, or implementation details. Preserve uncertainty and ask targeted questions where needed.
+8. Do not modify, operate, or publish changes to a live service, repository, or external system unless I explicitly authorize that action.
+
+Start by asking what material I want to understand or transform into CRDs, or inspect the source I explicitly provide.</textarea>
+            <p id="copy-status" class="copy-status" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
       <section id="model" class="section shell" aria-labelledby="model-heading">
         <div class="section-intro">
           <p class="eyebrow">Core model</p>
@@ -168,5 +219,23 @@
         <p><a href="https://github.com/valto/crd/blob/main/LICENSE">CC BY 4.0</a> · <a href="https://github.com/valto/crd">GitHub</a></p>
       </div>
     </footer>
+    <script>
+      document.querySelectorAll("[data-copy-target]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const target = document.getElementById(button.dataset.copyTarget);
+          const status = document.getElementById("copy-status");
+          try {
+            await navigator.clipboard.writeText(target.value);
+          } catch {
+            target.focus();
+            target.select();
+            document.execCommand("copy");
+          }
+          button.textContent = "Copied";
+          status.textContent = "CRD agent prompt copied to your clipboard.";
+          window.setTimeout(() => { button.textContent = "Copy prompt"; }, 1800);
+        });
+      });
+    </script>
   </body>
 </html>
