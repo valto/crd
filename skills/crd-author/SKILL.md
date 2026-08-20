@@ -62,7 +62,7 @@ Before presenting output:
 - No example, implementation choice, or operational constraint is stated as if it were a rule/invariant.
 - No API endpoint, UI component, database table, skill, or tool name is treated as a capability without independent purpose context (see the skill/tool/capability distinction in `../../working-with-crds.md`).
 - No capability has silently grown into a vague feature bucket — check boundaries excludes at least as carefully as includes.
-- If producing a JSON instance, run `python3 ../../scripts/validate.py` from the repo root (or point it at the file you produced) to check it against `../../schema/crd.schema.json`.
+- If producing a JSON example in this repository, run `python3 scripts/validate.py` from the repository root. The bundled validator checks the repository's JSON examples against `schema/crd.schema.json`; validate external CRD files with an equivalent schema-aware check.
 
 ## Step 5 — Register in the Capability Inventory
 

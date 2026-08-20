@@ -24,7 +24,7 @@
 
     <main id="top">
       <section class="hero shell">
-        <p class="eyebrow">Capability Documentation · CRD Draft 0.3</p>
+        <p class="eyebrow">Capability Documentation · CRD framework</p>
         <h1>A clear requirement document for every complete capability.</h1>
         <aside class="analogy" aria-label="CRD analogy">
           <p class="eyebrow">Start here</p>
@@ -67,6 +67,7 @@
             <h2 id="agent-activation-heading">Give your agent the CRD context once.</h2>
             <p>Copy this prompt into your AI agent. It directs the agent to the CRD source material, lets it answer questions for its owner, and gives it a disciplined way to begin drafting CRDs from product, design, code, and service evidence.</p>
             <p class="agent-note">The agent is instructed to preserve unknowns, distinguish facts from inference, and not change a live service without explicit approval.</p>
+            <p class="agent-note"><strong>For agents that support installable skills:</strong> use the <a href="https://github.com/valto/crd/blob/main/skills/crd-author/SKILL.md">CRD Author skill</a>. It provides the same technology-agnostic model in Define mode for new reusable CRDs and Extract mode for existing plans, code, APIs, MCP servers, and services.</p>
           </div>
           <div class="prompt-panel">
             <div class="prompt-panel-header">
@@ -201,6 +202,11 @@ Start by asking what material I want to understand or transform into CRDs, or in
             <h3>Worked examples</h3>
             <p>Compare a customer-facing quote request with internal payment reconciliation.</p>
             <span>Explore →</span>
+          </a>
+          <a class="resource" href="https://github.com/valto/crd/blob/main/skills/crd-author/SKILL.md">
+            <h3>CRD Author skill</h3>
+            <p>Give an installable AI-agent skill the CRD workflow for defining and extracting capabilities.</p>
+            <span>Open on GitHub →</span>
           </a>
         </div>
       </section>
