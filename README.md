@@ -2,7 +2,7 @@
 
 Draft 0.3 — an open, technology- and implementation-agnostic framework for defining, cataloguing, and operating complete capabilities.
 
-The canonical artifact is a **Capability Requirements Document (CRD)**: the requirement document for one Capability MLE. A CRD can be created before implementation or derived from existing systems, and it remains independent of whether the capability is realized through software, agents, MCP, APIs, UI, or a future mechanism.
+The canonical artifact is a **Capability Requirements Document (CRD)**: the requirement document for one Capability MLE. A capability may belong to a product, service, system, agent, or reusable open inventory; a CRD can be created before implementation or derived from existing systems, and it remains independent of any one realization mechanism.
 
 This is an early, reviewable specification draft. It is not a software runtime, a required product-management process, or an attempt to replace domain-specific documentation.
 
