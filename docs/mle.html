@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Minimum Logical Element background, rationale, and lineage to Capability Requirements Documents." />
+    <title>Minimum Logical Element — Capability Documentation</title><link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  </head>
+  <body>
+    <header class="site-header"><div class="shell header-content"><a class="brand" href="index.html"><img class="brand-mark" src="assets/crd-mark.png" alt="" /><span>CRD</span></a><nav aria-label="Primary navigation"><a href="specification.html">CRD Specification</a><a href="inventory.html">Inventory</a><a href="https://github.com/valto/crd">Repository</a></nav></div></header>
+    <main>
+      <section class="doc-hero"><div class="shell"><p class="eyebrow">Origins and rationale</p><h1>Minimum Logical Element</h1><p class="lede">The scope discipline that led to Capability MLEs and, in turn, to Capability Requirements Documents.</p><div class="meta-links"><a href="https://github.com/valto/crd/blob/main/minimum-logical-element.md">View Markdown source ↗</a><a href="specification.html">Read the CRD specification →</a></div></div></section>
+      <article class="doc-content">
+        <section><h2>Definition</h2><p class="definition">An MLE is the smallest bundled unit that still retains logical sense and context when considered across business, design, and development perspectives.</p><p>It is not simply the smallest technical artifact, UI part, or backlog item. It is the smallest unit that can still be understood as meaningful in its own context.</p></section>
+        <section><h2>Why it was needed</h2><p>Software work is fragmented into requirements, stories, screens, components, APIs, functions, schemas, tests, and operational processes. Each is useful, but none alone necessarily represents a complete, meaningful unit of the product.</p><p>The MLE lens asks what is smallest but still meaningful inside a discipline, and what is smallest but still meaningful when relevant disciplines are considered together.</p><div class="note"><p>It prevents both <strong>feature buckets</strong> that are too broad to explain or govern, and <strong>fragments</strong> such as a component, endpoint, or field that are too small to retain their purpose.</p></div></section>
+        <section><h2>Early cross-discipline framing</h2><table><thead><tr><th>Discipline</th><th>Example MLE</th></tr></thead><tbody><tr><td>UX/UI</td><td>User Story</td></tr><tr><td>Data modelling</td><td>Bounded Context</td></tr><tr><td>Frontend</td><td>Element Component</td></tr><tr><td>Backend</td><td>Use Case</td></tr></tbody></table><p>These examples demonstrate the observation that every relevant level has its own minimum logical element. They do not imply a universal one-to-one mapping across disciplines.</p></section>
+        <section><h2>From MLE to Capability MLE</h2><p>The next question was the MLE of a complete software ability. The answer is a <strong>Capability MLE</strong>: the smallest complete, contextually meaningful ability that produces a meaningful outcome.</p><p><code>Request a moving quote</code> is illustrative: it can be understood, invoked, implemented, tested, and composed independently. Arbitrary implementation pieces lose its purpose context; broadening it into all quote management creates a vague feature bucket.</p></section>
+        <section><h2>Why this leads to a CRD</h2><pre><code>Minimum Logical Element principle
+        ↓
+Capability MLE
+smallest complete meaningful ability
+        ↓
+Capability Requirements Document (CRD)
+canonical requirements specification for that ability
+        ↓
+Interaction Contract MLEs
+smallest executable behaviours
+        ↓
+Operational Capability Documentation
+current realizations</code></pre><p>A CRD does not replace a PRD. A PRD can describe a product or application and link to multiple CRDs. A CRD can also stand independently in a reusable Capability Inventory.</p></section>
+        <section><h2>What MLE contributes</h2><ul><li>A CRD is not a broad product area or undifferentiated feature request.</li><li>A CRD is not a wrapper around one endpoint, screen, component, or function.</li><li>A CRD carries purpose, boundaries, requirements, contracts, and unknowns—enough context to remain meaningful across realizations.</li></ul><p>That is why CRD can become common ground for people, agents, applications, and developers without being tied to one technology or current implementation.</p></section>
+        <section><h2>Source and status</h2><p>This background is derived from Valto Loikkanen’s original <em>Tools of EcosystemOS — TechStack for Ecosystem Orchestration</em> material and subsequent CRD development. It is conceptual background, not a claim that the discipline examples are universal or final.</p></section>
+      </article>
+    </main>
+    <footer class="site-footer"><div class="shell footer-content"><p>Capability Documentation by Valto Loikkanen.</p><p><a href="https://github.com/valto/crd/blob/main/LICENSE">CC BY 4.0</a> · <a href="index.html">Home</a></p></div></footer>
+  </body>
+</html>

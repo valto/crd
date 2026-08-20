@@ -45,6 +45,7 @@ Capability Documentation
 
 - [CRD Specification](crd-specification.md) — semantic model and conformance rules.
 - [CRD template](crd-template.md) — minimal document form with optional extensions.
+- [Minimum Logical Element (MLE)](minimum-logical-element.md) — origin, rationale, and the conceptual path to CRDs.
 - [Capability Inventory](capability-inventory.md) — a lightweight catalogue form for available or planned Capability MLEs.
 - [Agent transformation instructions](agent-transformation-instructions.md) — derive documentation from existing material without inventing facts.
 - [Worked example](examples/request-moving-quote.md) — an illustrative CRD and realization.
