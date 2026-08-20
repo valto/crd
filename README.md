@@ -6,6 +6,21 @@ The canonical artifact is a **Capability Requirements Document (CRD)**: the requ
 
 This is an early, reviewable specification draft. It is not a software runtime, a required product-management process, or an attempt to replace domain-specific documentation.
 
+## Start here
+
+> **A CRD is like a feature specification for the agentic era.**
+
+It is smaller than a PRD and more rigorous than a typical feature definition. A CRD specifies one complete capability’s purpose, boundaries, requirements, interaction contracts, realizations, evidence, and unknowns—so people, agents, and software can work from the same durable meaning.
+
+| Question | Short answer |
+|---|---|
+| **What?** | A CRD is the requirement document for one complete Capability MLE, not merely a feature, endpoint, component, or function. |
+| **For whom?** | Product, domain, UX, and engineering people; AI agents; applications; and other software. |
+| **Why?** | To prevent purpose, requirements, defaults, examples, implementation choices, operational constraints, and unknowns from being confused or lost between systems. |
+| **How?** | Define a Capability MLE, its Interaction Contract MLEs, and one or more realizations; then trace the CRD to relevant UX, APIs, tools, code, tests, and operations. |
+
+Read the public introduction at [valto.github.io/crd](https://valto.github.io/crd/).
+
 ## Core model
 
 ```text
