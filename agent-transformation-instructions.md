@@ -2,7 +2,7 @@
 
 ## Objective
 
-Transform existing material into Capability Definitions, Interaction Contract MLEs, and—only where evidence supports them—Operational Capability Realizations.
+Transform existing material into Capability Requirements Documents (CRDs), Interaction Contract MLEs, and—only where evidence supports them—Operational Capability Realizations.
 
 Possible source material includes PRDs, plans, applications, codebases, Storybook, OpenAPI, MCP servers, skills, API documentation, database schemas, user stories, tests, and operational runbooks.
 
@@ -11,7 +11,7 @@ Possible source material includes PRDs, plans, applications, codebases, Storyboo
 1. Do not invent product facts, policies, ownership, outcomes, or implementation details.
 2. Preserve source uncertainty. Mark it `unknown/unresolved` rather than filling it with a plausible answer.
 3. Distinguish an explicit fact from a reasonable inference, recommended default, example, implementation choice, and operational constraint.
-4. Do not derive a reusable capability definition solely from one operational realization without marking realization-specific facts.
+4. Do not derive a reusable CRD solely from one operational realization without marking realization-specific facts.
 5. Keep a capability small enough to retain a single contextual purpose; do not split it merely because it has multiple steps.
 
 ## Procedure
@@ -51,7 +51,7 @@ Do not infer a state transition, policy, or effect from a name alone. Mark it un
 
 ### 6. Separate reusable definition from realization
 
-Place general purpose, boundaries, and reusable rules in the Capability Definition. Put deployment, API/MCP exposure, code references, organizational rationale, ownership, and operational restrictions in a realization extension.
+Place general purpose, boundaries, and reusable rules in the CRD. Put deployment, API/MCP exposure, code references, organizational rationale, ownership, and operational restrictions in a realization extension.
 
 ### 7. Produce and validate the document
 
@@ -61,7 +61,7 @@ Use the human template. Verify that every required core field is present or expl
 
 Return:
 
-1. A Capability Definition using the template.
+1. A CRD using the template.
 2. A statement-provenance table.
 3. A short decision log for capability combination/decomposition.
 4. An unresolved-questions list.

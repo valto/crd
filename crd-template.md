@@ -1,6 +1,6 @@
-# Capability Document Template
+# Capability Requirements Document (CRD) Template
 
-Use this template for a reusable Capability Definition. Remove optional sections that add no contextual meaning; do not replace unknown information with invention.
+Use this template for a reusable Capability Requirements Document (CRD). Remove optional sections that add no contextual meaning; do not replace unknown information with invention.
 
 ## Identity
 

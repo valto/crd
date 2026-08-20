@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/valto/capability-documentation/schema/capability-definition.schema.json",
-  "title": "Capability Definition",
-  "description": "Draft 0.1 machine-readable representation of the required Capability Documentation core.",
+  "$id": "https://github.com/valto/capability-requirements-documentation/schema/crd.schema.json",
+  "title": "Capability Requirements Document (CRD)",
+  "description": "Draft 0.2 machine-readable representation of the required Capability Requirements Documentation core.",
   "type": "object",
   "additionalProperties": false,
   "required": [

@@ -1,6 +1,6 @@
-# Capability Documentation
+# Capability Requirements Documentation (CRD)
 
-Draft 0.1 — a technology- and implementation-agnostic way to document capabilities so that humans, agents, applications, and developers can understand, use, build, compose, and operate them.
+Draft 0.2 — a technology- and implementation-agnostic method for defining capability requirements so that humans, agents, applications, and developers can understand, use, build, compose, and operate complete capabilities.
 
 This is an early, reviewable specification draft. It is not a software runtime, a required product-management process, or an attempt to replace domain-specific documentation.
 
@@ -19,17 +19,17 @@ Product / Service / Application
 
 ## Package
 
-- [Specification](capability-documentation-specification.md) — semantic model and conformance rules.
-- [Human template](capability-document-template.md) — minimal document form with optional extensions.
+- [CRD Specification](crd-specification.md) — semantic model and conformance rules.
+- [CRD template](crd-template.md) — minimal document form with optional extensions.
 - [Agent transformation instructions](agent-transformation-instructions.md) — derive documentation from existing material without inventing facts.
-- [Worked example](examples/request-moving-quote.md) — an illustrative capability definition and realization.
-- [JSON Schema](schema/capability-definition.schema.json) — portable machine-readable representation of the required core.
+- [Worked example](examples/request-moving-quote.md) — an illustrative CRD and realization.
+- [JSON Schema](schema/crd.schema.json) — portable machine-readable representation of the required core.
 - [JSON example](examples/request-moving-quote.json) — schema-conforming illustrative instance.
 
 ## Quick start
 
-1. Read the [Specification](capability-documentation-specification.md).
-2. Copy the [Human template](capability-document-template.md) for a reusable capability.
+1. Read the [CRD Specification](crd-specification.md).
+2. Copy the [CRD template](crd-template.md) for a reusable capability.
 3. Use the [Agent transformation instructions](agent-transformation-instructions.md) to derive documentation from existing material without inventing facts.
 4. Validate a structured representation against the JSON Schema where machine interchange is useful.
 
@@ -39,6 +39,10 @@ This repository is licensed under [Creative Commons Attribution 4.0 Internationa
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). This first draft intentionally keeps the required core small; proposed additions should demonstrate why they preserve contextual logical meaning rather than turn a Capability Document into a mini-PRD.
+See [CONTRIBUTING.md](CONTRIBUTING.md). This first draft intentionally keeps the required core small; proposed additions should demonstrate why they preserve contextual logical meaning rather than turn a CRD into a mini-PRD.
 
 The initial draft deliberately does not prescribe a single serialization format, repository layout, or runtime. Markdown is the human form and JSON Schema is the initial portable machine-interchange form.
+
+## Compatibility note
+
+The draft was originally published under the working name **Capability Documentation**. It now uses **Capability Requirements Documentation (CRD)**; prior repository links redirect to the new location.

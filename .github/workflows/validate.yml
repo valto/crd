@@ -1,4 +1,4 @@
-name: Validate Capability Documentation
+name: Validate CRD
 
 on:
   push:

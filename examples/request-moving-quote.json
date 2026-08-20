@@ -1,5 +1,5 @@
 {
-  "$schema": "../schema/capability-definition.schema.json",
+  "$schema": "../schema/crd.schema.json",
   "name": "Request a moving quote",
   "definition": "Enable a prospective customer or authorized caller to submit sufficient moving details for a provider to begin the quote process.",
   "capabilityPurpose": "Enable a move to be presented to a provider for quote consideration.",

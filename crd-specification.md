@@ -1,16 +1,16 @@
-# Capability Documentation Specification
+# Capability Requirements Documentation (CRD) Specification
 
-Status: Draft 0.1
+Status: Draft 0.2
 
 ## 1. Purpose
 
-Capability Documentation is the common, implementation- and technology-agnostic description through which humans, agents, applications, and developers can understand, use, build, compose, and operate capabilities.
+Capability Requirements Documentation (CRD) is the common, implementation- and technology-agnostic way to express the requirements of a complete capability. A **Capability Requirements Document (CRD)** gives humans, agents, applications, and developers a shared basis to understand, use, build, compose, and operate that capability.
 
 This specification preserves the Minimum Logical Element (MLE) principle: the document requires only the information necessary for a capability to retain contextual logical meaning. Detail that belongs to a particular implementation is optional.
 
 ## 2. Normative terms
 
-**MUST** means required for a conforming Capability Definition. **SHOULD** means recommended unless a documented reason exists not to follow it. **MAY** means optional.
+**MUST** means required for a conforming Capability Requirements Document (CRD). **SHOULD** means recommended unless a documented reason exists not to follow it. **MAY** means optional.
 
 ## 3. Model
 
@@ -40,9 +40,9 @@ A realization is a particular operational implementation of a capability or inte
 
 A capability MAY have one or many interaction contracts. A contract MAY have one or many realizations. The same component, endpoint, function, or tool MAY support multiple capabilities. No one-to-one mapping is implied.
 
-## 4. Capability Definition: required core
+## 4. Capability Requirements Document (CRD): required core
 
-A conforming Capability Definition MUST contain:
+A conforming CRD MUST contain:
 
 | Field | Meaning |
 |---|---|
@@ -113,4 +113,4 @@ Boundaries MUST identify included and excluded concerns. They SHOULD distinguish
 
 ## 9. Conformance
 
-A document conforms as a **Capability Definition** when it satisfies section 4 and all defined contracts satisfy section 5. It conforms as an **Operational Capability Realization** when it additionally documents the realization-specific constraints, references, and evidence it chooses to expose.
+A document conforms as a **Capability Requirements Document (CRD)** when it satisfies section 4 and all defined contracts satisfy section 5. It conforms as an **Operational Capability Realization** when it additionally documents the realization-specific constraints, references, and evidence it chooses to expose.

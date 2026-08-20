@@ -5,7 +5,7 @@ Contributions are welcome.
 ## Contribution principles
 
 - Preserve the Minimum Logical Element principle: require only what is needed to retain contextual logical meaning.
-- Keep reusable Capability Definitions separate from realization-specific operations and implementation choices.
+- Keep reusable Capability Requirements Documents (CRDs) separate from realization-specific operations and implementation choices.
 - Make uncertainty explicit; do not replace an unknown with a plausible invention.
 - Preserve the distinction among rules, defaults, examples, rationale, implementation choices, operational constraints, explicit facts, and reasonable inferences.
 - Prefer worked examples and counterexamples when proposing a change to the specification.
@@ -21,6 +21,6 @@ Open an issue or pull request that explains:
 
 ## Scope discipline
 
-Do not add a field to the required core solely because it is useful in one product, tool, organization, or operational realization. Demonstrate that it is necessary for a reusable Capability Definition to retain contextual logical meaning.
+Do not add a field to the required core solely because it is useful in one product, tool, organization, or operational realization. Demonstrate that it is necessary for a reusable CRD to retain contextual logical meaning.
 
 All contributions are made under the repository's CC BY 4.0 license.

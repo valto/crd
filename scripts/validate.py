@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Dependency-free structural validation for the draft Capability Documentation schema."""
+"""Dependency-free structural validation for the draft Capability Requirements Document (CRD) schema."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCHEMA_PATH = ROOT / "schema" / "capability-definition.schema.json"
+SCHEMA_PATH = ROOT / "schema" / "crd.schema.json"
 EXAMPLES_DIR = ROOT / "examples"
 
 

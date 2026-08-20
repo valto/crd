@@ -3,36 +3,39 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Capability Documentation: a technology-agnostic specification for documenting reusable software and agent capabilities." />
-    <title>Capability Documentation</title>
+    <meta name="description" content="Capability Requirements Documentation (CRD): a technology-agnostic requirement document for each complete capability." />
+    <title>CRD — Capability Requirements Documentation</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
   </head>
   <body>
     <header class="site-header">
       <div class="shell header-content">
-        <a class="brand" href="#top" aria-label="Capability Documentation home">Capability Documentation</a>
+        <a class="brand" href="#top" aria-label="Capability Requirements Documentation home"><img class="brand-mark" src="assets/crd-mark.png" alt="" /><span>CRD</span></a>
         <nav aria-label="Primary navigation">
           <a href="#model">Model</a>
           <a href="#start">Start</a>
-          <a href="https://github.com/valto/capability-documentation">Repository</a>
+          <a href="https://github.com/valto/capability-requirements-documentation">Repository</a>
         </nav>
       </div>
     </header>
 
     <main id="top">
       <section class="hero shell">
-        <p class="eyebrow">Draft 0.1</p>
-        <h1>Make capabilities understandable before choosing their implementation.</h1>
-        <p class="lede">A small, technology-agnostic common ground for describing what a system can do—before that meaning is fragmented across requirements, UX, code, APIs, agents, and operations.</p>
+        <p class="eyebrow">Capability Requirements Documentation · Draft 0.2</p>
+        <h1>A clear requirement document for every complete capability.</h1>
+        <p class="lede">A Capability Requirements Document (CRD) makes one capability’s purpose, boundaries, requirements, interaction contracts, and realizations understandable before that meaning fragments across UX, code, APIs, agents, and operations.</p>
         <div class="actions">
           <a class="button primary" href="specification.html">Read the specification</a>
-          <a class="button secondary" href="https://github.com/valto/capability-documentation">View the repository</a>
+          <a class="button secondary" href="https://github.com/valto/capability-requirements-documentation">View the repository</a>
         </div>
         <div class="positioning-grid" aria-label="What, who, why, and how">
           <article>
             <p class="eyebrow">What</p>
-            <h2>A document for a complete ability.</h2>
-            <p>Capability Documentation describes the smallest complete, contextually meaningful ability that produces an outcome—not merely a feature, endpoint, component, or function.</p>
+            <h2>A requirement document for a complete ability.</h2>
+            <p>A CRD describes the smallest complete, contextually meaningful ability that produces an outcome—not merely a feature, endpoint, component, or function.</p>
           </article>
           <article>
             <p class="eyebrow">For whom</p>
@@ -46,8 +49,8 @@
           </article>
           <article>
             <p class="eyebrow">How</p>
-            <h2>Connect meaning to execution.</h2>
-            <p>Define a Capability MLE, its Interaction Contract MLEs, and one or more realizations—then trace them to the relevant UX, APIs, tools, code, tests, and operations.</p>
+            <h2>Connect requirements to execution.</h2>
+            <p>Define a Capability MLE, its Interaction Contract MLEs, and one or more realizations—then trace the CRD to the relevant UX, APIs, tools, code, tests, and operations.</p>
           </article>
         </div>
       </section>
@@ -57,7 +60,7 @@
           <p class="eyebrow">Core model</p>
           <h2 id="model-heading">Three layers, without implementation lock-in.</h2>
         </div>
-        <div class="model-flow" role="list" aria-label="Capability Documentation model">
+        <div class="model-flow" role="list" aria-label="Capability Requirements Documentation (CRD) model">
           <article class="model-card" role="listitem">
             <span class="number">01</span>
             <h3>Capability MLE</h3>
@@ -84,7 +87,7 @@
             <p class="eyebrow">Why it exists</p>
             <h2>Shared meaning across product, software, and agents.</h2>
           </div>
-          <p>Capability Documentation keeps general capability purpose separate from organization-specific rationale and implementation. It makes rules, defaults, examples, operational constraints, inferences, and unknowns explicit—so current code is not mistaken for the fundamental definition.</p>
+          <p>CRD keeps general capability purpose separate from organization-specific rationale and implementation. It makes rules, defaults, examples, operational constraints, inferences, and unknowns explicit—so current code is not mistaken for the fundamental requirement.</p>
         </div>
       </section>
 
@@ -95,12 +98,12 @@
         </div>
         <div class="resource-grid">
           <a class="resource" href="specification.html">
-            <h3>Specification</h3>
+            <h3>CRD Specification</h3>
             <p>Required semantic core, optional extensions, and conformance rules.</p>
             <span>Read →</span>
           </a>
           <a class="resource" href="template.html">
-            <h3>Human template</h3>
+            <h3>CRD template</h3>
             <p>Document a reusable capability without creating a mini-PRD.</p>
             <span>Use →</span>
           </a>
@@ -137,8 +140,8 @@
 
     <footer class="site-footer">
       <div class="shell footer-content">
-        <p>Capability Documentation by Valto Loikkanen.</p>
-        <p><a href="https://github.com/valto/capability-documentation/blob/main/LICENSE">CC BY 4.0</a> · <a href="https://github.com/valto/capability-documentation">GitHub</a></p>
+        <p>Capability Requirements Documentation (CRD) by Valto Loikkanen.</p>
+        <p><a href="https://github.com/valto/capability-requirements-documentation/blob/main/LICENSE">CC BY 4.0</a> · <a href="https://github.com/valto/capability-requirements-documentation">GitHub</a></p>
       </div>
     </footer>
   </body>
