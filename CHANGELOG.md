@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Added optional Mermaid diagram guidance to the CRD Author skill (`skills/crd-author/SKILL.md`): illustrative, non-normative renderings of Interaction Contract state flow and shared-element/skill/tool relationships, always traceable to text already stated in the CRD.
+- Added an illustrative Mermaid state-flow diagram to the `Reconcile payments` example.
+
 ## 0.5.0 — 2026-08-20
 
 - Added the CRD Author agent skill (`skills/crd-author/SKILL.md`): Define mode for new reusable CRDs, Extract mode for deriving CRDs from existing material, and a shared Capability Inventory registration step.

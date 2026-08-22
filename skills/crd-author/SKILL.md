@@ -1,6 +1,6 @@
 ---
 name: crd-author
-description: "Write Capability Requirements Documents (CRDs) and maintain a Capability Inventory using the CRD framework (github.com/valto/crd, Draft 0.4). Two modes: Define — write a new, reusable, technology-agnostic CRD for a capability that doesn't exist yet or is being specified independent of any particular implementation; Extract — decompose or combine existing material (PRD, codebase, API/OpenAPI spec, MCP server, database schema, user stories, existing application) into one or more CRDs plus Operational Capability Documentation, without inventing facts. Both modes register the result in a Capability Inventory. Use whenever asked to: 'write/create/draft a CRD', 'document this as a capability', 'define a Capability MLE', 'build/update a capability inventory', 'extract capabilities from this PRD/codebase/API/MCP server', 'turn this into capability documentation', or any request framed in CRD / Capability MLE / Interaction Contract MLE terms."
+description: "Write Capability Requirements Documents (CRDs) and maintain a Capability Inventory using the CRD framework (github.com/valto/crd, Draft 0.4). Two modes: Define — write a new, reusable, technology-agnostic CRD for a capability that doesn't exist yet or is being specified independent of any particular implementation; Extract — decompose or combine existing material (PRD, codebase, API/OpenAPI spec, MCP server, database schema, user stories, existing application) into one or more CRDs plus Operational Capability Documentation, without inventing facts. Both modes register the result in a Capability Inventory and can optionally render an illustrative Mermaid diagram of interaction-contract state flow or shared-element/skill/tool relationships. Use whenever asked to: 'write/create/draft a CRD', 'document this as a capability', 'define a Capability MLE', 'build/update a capability inventory', 'extract capabilities from this PRD/codebase/API/MCP server', 'turn this into capability documentation', 'diagram this capability/state flow', or any request framed in CRD / Capability MLE / Interaction Contract MLE terms."
 ---
 
 # CRD Author
@@ -35,6 +35,7 @@ You're inside the `valto/crd` repository. Worked/illustrative examples belong in
 4. Tag every substantive statement with a semantic class from `../../crd-specification.md` §6 (capability purpose, rationale/intent, rule/invariant, implementation-requirement, recommended default, example, implementation choice, operational constraint, unknown/unresolved) — never let an example or implementation choice read as a binding rule.
 5. Add optional sections (operational realization, shared elements/approved reuse, agentic mappings, audience projections) only where you have real content — an empty optional section is worse than an omitted one.
 6. When declaring a realization, state its execution mode explicitly: `software-primary`, `agent-primary-using-software`, `software-primary-calling-agents`, or `unknown`. Don't conflate this with `agent-built-software`, which is provenance (how it was built), not runtime control.
+7. Optional: add a Mermaid diagram (see "Optional: Mermaid diagrams" below) when a visual rendering of the states/transitions or the shared-element/skill/tool relationships would help a reader, without introducing anything not already stated in the CRD's text.
 
 ## Step 3 — Extract mode
 
@@ -55,6 +56,22 @@ Required output for Extract mode, every time:
 4. An unresolved-questions list.
 5. A shared-element/reuse table and agentic mapping when a component, schema, prompt, tool, or skill supports more than one capability.
 
+## Optional: Mermaid diagrams
+
+A CRD MAY include one or more Mermaid diagrams as an illustrative, non-normative rendering of content that is already stated in the CRD's text. Mermaid is preferred over other diagram formats here because it is plain text, renders natively on GitHub, and stays diffable — consistent with the CRD framework's text-first, agent-readable approach.
+
+Two renderings are useful:
+
+1. **Interaction Contract state flow** — a `stateDiagram-v2` or `flowchart` showing the states and transitions across a capability's Interaction Contract MLEs (current state → transition → new state, per contract).
+2. **Shared-element / skill / tool relationship** — a `graph`/`flowchart` showing the many-to-many relationship between the Capability MLE, any skills that realize or bundle it, any tools it depends on, and any shared elements it declares (`createdFor`/`approvedReuse`).
+
+Rules for using them:
+
+- A diagram is a projection of the CRD, exactly like an audience projection (§7.2 of `../../crd-specification.md`): it MUST trace back to states, transitions, rules, or relationships already declared in the document's text, and MUST NOT introduce a state, transition, edge, or relationship that isn't already stated there.
+- Label the diagram clearly as illustrative (e.g. a heading like "Illustrative state flow (Mermaid)") so it is never mistaken for an additional normative section.
+- Do not add a diagram merely to make a CRD look more complete — omit it if it wouldn't help a reader understand something the prose doesn't already make clear.
+- Place it near the section it illustrates (Interaction Contract MLEs, or the shared elements/agentic mappings section), not as a required standalone section.
+
 ## Step 4 — Validate
 
 Before presenting output:
@@ -62,6 +79,7 @@ Before presenting output:
 - No example, implementation choice, or operational constraint is stated as if it were a rule/invariant.
 - No API endpoint, UI component, database table, skill, or tool name is treated as a capability without independent purpose context (see the skill/tool/capability distinction in `../../working-with-crds.md`).
 - No capability has silently grown into a vague feature bucket — check boundaries excludes at least as carefully as includes.
+- If a Mermaid diagram is included, every state/transition/edge in it matches something explicitly stated in the CRD's own text — no diagram-only facts.
 - If producing a JSON example in this repository, run `python3 scripts/validate.py` from the repository root. The bundled validator checks the repository's JSON examples against `schema/crd.schema.json`; validate external CRD files with an equivalent schema-aware check.
 
 ## Step 5 — Register in the Capability Inventory
@@ -75,6 +93,7 @@ Add or update one row per capability in `capability-inventory.md` using the form
 - Do not let a recommended default or your own judgment override a rule/invariant or an explicit requirement.
 - Do not assume a skill equals one capability, or that a tool equals a skill — map them explicitly (`../../working-with-crds.md`).
 - Do not hide unknowns behind confident-sounding generic language.
+- Do not let a Mermaid diagram assert a state, transition, or relationship that the CRD's own text doesn't already establish.
 - Do not modify, operate, or publish changes to a live service, repository, or external system as a side effect of documenting it, unless explicitly authorized.
 
 ## Reference material

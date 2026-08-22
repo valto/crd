@@ -47,6 +47,25 @@ Status: illustrative internal-capability example. It demonstrates that a Capabil
 - **Result:** a documented discrepancy-review outcome
 - **Events / effects:** `PaymentDiscrepancyReviewed`
 
+### Illustrative state flow (Mermaid)
+
+Non-normative. Every state and transition below restates what the three Interaction Contract MLEs above already declare.
+
+```mermaid
+stateDiagram-v2
+    PeriodOpen: reconciliation period is open
+    RecordsAvailable: reconcilable payment-record set
+    Reconciled: reconciled records and discrepancy cases
+    DiscrepancyOpen: discrepancy case exists
+    DiscrepancyResolved: discrepancy resolved with audit note
+
+    PeriodOpen --> RecordsAvailable: Import payment records
+    RecordsAvailable --> Reconciled: Run payment reconciliation
+    Reconciled --> DiscrepancyOpen: discrepancy case detected
+    DiscrepancyOpen --> DiscrepancyOpen: Review payment discrepancy (remains open)
+    DiscrepancyOpen --> DiscrepancyResolved: Review payment discrepancy (resolved)
+```
+
 ## Rules, defaults, and unknowns
 
 - **Rule / invariant:** reconciliation outcomes must preserve enough evidence for an authorized reviewer to understand the match or discrepancy. **[example]**
