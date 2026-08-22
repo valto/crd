@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://valto.github.io/crd/sitemap.xml

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://valto.github.io/crd/</loc></url>
+  <url><loc>https://valto.github.io/crd/learn.html</loc></url>
+  <url><loc>https://valto.github.io/crd/why-crd.html</loc></url>
+  <url><loc>https://valto.github.io/crd/mle.html</loc></url>
+  <url><loc>https://valto.github.io/crd/working-with-crds.html</loc></url>
+  <url><loc>https://valto.github.io/crd/resources.html</loc></url>
+  <url><loc>https://valto.github.io/crd/specification.html</loc></url>
+  <url><loc>https://valto.github.io/crd/template.html</loc></url>
+  <url><loc>https://valto.github.io/crd/agent-transformation.html</loc></url>
+  <url><loc>https://valto.github.io/crd/inventory.html</loc></url>
+  <url><loc>https://valto.github.io/crd/examples.html</loc></url>
+  <url><loc>https://valto.github.io/crd/examples/request-moving-quote.html</loc></url>
+  <url><loc>https://valto.github.io/crd/examples/reconcile-payments.html</loc></url>
+</urlset>
