@@ -1,6 +1,6 @@
 ---
 name: crd-author
-description: "Write Capability Requirements Documents (CRDs) and maintain a Capability Inventory using the CRD framework (github.com/valto/crd, Draft 0.4). Two modes: Define — write a new, reusable, technology-agnostic CRD for a capability that doesn't exist yet or is being specified independent of any particular implementation; Extract — decompose or combine existing material (PRD, codebase, API/OpenAPI spec, MCP server, database schema, user stories, existing application) into one or more CRDs plus Operational Capability Documentation, without inventing facts. Both modes register the result in a Capability Inventory and can optionally render an illustrative Mermaid diagram of interaction-contract state flow or shared-element/skill/tool relationships. Use whenever asked to: 'write/create/draft a CRD', 'document this as a capability', 'define a Capability MLE', 'build/update a capability inventory', 'extract capabilities from this PRD/codebase/API/MCP server', 'turn this into capability documentation', 'diagram this capability/state flow', or any request framed in CRD / Capability MLE / Interaction Contract MLE terms."
+description: "Write Capability Requirements Documents (CRDs) and maintain a Capability Inventory using the CRD framework (github.com/valto/crd, Draft 0.4). Two modes: Define — write a new, reusable, technology-agnostic CRD for a capability that doesn't exist yet or is being specified independent of any particular implementation; Extract — decompose or combine existing material (PRD, codebase, API/OpenAPI spec, MCP server, database schema, user stories, existing application) into one or more CRDs plus Operational Capability Documentation, without inventing facts. Both modes register the result in a Capability Inventory (including known realizations, so reusability claims are checkable rather than asserted) and can optionally render an illustrative Mermaid diagram of interaction-contract state flow or shared-element/skill/tool relationships. Extract mode defaults to producing only the specific/operational set, and produces a Source Context Reference alongside the CRDs for product-wide/cross-cutting context that no single CRD should own. Use whenever asked to: 'write/create/draft a CRD', 'document this as a capability', 'define a Capability MLE', 'build/update a capability inventory', 'extract capabilities from this PRD/codebase/API/MCP server', 'turn this into capability documentation', 'diagram this capability/state flow', or any request framed in CRD / Capability MLE / Interaction Contract MLE terms."
 ---
 
 # CRD Author
@@ -47,17 +47,24 @@ Follow `../../agent-transformation-instructions.md` exactly; it is the canonical
 - Distinguish explicit fact / reasonable inference / recommended default / example / implementation choice / operational constraint at every statement.
 - Do not derive a reusable CRD solely from one operational realization without flagging realization-specific facts as such.
 - Resolve competing guidance in precedence order: rule/invariant → explicit implementation requirement → explicit owner/user choice → recommended default → agent judgment. Same-level conflicts become `unknown/unresolved`, not a silent choice.
+- Do not infer a priority or ordering relationship between independently stated facts unless the source states that ordering directly. If a source states several related settings/rules but never says which wins when they conflict, that ordering is `unknown/unresolved` — not a rule, and not even an "example" default, however sensible it looks.
+- Preserve the source's own hedge language. A statement phrased as "preferably," "should," "recommended," or an equivalent hedge in the source language classifies as `recommended default` or `implementation choice`, never `rule/invariant` — regardless of how operationally important it seems. Strengthening a hedge into a binding rule is inventing a fact.
 
 Procedure: inventory and classify sources → extract candidate statements → identify candidate capabilities (apply the MLE test from Step 2.1) → combine/decompose → define interaction contracts → separate reusable definition from realization (including execution mode and shared-element/approved-reuse notes, §6.1) → produce and validate.
 
-When the source is a specific product/system and the user wants a reusable/generic CRD alongside (or instead of) the product-specific one, generalize terms into an open standard vocabulary per Step 2's "Terms and concepts" guidance — but keep every rule, default, and boundary grounded in what the source actually states; generalizing vocabulary is not license to generalize requirements.
+When deciding to combine several elements into one capability, don't just test the merged result — run the MLE test from Step 2.1 on each element being combined, individually, first. Combine only when every element fails the test alone (none is independently meaningful). If one element you're about to fold in actually passes the test by itself — it has its own actor, command, state, and result — it is very likely its own Capability MLE, not a contract inside a bigger one. Record this check in the decision log, not just its conclusion.
+
+**Default to the specific/operational CRD set only.** Produce an additional generic/reusable projection only when the user asks for one, or when reuse by a second real consumer is already established or clearly imminent — not by default, and not just because generalization is possible. A generic CRD produced with no known consumer is a hypothesis, not a demonstrated reusable capability; say so in the inventory (see Step 5) rather than implying otherwise. When you do produce a generic projection, treat every generalizing phrase ("or otherwise," "or similar," "any," "etc.") as a checkpoint: verify it's directly supported by the source, not merely a plausible-sounding broadening. Generalizing vocabulary (Step 2's "Terms and concepts" guidance) is never license to generalize requirements.
+
+When extracting multiple capabilities from one substantial source (a PRD, a plan, a spec), also produce a Source Context Reference — see `../../source-context-template.md` — capturing the source(s) used and the product-wide/cross-cutting content that no single capability should own but that shouldn't be lost either: overall intent, cross-cutting constraints (localization, non-functional requirements, forward-compatibility promises), a platform/client exposure matrix if the source describes more than one client, and the source's own build/delivery sequencing (explicitly marked non-normative to any CRD). Skip it for a small or single-capability extraction where there's no real cross-cutting content to lose.
 
 Required output for Extract mode, every time:
 1. One CRD per identified Capability MLE.
 2. A statement-provenance table.
-3. A short decision log explaining each combine/decompose choice.
+3. A short decision log explaining each combine/decompose choice, including the symmetric MLE check above.
 4. An unresolved-questions list.
 5. A shared-element/reuse table and agentic mapping when a component, schema, prompt, tool, or skill supports more than one capability.
+6. A Source Context Reference when extracting from one substantial source (see above).
 
 ## Optional: Mermaid diagrams
 
@@ -74,6 +81,7 @@ Rules for using them:
 - Label the diagram clearly as illustrative (e.g. a heading like "Illustrative state flow (Mermaid)") so it is never mistaken for an additional normative section.
 - Do not add a diagram merely to make a CRD look more complete — omit it if it wouldn't help a reader understand something the prose doesn't already make clear.
 - Place it near the section it illustrates (Interaction Contract MLEs, or the shared elements/agentic mappings section), not as a required standalone section.
+- In a `stateDiagram-v2`, do not route a state into the `[*]` exit pseudostate unless the prose explicitly describes that state as terminal/final. A state the prose describes as "retained," "persists," or "stays in history" is not terminal — model it as a state, not an exit, even if nothing further happens to it in this CRD's contracts.
 
 ## Step 4 — Validate
 
@@ -87,7 +95,9 @@ Before presenting output:
 
 ## Step 5 — Register in the Capability Inventory
 
-Add or update one row per capability in `capability-inventory.md` using the format it already defines: `id`, `name`, `status`, `purpose`, link to the CRD, `realization status`, `notes`. Never let the inventory drift from the CRDs it links to — if a CRD's status or realization status changes, update the row in the same pass.
+Add or update one row per capability in `capability-inventory.md` using the format it already defines: `id`, `name`, `status`, `purpose`, link to the CRD, `realization status`, `known realizations`, `notes`. Never let the inventory drift from the CRDs it links to — if a CRD's status or realization status changes, update the row in the same pass.
+
+For a generic/reusable inventory, populate `known realizations` honestly: list every product/service/app already known to realize the capability, linked to that realization's own CRD or Operational Capability Documentation if one exists. If the generic capability was itself generalized from one specific product's capability (the common case when you produced both sets from one Extract-mode run), that product is realization #1 — list it, don't leave the column empty just because it feels like the "obvious" source. A capability with zero known realizations is an unproven hypothesis about reusability, not a demonstrated one; the inventory should make that visible rather than implying otherwise through silence.
 
 ## What not to do
 
@@ -96,7 +106,9 @@ Add or update one row per capability in `capability-inventory.md` using the form
 - Do not let a recommended default or your own judgment override a rule/invariant or an explicit requirement.
 - Do not assume a skill equals one capability, or that a tool equals a skill — map them explicitly (`../../working-with-crds.md`).
 - Do not hide unknowns behind confident-sounding generic language.
+- Do not invent a priority ordering between facts the source states independently, and do not strengthen a source's hedge language ("preferably," "should") into a binding rule.
 - Do not let a Mermaid diagram assert a state, transition, or relationship that the CRD's own text doesn't already establish.
+- Do not produce a generic/reusable CRD set by default — only when asked, or when a second real consumer already exists or is imminent — and do not claim a generic capability is reusable without listing its known realizations.
 - Do not modify, operate, or publish changes to a live service, repository, or external system as a side effect of documenting it, unless explicitly authorized.
 
 ## Reference material
@@ -106,7 +118,8 @@ Add or update one row per capability in `capability-inventory.md` using the form
 - `../../minimum-logical-element.md` — Minimum Logical Element origin and the MLE test.
 - `../../working-with-crds.md` — decision precedence, shared-element reuse, skill/tool mapping, audience projections, why a CRD isn't a feature/PRD/API doc.
 - `../../agent-transformation-instructions.md` — canonical Extract-mode procedure.
-- `../../capability-inventory.md` — Capability Inventory entry format.
+- `../../capability-inventory.md` — Capability Inventory entry format, including known realizations.
+- `../../source-context-template.md` — companion document for product-wide/cross-cutting context that no single CRD should own.
 - `../../schema/crd.schema.json` — machine-readable schema for JSON instances.
 - `../../scripts/validate.py` — schema validator.
 - `../../examples/` — worked examples (external-facing and internal capabilities).

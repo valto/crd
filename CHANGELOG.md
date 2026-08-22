@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Added a Source Context Reference template (`source-context-template.md`) for product-wide/cross-cutting content (intent, cross-cutting constraints, platform exposure, build sequencing) that no single CRD should own but that shouldn't be lost between capability-scoped documents either.
+- Added `known realizations` to the Capability Inventory format (`capability-inventory.md`), so a generic capability's reusability is a checkable fact (which products/services realize it) rather than an assertion.
+- Hardened the CRD Author skill against issues found by two independent blind audits of a real extraction run: don't infer a priority ordering between independently stated facts; preserve source hedge language instead of silently strengthening it into a binding rule; run the MLE test on each element individually before combining, not just on the merged result; treat generalizing phrases in a generic projection as a checkpoint against the source, not a free pass; don't route a persisting/retained state into a Mermaid `[*]` exit; default Extract mode to the specific/operational set only, producing a generic projection only on request or demonstrated reuse.
 - Added optional Mermaid diagram guidance to the CRD Author skill (`skills/crd-author/SKILL.md`): illustrative, non-normative renderings of Interaction Contract state flow and shared-element/skill/tool relationships, always traceable to text already stated in the CRD.
 - Added an illustrative Mermaid state-flow diagram to the `Reconcile payments` example.
 

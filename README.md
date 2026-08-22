@@ -47,7 +47,8 @@ Capability Documentation
 - [CRD template](crd-template.md) — minimal document form with optional extensions.
 - [Minimum Logical Element (MLE)](minimum-logical-element.md) — origin, rationale, and the conceptual path to CRDs.
 - [Working with CRDs](working-with-crds.md) — precedence, shared-element reuse, skill/tool mapping, audience projections, and why CRD is not merely a feature.
-- [Capability Inventory](capability-inventory.md) — a lightweight catalogue form for available or planned Capability MLEs.
+- [Capability Inventory](capability-inventory.md) — a lightweight catalogue form for available or planned Capability MLEs, including known realizations.
+- [Source Context Reference template](source-context-template.md) — a companion document for product-wide/cross-cutting context (why it exists, cross-cutting constraints, platform exposure, build sequencing) that no single CRD should own, but that shouldn't be lost either.
 - [Agent transformation instructions](agent-transformation-instructions.md) — derive documentation from existing material without inventing facts.
 - [Worked example](examples/request-moving-quote.md) — an illustrative CRD and realization.
 - [Internal-capability example](examples/reconcile-payments.md) — an illustrative internal CRD with a software-primary realization.
@@ -59,7 +60,7 @@ Capability Documentation
 
 1. Read the [CRD Specification](crd-specification.md).
 2. Copy the [CRD template](crd-template.md) for a reusable capability.
-3. Use the [Agent transformation instructions](agent-transformation-instructions.md) to derive documentation from existing material without inventing facts. An agent can also run this end to end via the [CRD Author skill](skills/crd-author/SKILL.md).
+3. Use the [Agent transformation instructions](agent-transformation-instructions.md) to derive documentation from existing material without inventing facts, producing a [Source Context Reference](source-context-template.md) alongside the CRDs when extracting from one substantial source. An agent can also run this end to end via the [CRD Author skill](skills/crd-author/SKILL.md).
 4. Validate a structured representation against the JSON Schema where machine interchange is useful.
 
 ## License and attribution
