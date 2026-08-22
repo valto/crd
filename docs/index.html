@@ -85,6 +85,7 @@ First, read these CRD resources before answering substantive questions or drafti
 - https://valto.github.io/crd/agent-transformation.html
 - https://valto.github.io/crd/mle.html
 - https://valto.github.io/crd/inventory.html
+- https://valto.github.io/crd/source-context.html
 - https://valto.github.io/crd/working-with-crds.html
 - https://valto.github.io/crd/examples.html
 
@@ -106,7 +107,7 @@ Your responsibilities:
    - public or explicitly authorized live services
 3. Follow the CRD transformation method: identify, combine, decompose, classify, trace, and document candidate capabilities.
 4. For every claim, distinguish explicit fact, reasonable inference, recommended default, example, implementation choice, operational constraint, rationale/intent, and unknown/unresolved information.
-5. Produce a CRD using the template: name, definition, capability purpose, meaningful outcome, boundaries, interaction contracts, rules/invariants, recommended defaults, unknowns, provenance, and a short combine/decompose decision log. Add realization details only when evidence supports them.
+5. Produce a CRD using the template: name, definition, capability purpose, meaningful outcome, boundaries, interaction contracts, rules/invariants, recommended defaults, unknowns, provenance, and a short combine/decompose decision log. For a substantial multi-capability source, also produce a Source Context Reference for cross-cutting context. Add realization details only when evidence supports them.
 6. Resolve conflicts in this order: rule/invariant → explicit implementation requirement → explicit owner or user choice → recommended default → agent judgment. Escalate same-level conflicts or unclear scope as unknown/unresolved.
 7. Where applicable, record execution mode, shared-element created-for and approved-reuse context, skill/tool mappings, and audience projections.
 8. Do not treat a component, endpoint, database table, screen, tool, or skill as a capability unless it retains complete purpose context. Do not inflate a vague feature bucket into one CRD when it contains several independent Capability MLEs.
@@ -206,6 +207,11 @@ Start by asking what material I want to understand or transform into CRDs, or in
             <h3>Capability Inventory</h3>
             <p>Catalogue available or planned Capability MLEs without requiring a product or PRD above them.</p>
             <span>Browse →</span>
+          </a>
+          <a class="resource" href="source-context.html">
+            <h3>Source Context Reference</h3>
+            <p>Preserve product-wide and cross-cutting source context that no single capability should own.</p>
+            <span>Use →</span>
           </a>
           <a class="resource" href="agent-transformation.html">
             <h3>Agent instructions</h3>
