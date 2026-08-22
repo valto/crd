@@ -32,6 +32,7 @@ You're inside the `valto/crd` repository. Worked/illustrative examples belong in
    - Would enlarging it fold in other independently meaningful abilities?
 2. If the candidate fails the test, propose a split (multiple CRDs) or a merge (one CRD) and say why, before drafting.
 3. Fill `../../crd-template.md` for the capability. Required core: name, definition, capability purpose, boundaries (includes/excludes), meaningful outcome, at least one Interaction Contract MLE (or an explicit unknown explaining why none exists yet), rules/invariants (or "none known"), recommended defaults (or "none known"), unknowns.
+   - **Terms and concepts:** for a reusable/generic CRD, ground terms in an applicable open standard vocabulary (schema.org first choice; Dublin Core, ActivityStreams, or another IANA/W3C vocabulary where a better fit exists) instead of inventing bespoke terminology, unless the source material specifies a concrete term that should be preserved as-is. Cite the standard type/property alongside the plain-language term (e.g. `participant (schema.org/Person)`, `comment (schema.org/Comment)`, `rating/confidence (schema.org/Rating.ratingValue)`). This is guidance for the reusable CRD's terms only — an Operational Capability Documentation extension should use the actual system's own terminology, not the standard vocabulary.
 4. Tag every substantive statement with a semantic class from `../../crd-specification.md` §6 (capability purpose, rationale/intent, rule/invariant, implementation-requirement, recommended default, example, implementation choice, operational constraint, unknown/unresolved) — never let an example or implementation choice read as a binding rule.
 5. Add optional sections (operational realization, shared elements/approved reuse, agentic mappings, audience projections) only where you have real content — an empty optional section is worse than an omitted one.
 6. When declaring a realization, state its execution mode explicitly: `software-primary`, `agent-primary-using-software`, `software-primary-calling-agents`, or `unknown`. Don't conflate this with `agent-built-software`, which is provenance (how it was built), not runtime control.
@@ -48,6 +49,8 @@ Follow `../../agent-transformation-instructions.md` exactly; it is the canonical
 - Resolve competing guidance in precedence order: rule/invariant → explicit implementation requirement → explicit owner/user choice → recommended default → agent judgment. Same-level conflicts become `unknown/unresolved`, not a silent choice.
 
 Procedure: inventory and classify sources → extract candidate statements → identify candidate capabilities (apply the MLE test from Step 2.1) → combine/decompose → define interaction contracts → separate reusable definition from realization (including execution mode and shared-element/approved-reuse notes, §6.1) → produce and validate.
+
+When the source is a specific product/system and the user wants a reusable/generic CRD alongside (or instead of) the product-specific one, generalize terms into an open standard vocabulary per Step 2's "Terms and concepts" guidance — but keep every rule, default, and boundary grounded in what the source actually states; generalizing vocabulary is not license to generalize requirements.
 
 Required output for Extract mode, every time:
 1. One CRD per identified Capability MLE.
