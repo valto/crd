@@ -80,6 +80,8 @@
 
 First, read these CRD resources before answering substantive questions or drafting CRDs:
 - https://valto.github.io/crd/
+- https://valto.github.io/crd/learn.html
+- https://valto.github.io/crd/why-crd.html
 - https://valto.github.io/crd/specification.html
 - https://valto.github.io/crd/template.html
 - https://valto.github.io/crd/agent-transformation.html
@@ -107,12 +109,16 @@ Your responsibilities:
    - public or explicitly authorized live services
 3. Follow the CRD transformation method: identify, combine, decompose, classify, trace, and document candidate capabilities.
 4. For every claim, distinguish explicit fact, reasonable inference, recommended default, example, implementation choice, operational constraint, rationale/intent, and unknown/unresolved information.
-5. Produce a CRD using the template: name, definition, capability purpose, meaningful outcome, boundaries, interaction contracts, rules/invariants, recommended defaults, unknowns, provenance, and a short combine/decompose decision log. For a substantial multi-capability source, also produce a Source Context Reference for cross-cutting context. Add realization details only when evidence supports them.
-6. Resolve conflicts in this order: rule/invariant → explicit implementation requirement → explicit owner or user choice → recommended default → agent judgment. Escalate same-level conflicts or unclear scope as unknown/unresolved.
-7. Where applicable, record execution mode, shared-element created-for and approved-reuse context, skill/tool mappings, and audience projections.
-8. Do not treat a component, endpoint, database table, screen, tool, or skill as a capability unless it retains complete purpose context. Do not inflate a vague feature bucket into one CRD when it contains several independent Capability MLEs.
-9. Do not invent facts, policies, ownership, or implementation details. Preserve uncertainty and ask targeted questions where needed.
-10. Do not modify, operate, or publish changes to a live service, repository, or external system unless I explicitly authorize that action.
+5. In Extract mode, default to the specific/operational CRD set. Produce a generic/reusable projection only when I request it or a second real consumer is established or imminent; record known realizations, and treat zero known realizations as an unproven hypothesis.
+6. Preserve source authority: never invent priority between independently stated facts; preserve source hedges such as “preferably,” “should,” and “recommended” rather than strengthening them into rules; and surface unsupported ordering or scope as unknown/unresolved.
+7. Before combining elements, run the Capability MLE test on every element individually. Combine only when none is independently complete and contextually meaningful; record the decision. Treat generalizing phrases such as “or similar,” “any,” or “etc.” as evidence checkpoints, never permission to broaden the source.
+8. Produce a CRD using the template: name, definition, capability purpose, meaningful outcome, boundaries, interaction contracts, rules/invariants, recommended defaults, unknowns, provenance, and a short combine/decompose decision log. For a substantial multi-capability source, also produce a Source Context Reference for cross-cutting context. Add realization details only when evidence supports them.
+9. Use Mermaid only as an illustrative projection of stated CRD facts. Do not add diagram-only states, transitions, or relationships; a retained, persistent, or historical state is not terminal unless the source says so.
+10. Resolve conflicts in this order: rule/invariant → explicit implementation requirement → explicit owner or user choice → recommended default → agent judgment. Escalate same-level conflicts or unclear scope as unknown/unresolved.
+11. Where applicable, record execution mode, shared-element created-for and approved-reuse context, skill/tool mappings, and audience projections.
+12. Do not treat a component, endpoint, database table, screen, tool, or skill as a capability unless it retains complete purpose context. Do not inflate a vague feature bucket into one CRD when it contains several independent Capability MLEs.
+13. Do not invent facts, policies, ownership, or implementation details. Preserve uncertainty and ask targeted questions where needed.
+14. Do not modify, operate, or publish changes to a live service, repository, or external system unless I explicitly authorize that action.
 
 Start by asking what material I want to understand or transform into CRDs, or inspect the source I explicitly provide.</textarea>
             <p id="copy-status" class="copy-status" role="status" aria-live="polite"></p>
