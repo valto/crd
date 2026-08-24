@@ -20,6 +20,9 @@ For a substantial source that yields multiple capabilities, also produce a [Sour
 6. Resolve competing guidance in this order: rule/invariant → explicit implementation requirement → explicit owner/user choice → recommended default → agent judgment. Surface same-level conflicts or unclear scope as `unknown/unresolved`.
 7. Do not infer a priority or conflict-ordering relationship between independently stated facts. If the source does not establish which applies first, record that ordering as `unknown/unresolved`.
 8. Preserve source hedge language. A statement expressed as “preferably,” “should,” “recommended,” or an equivalent hedge is a recommended default or implementation choice—not a rule/invariant—unless the source explicitly makes it binding.
+9. Do not carry over terminology, facts, or conclusions from any other source, project, or prior work not included in the material assigned for this extraction—including other material handled earlier in the same session. If a term seems relevant but you cannot point to where in the assigned source it appears, omit it; do not include it hedged as “possibly used elsewhere.”
+10. When extracting from a codebase or structured configuration (build/target definitions, schemas, manifests), do not assert a machine-checkable fact—such as which build target includes a file, or which route a client calls—as confirmed unless you have traced it directly in the specific file and line that governs it. If you have not traced it, mark it `unknown/unresolved` rather than stating it with confidence.
+11. A declared type, enum case, schema field, or similar construct that you cannot find an actual code path constructing, assigning, or reaching must not be presented as a live, reachable, user-visible outcome. Either omit it, or explicitly mark it “declared but reachability not confirmed.”
 
 ## Procedure
 
@@ -47,6 +50,8 @@ Propose a Capability MLE only when there is a complete ability with a meaningful
 Decompose one apparent feature when it contains several independent complete abilities. Combine low-level endpoints, components, or functions only when they jointly form one ability and none is meaningful alone.
 
 Before combining elements, run the Capability MLE test on **each element individually**, not only on the proposed combined result. Combine only when every candidate element fails the test alone. If one element has its own actor, command, state, and result, it is likely its own Capability MLE; record the decision in the log.
+
+This is not a discretionary judgment call once an element passes the test alone: split it out. Recording in the decision log that an element passed individually and combining it anyway does not satisfy this rule—disclosure is not compliance.
 
 When a generic/reusable projection is authorized, treat generalizing phrases such as “or otherwise,” “or similar,” “any,” or “etc.” as a source-grounding checkpoint. They are not permission to broaden a requirement beyond what the source supports.
 
@@ -108,5 +113,8 @@ Reject or revise the output if it:
 - lets a recommended default or agent judgment override a rule/invariant or explicit requirement;
 - treats a skill or tool name as proof of a Capability MLE without purpose context;
 - invents a priority ordering, strengthens a source hedge into a rule, or generalizes beyond the evidence;
-- uses a Mermaid diagram to assert a state, transition, or relationship that the CRD text does not establish; or
-- presents a speculative generic capability as demonstrated reusable without known realizations.
+- uses a Mermaid diagram to assert a state, transition, or relationship that the CRD text does not establish;
+- presents a speculative generic capability as demonstrated reusable without known realizations;
+- documents in its own decision log that a candidate element passes the Capability MLE test alone, then combines it anyway;
+- asserts a build-membership or other machine-checkable fact without citing the exact file/line traced to support it; or
+- presents a declared type, enum case, or schema value as a live outcome without confirming it is ever actually constructed or reached.
