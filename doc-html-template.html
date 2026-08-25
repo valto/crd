@@ -1,0 +1,50 @@
+<!--
+  Generic supporting-document HTML page template — for a Source Context
+  Reference, decision log, unresolved-questions list, or provenance table
+  linked from a showcase. Same rule as the CRD and inventory templates: a
+  user-facing showcase must be entirely HTML, so this page must actually
+  contain the rendered content, not just a link to the .md source.
+
+  How to use:
+  1. Copy this file to {{slug}}.html next to the source .md file
+     (e.g. decision-log.html next to decision-log.md).
+  2. Replace {{DOC_TITLE}} with the document's own H1.
+  3. Replace {{DOC_CONTENT}} with the document's content, converted
+     directly from markdown to HTML: `## heading` -> <h2>, `### heading`
+     -> <h3>, **bold** -> <strong>, `code` -> <code>, bullet lists ->
+     <ul><li>, numbered lists -> <ol><li>, tables -> <table>, fenced code
+     blocks -> <pre><code>, links -> <a href>. Do not summarize, shorten,
+     or reorganize the content while converting it — this is a rendering
+     of the same document, not a rewrite.
+  4. Keep this file dependency-free (no CDN scripts, no build step, no
+     external stylesheet) — same rule as the other templates.
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{DOC_TITLE}}</title>
+    <style>
+      body { font-family: -apple-system, "Segoe UI", system-ui, sans-serif; max-width: 800px; margin: 2.5rem auto; padding: 0 1.25rem; color: #1a1a1a; line-height: 1.6; }
+      h1 { font-size: 1.5rem; }
+      h2 { font-size: 1.1rem; margin-top: 2rem; border-bottom: 1px solid #e2e2e2; padding-bottom: 0.3rem; }
+      h3 { font-size: 1rem; margin-top: 1.3rem; }
+      table { width: 100%; border-collapse: collapse; margin: 0.8rem 0; font-size: 0.9rem; }
+      th, td { text-align: left; padding: 0.45rem 0.6rem; border-bottom: 1px solid #e2e2e2; vertical-align: top; }
+      th { font-size: 0.72rem; text-transform: uppercase; color: #666; }
+      code { background: #f2f2f2; padding: 0.1rem 0.3rem; border-radius: 3px; font-size: 0.9em; }
+      pre { background: #f2f2f2; padding: 0.8rem 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.85em; }
+      ul, ol { padding-left: 1.3rem; }
+      a { color: #1a56db; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      .backlink { display: inline-block; margin-bottom: 1rem; font-size: 0.88rem; }
+      footer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid #eee; color: #999; font-size: 0.82rem; }
+    </style>
+  </head>
+  <body>
+    <a class="backlink" href="capability-inventory.html">← Back to inventory</a>
+    {{DOC_CONTENT}}
+    <footer>Part of the Capability Inventory, generated with the CRD framework (github.com/valto/crd). This page is a reading aid — the source markdown file governs if you need the exact original text.</footer>
+  </body>
+</html>

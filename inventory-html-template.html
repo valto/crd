@@ -8,17 +8,28 @@
   projection (crd-specification.md §7.2) — it must not introduce content
   absent from the inventory/CRDs it summarizes.
 
+  A user-facing showcase must be entirely HTML — a human should never click
+  through from this page and land on a raw .md file. That means every CRD
+  linked here needs its own HTML page (crd-html-template.html) and every
+  supporting doc you link (source context, decision log, unresolved
+  questions, provenance) needs one too (doc-html-template.html). This page
+  is the index; it is not the whole showcase by itself.
+
   How to use:
   1. Copy this file next to your capability-inventory.md.
   2. Replace {{INVENTORY_TITLE}} and {{INVENTORY_SUBTITLE}} with your
      product/inventory name and a one-line description (from the inventory's
      own intro paragraph — don't invent new framing).
-  3. Replace {{CAPABILITY_ROWS}} with one <tr> per capability-inventory.md
-     row, in the same order, using the row template in the HTML comment
-     below it. Do not add capabilities not present in the inventory table.
-  4. Replace or remove the links in the .meta paragraph to point at
-     whichever of source-context.md / decision-log.md / unresolved.md
-     actually exist for this inventory.
+  3. For every capability in capability-inventory.md, render its CRD as an
+     HTML page using crd-html-template.html (see that file's own
+     instructions), then replace {{CAPABILITY_ROWS}} with one <tr> per
+     inventory row, in the same order, linking to the rendered .html page —
+     never to the .md source. Do not add capabilities not present in the
+     inventory table.
+  4. Render whichever of source-context.md / decision-log.md /
+     unresolved.md actually exist for this inventory using
+     doc-html-template.html, then link to those .html pages in the .meta
+     paragraph — omit any link whose source file doesn't exist.
   5. Produce this only when asked, or when the user wants to browse/publish
      the inventory — not by default alongside every extraction.
 
@@ -53,10 +64,10 @@
   <body>
     <h1>{{INVENTORY_TITLE}}</h1>
     <p class="meta">{{INVENTORY_SUBTITLE}} — projected from <code>capability-inventory.md</code>, which remains canonical. See
-      <a href="source-context.md">source context</a> ·
-      <a href="decision-log.md">decision log</a> ·
-      <a href="unresolved.md">unresolved questions</a>
-      (omit any link whose file doesn't exist for this inventory).</p>
+      <a href="source-context.html">source context</a> ·
+      <a href="decision-log.html">decision log</a> ·
+      <a href="unresolved.html">unresolved questions</a>
+      (omit any link whose source file doesn't exist for this inventory).</p>
     <table>
       <thead>
         <tr><th>Capability</th><th>Status</th><th>Realization</th><th>Purpose</th></tr>
@@ -65,10 +76,11 @@
         {{CAPABILITY_ROWS}}
         <!--
           Row template — one per capability-inventory.md row, same order,
-          no additions or omissions:
+          no additions or omissions. Link to the rendered HTML page, never
+          the .md source:
 
           <tr>
-            <td><a href="crds/{{slug}}.md">{{name}}</a></td>
+            <td><a href="crds/{{slug}}.html">{{name}}</a></td>
             <td><span class="status status-{{status}}">{{status}}</span></td>
             <td>{{realization_status}}</td>
             <td>{{purpose}}</td>
@@ -76,6 +88,6 @@
         -->
       </tbody>
     </table>
-    <footer>Generated from a Capability Inventory using the CRD framework (github.com/valto/crd). This page is a reading aid, not a source of truth — the linked markdown files govern.</footer>
+    <footer>Generated from a Capability Inventory using the CRD framework (github.com/valto/crd). This page is a reading aid, not a source of truth — the source markdown files govern if you need the exact original text.</footer>
   </body>
 </html>

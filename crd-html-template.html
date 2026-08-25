@@ -1,0 +1,140 @@
+<!--
+  Single-CRD HTML page template — used by inventory-html-template.html's
+  showcase. A user-facing inventory showcase must be entirely HTML: no link
+  in it should ever land on a raw .md file. This template maps directly to
+  crd-template.md's own section order — fill in each field from the CRD
+  markdown, do not paraphrase or add content the CRD doesn't state, and
+  omit any optional section the source CRD doesn't have (do not render an
+  empty section).
+
+  How to use:
+  1. Copy this file to crds/{{slug}}.html next to the CRD's {{slug}}.md.
+  2. Fill every {{PLACEHOLDER}} from the corresponding field in the .md.
+  3. For each Interaction Contract MLE, duplicate the <article
+     class="contract"> block once per contract, in the same order as the
+     source document.
+  4. For each Optional section (operational realization, shared elements,
+     agentic mappings, audience projections, Mermaid diagram, statement
+     provenance), include the block only if that section exists in the
+     source CRD — delete the block entirely otherwise, do not leave it
+     empty.
+  5. A Mermaid diagram block (if the CRD has one) should render the same
+     diagram as a plain <pre><code> block here — do not pull in the
+     Mermaid JS renderer (that would break the "no external dependency"
+     rule); a labeled code block is sufficient for a reading aid.
+  6. Keep this file dependency-free (no CDN scripts, no build step, no
+     external stylesheet) — same rule as inventory-html-template.html.
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{CRD_NAME}} — Capability Requirements Document</title>
+    <style>
+      body { font-family: -apple-system, "Segoe UI", system-ui, sans-serif; max-width: 800px; margin: 2.5rem auto; padding: 0 1.25rem; color: #1a1a1a; line-height: 1.6; }
+      h1 { font-size: 1.5rem; margin-bottom: 0.15rem; }
+      h2 { font-size: 1.05rem; margin-top: 2.2rem; border-bottom: 1px solid #e2e2e2; padding-bottom: 0.35rem; }
+      h3 { font-size: 0.98rem; margin-top: 1.4rem; color: #333; }
+      .status { display: inline-block; padding: 0.08rem 0.5rem; border-radius: 3px; font-size: 0.78rem; }
+      .status-active, .status-available { background: #e6f4ea; color: #1e7e34; }
+      .status-draft, .status-planned { background: #fff4e0; color: #9a5b00; }
+      .status-deprecated, .status-unknown { background: #eee; color: #666; }
+      dl { margin: 0.6rem 0; }
+      dt { font-weight: 600; font-size: 0.85rem; color: #555; margin-top: 0.7rem; }
+      dd { margin: 0.15rem 0 0 0; }
+      .contract { border: 1px solid #e2e2e2; border-radius: 6px; padding: 0.9rem 1.1rem; margin: 1rem 0; }
+      .contract h3 { margin-top: 0; }
+      table { width: 100%; border-collapse: collapse; margin: 0.8rem 0; font-size: 0.9rem; }
+      th, td { text-align: left; padding: 0.45rem 0.6rem; border-bottom: 1px solid #e2e2e2; vertical-align: top; }
+      th { font-size: 0.72rem; text-transform: uppercase; color: #666; }
+      ul { padding-left: 1.3rem; }
+      code { background: #f2f2f2; padding: 0.1rem 0.3rem; border-radius: 3px; font-size: 0.9em; }
+      pre { background: #f2f2f2; padding: 0.8rem 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.85em; }
+      a { color: #1a56db; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      .example { color: #806000; font-size: 0.85em; }
+      footer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid #eee; color: #999; font-size: 0.82rem; }
+      .backlink { display: inline-block; margin-bottom: 1rem; font-size: 0.88rem; }
+    </style>
+  </head>
+  <body>
+    <a class="backlink" href="../capability-inventory.html">← Back to inventory</a>
+    <h1>{{CRD_NAME}}</h1>
+    <p><span class="status status-{{STATUS}}">{{STATUS}}</span></p>
+    <p>{{DEFINITION}}</p>
+
+    <h2>Core meaning</h2>
+    <dl>
+      <dt>Capability purpose</dt><dd>{{CAPABILITY_PURPOSE}}</dd>
+      <dt>Meaningful outcome</dt><dd>{{MEANINGFUL_OUTCOME}}</dd>
+      <dt>Boundaries — includes</dt><dd>{{BOUNDARIES_INCLUDES}}</dd>
+      <dt>Boundaries — excludes</dt><dd>{{BOUNDARIES_EXCLUDES}}</dd>
+      <dt>Terms and concepts</dt><dd>{{TERMS_AND_CONCEPTS}}</dd>
+    </dl>
+
+    <h2>Interaction Contract MLEs</h2>
+    <!-- Repeat this <article> block once per contract, same order as the source -->
+    <article class="contract">
+      <h3>{{CONTRACT_NAME}}</h3>
+      <dl>
+        <dt>Actor</dt><dd>{{ACTOR}}</dd>
+        <dt>Command / intent</dt><dd>{{COMMAND_INTENT}}</dd>
+        <dt>Current state</dt><dd>{{CURRENT_STATE}}</dd>
+        <dt>Policies / invariants</dt><dd>{{POLICIES_INVARIANTS}}</dd>
+        <dt>Transition</dt><dd>{{TRANSITION}}</dd>
+        <dt>Result</dt><dd>{{RESULT}}</dd>
+        <dt>Events / effects</dt><dd>{{EVENTS_EFFECTS}}</dd>
+        <dt>Unknowns</dt><dd>{{CONTRACT_UNKNOWNS}}</dd>
+      </dl>
+    </article>
+
+    <!-- Optional: only if the source CRD has one -->
+    <h2>Illustrative state flow</h2>
+    <p><em>Non-normative — restates the contracts above.</em></p>
+    <pre><code>{{MERMAID_SOURCE_AS_PLAIN_TEXT}}</code></pre>
+
+    <h2>Rules and defaults</h2>
+    <h3>Rules / invariants</h3>
+    <ul>{{RULES_INVARIANTS_LIST_ITEMS}}</ul>
+    <h3>Recommended defaults</h3>
+    <ul>{{RECOMMENDED_DEFAULTS_LIST_ITEMS}}<!-- mark any "[example]"-tagged item with <span class="example">[example]</span> --></ul>
+    <h3>Decision precedence</h3>
+    <pre><code>Rule / invariant
+→ explicit implementation requirement
+→ explicit owner or user choice
+→ recommended default
+→ agent judgment</code></pre>
+
+    <h2>Unknown / unresolved</h2>
+    <ul>{{UNKNOWN_UNRESOLVED_LIST_ITEMS}}</ul>
+
+    <!-- Optional: only if the source CRD has an operational realization -->
+    <h2>Optional: operational realization</h2>
+    <dl>
+      <dt>Realization name and status</dt><dd>{{REALIZATION_NAME_STATUS}}</dd>
+      <dt>Execution mode</dt><dd><code>{{EXECUTION_MODE}}</code></dd>
+      <dt>Implementation/business rationale</dt><dd>{{RATIONALE}}</dd>
+      <dt>Owner / operating context</dt><dd>{{OWNER_CONTEXT}}</dd>
+      <dt>Operational constraints</dt><dd>{{OPERATIONAL_CONSTRAINTS}}</dd>
+      <dt>Exposure</dt><dd>{{EXPOSURE}}</dd>
+      <dt>Implementation references</dt><dd>{{IMPLEMENTATION_REFERENCES}}</dd>
+      <dt>Tests / verification</dt><dd>{{TESTS_VERIFICATION}}</dd>
+    </dl>
+
+    <!-- Optional: only if the source CRD has this table -->
+    <h2>Optional: shared elements and approved reuse</h2>
+    <table>
+      <thead><tr><th>Shared element</th><th>Kind</th><th>Created for</th><th>Approved reuse by</th><th>Notes</th></tr></thead>
+      <tbody>{{SHARED_ELEMENTS_ROWS}}</tbody>
+    </table>
+
+    <h2>Statement provenance</h2>
+    <table>
+      <thead><tr><th>Statement</th><th>Semantic class</th><th>Evidence status</th><th>Source / note</th></tr></thead>
+      <tbody>{{PROVENANCE_ROWS}}</tbody>
+    </table>
+
+    <footer>Part of the <a href="../capability-inventory.html">{{INVENTORY_TITLE}}</a> Capability Inventory, generated with the CRD framework (github.com/valto/crd). This page is a reading aid, not a source of truth — <a href="{{SLUG}}.md">the source CRD</a> governs if you need the exact original text.</footer>
+  </body>
+</html>

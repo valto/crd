@@ -107,7 +107,13 @@ For a generic/reusable inventory, populate `known realizations` honestly: list e
 
 ## Optional: showcase the inventory as HTML
 
-A Capability Inventory and its CRDs are markdown by default — good for agents, not always pleasant for a human browsing their own product's capabilities. When the user wants to browse or publish an inventory, render it using `../../inventory-html-template.html`: copy it next to `capability-inventory.md`, fill in the title/subtitle from the inventory's own intro, and generate one table row per inventory row in the same order — no additions, no omissions, no content beyond what's already in the inventory/CRDs (this page is a projection, like any audience projection, not a new source of truth). Do not add a build pipeline, JS framework, or external dependency; it should open directly from disk or host as a static file with zero configuration. Produce this only when asked or when publishing — not by default alongside every extraction.
+A Capability Inventory and its CRDs are markdown by default — good for agents, not always pleasant for a human browsing their own product's capabilities. When the user wants to browse or publish an inventory, the showcase must be **entirely HTML** — a human should never click through from it and land on a raw `.md` file. That means three template files, all used together, not just the index:
+
+- `../../inventory-html-template.html` — the index page. Copy it next to `capability-inventory.md`, fill in the title/subtitle from the inventory's own intro, and generate one table row per inventory row in the same order — no additions, no omissions, no content beyond what's already in the inventory/CRDs (this page is a projection, like any audience projection, not a new source of truth).
+- `../../crd-html-template.html` — render **one of these per capability**, from its CRD's own fields (Identity, Core meaning, every Interaction Contract MLE, Rules and defaults, Unknown/unresolved, and any Optional sections the CRD actually has). Link the index's rows to these pages, not to the `.md` files.
+- `../../doc-html-template.html` — render one of these for each supporting doc that exists (source context, decision log, unresolved questions, provenance), converting the markdown structure directly (headings, bold, lists, tables, code blocks, links) without summarizing or reorganizing it.
+
+Do not add a build pipeline, JS framework, or external dependency; every page should open directly from disk or host as a static file with zero configuration. Produce this only when asked or when publishing — not by default alongside every extraction.
 
 ## What not to do
 
@@ -134,7 +140,9 @@ A Capability Inventory and its CRDs are markdown by default — good for agents,
 - `../../agent-transformation-instructions.md` — canonical Extract-mode procedure.
 - `../../capability-inventory.md` — Capability Inventory entry format, including known realizations.
 - `../../source-context-template.md` — companion document for product-wide/cross-cutting context that no single CRD should own.
-- `../../inventory-html-template.html` — dependency-free static-page template for browsing a capability inventory.
+- `../../inventory-html-template.html` — dependency-free static-page template for a capability inventory's HTML index.
+- `../../crd-html-template.html` — HTML page template for a single CRD, used by the inventory showcase.
+- `../../doc-html-template.html` — HTML page template for a supporting doc (source context, decision log, unresolved, provenance), used by the inventory showcase.
 - `../../schema/crd.schema.json` — machine-readable schema for JSON instances.
 - `../../scripts/validate.py` — schema validator.
 - `../../examples/` — worked examples (external-facing and internal capabilities).
