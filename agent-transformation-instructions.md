@@ -4,7 +4,7 @@
 
 Transform existing material into Capability Requirements Documents (CRDs), Interaction Contract MLEs, and—only where evidence supports them—Operational Capability Realizations.
 
-Possible source material includes PRDs, plans, applications, codebases, Storybook, OpenAPI, MCP servers, skills, API documentation, database schemas, user stories, tests, and operational runbooks.
+Possible source material includes PRDs, plans, applications, codebases, Storybook, OpenAPI, Arazzo workflow documents, MCP servers, skills, API documentation, database schemas, user stories, tests, and operational runbooks.
 
 Extract mode defaults to a **specific/operational CRD set**. Produce an additional generic/reusable projection only when the user asks for it, or when reuse by a second real consumer is already established or clearly imminent. A generic capability with zero known realizations is an unproven hypothesis, not demonstrated reuse.
 
@@ -46,6 +46,8 @@ Propose a Capability MLE only when there is a complete ability with a meaningful
 - Would further splitting cause the pieces to lose their purpose context?
 
 A candidate that only passes these questions because its actor is "a developer manually running this for pre-release verification," with no recurring operational role in the running system and no exposure beyond that developer, is presumptively a **tool** or **implementation/test scaffolding** (§3.6), not a capability—even with its own dedicated doc, test, and CLI target. Good documentation and test coverage make it good engineering; they do not make it a capability. Promote it only when it serves a recurring operational purpose in the product, or is exposed for someone other than the building developer to invoke.
+
+When the source includes an Arazzo workflow document alongside an OpenAPI (or other API) description, treat each declared workflow as a candidate-capability hypothesis and each of its steps as candidate Interaction Contract evidence—not as an automatic capability boundary. Still run the MLE test on the workflow as a whole: a vendor-declared workflow may bundle several independently meaningful capabilities, or be too narrow to be one on its own. A step's referenced operation is evidence for a tool (§3.6), not a capability by itself. Most sources will not have an Arazzo document; a raw OpenAPI spec alone requires the same combine/decompose work described in §4, with less structural evidence to work from.
 
 ### 4. Combine and decompose
 
