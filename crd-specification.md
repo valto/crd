@@ -157,6 +157,7 @@ The following are optional and MUST NOT be required merely to classify something
 - execution mode and agentic mappings
 - shared-element reuse approvals
 - audience projections
+- tags
 
 These become important when documenting a particular operational realization.
 
@@ -187,6 +188,12 @@ One canonical CRD MAY be projected into audience-specific views without creating
 | Operations | Which realization is active, how is it observed, and what constraints or fallback paths exist? |
 
 Projections SHOULD be traceable to the canonical CRD. They MUST NOT silently introduce requirements that are absent from it.
+
+### 7.3 Tags
+
+A CRD MAY declare a small set of universal tags for dimensions that are not already derivable from its required fields (§4) and that stay meaningful regardless of which product realizes the capability. Reserve a tag for what isn't already implied elsewhere: do not tag `read-only` when every Interaction Contract's `transition` already states none; do not tag `internal`/`user-facing` when `exposure` (§7) already says so. Typical universal tags: `network-touching` / `local-only`, `data-sensitive`, `identity-related`, `notification-triggering`. A hand-authored tag that duplicates a derivable fact tends to drift from that fact over time — prefer deriving over tagging whenever a field already settles the question.
+
+An Operational Capability Documentation extension MAY separately declare **implementation tags** — product-specific groupings (a module, domain, or internal team name) meaningful only within that realization. Implementation tags MUST be clearly distinguished from the CRD's own universal tags and MUST NOT be presented as if they describe the reusable capability generally (a common convention is prefixing each one, e.g. `impl:inbox`).
 
 ## 8. Boundary rules
 

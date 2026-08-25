@@ -32,10 +32,28 @@
      paragraph — omit any link whose source file doesn't exist.
   5. Produce this only when asked, or when the user wants to browse/publish
      the inventory — not by default alongside every extraction.
+  6. If rows have tags (crd-specification.md §7.3), show them in the Tags
+     column as <span class="tag">{{tag}}</span> per tag; an implementation
+     tag gets class="tag tag-impl" instead, so it reads as visually
+     distinct from a universal one. Omit the whole Tags column if no row
+     has any.
+  7. Optional grouping: if the capabilities fall into natural domains (e.g.
+     from a shared ID prefix like product.domain.verb), you MAY replace the
+     single table with one <h2>{{domain name}}</h2><table>...</table> block
+     per domain instead of one flat table — same row template, just split
+     across sections. This is purely a reading aid: it must not change
+     what's in the inventory, only how it's grouped on this page. Only do
+     this when a real grouping already exists in the data; do not invent
+     categories to fill this in.
 
   Keep this file dependency-free (no CDN scripts, no build step, no
   external stylesheet). It should work opened directly from disk or hosted
-  as a static file (e.g. GitHub Pages) with zero configuration.
+  as a static file (e.g. GitHub Pages) with zero configuration. Grouping
+  (point 7) is achievable with plain HTML sectioning; if you ever want live
+  interactive filtering instead of static grouping, that needs a small
+  amount of inline vanilla JS — a real departure from "works with
+  JavaScript disabled," so treat it as a separate, deliberate decision
+  rather than assuming it's included here.
 -->
 <!doctype html>
 <html lang="en">
@@ -58,6 +76,8 @@
       .status-active, .status-available { background: #e6f4ea; color: #1e7e34; }
       .status-draft, .status-planned { background: #fff4e0; color: #9a5b00; }
       .status-deprecated, .status-unknown { background: #eee; color: #666; }
+      .tag { display: inline-block; padding: 0.08rem 0.5rem; margin: 0.1rem 0.15rem 0.1rem 0; border-radius: 3px; font-size: 0.78rem; background: #eef2ff; color: #3b4cb8; }
+      .tag-impl { background: #f5f0e6; color: #7a5c1e; }
       footer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid #eee; color: #999; font-size: 0.82rem; }
     </style>
   </head>
@@ -70,20 +90,22 @@
       (omit any link whose source file doesn't exist for this inventory).</p>
     <table>
       <thead>
-        <tr><th>Capability</th><th>Status</th><th>Realization</th><th>Purpose</th></tr>
+        <tr><th>Capability</th><th>Status</th><th>Realization</th><th>Purpose</th><th>Tags</th></tr>
       </thead>
       <tbody>
         {{CAPABILITY_ROWS}}
         <!--
           Row template — one per capability-inventory.md row, same order,
           no additions or omissions. Link to the rendered HTML page, never
-          the .md source:
+          the .md source. Omit the Tags <td> (and the column above) if no
+          row has any tags:
 
           <tr>
             <td><a href="crds/{{slug}}.html">{{name}}</a></td>
             <td><span class="status status-{{status}}">{{status}}</span></td>
             <td>{{realization_status}}</td>
             <td>{{purpose}}</td>
+            <td>{{tags_as_spans}}</td>
           </tr>
         -->
       </tbody>

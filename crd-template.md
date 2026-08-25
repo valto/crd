@@ -15,6 +15,7 @@ Use this template for a reusable Capability Requirements Document (CRD). Remove 
 - **Boundaries — includes:**
 - **Boundaries — excludes:**
 - **Terms and concepts:**
+- **Tags (optional):** universal only — a dimension not already derivable from another field (e.g. `network-touching`/`local-only`, `data-sensitive`, `identity-related`, `notification-triggering`). Omit rather than restate what `exposure` or a contract's `transition` already says.
 
 ## Interaction Contract MLEs
 
@@ -63,6 +64,7 @@ Rule / invariant
 - **Owner / operating context:**
 - **Operational constraints:**
 - **Exposure:** UI | API | MCP | tool | event | workflow | internal
+- **Implementation tags (optional):** product-specific groupings meaningful only to this realization (e.g. `impl:inbox`) — never the CRD's own universal tags, and always distinguishable from them (a consistent prefix such as `impl:` is a common convention).
 - **Implementation references:**
 - **UX representations:**
 - **Tests / verification:**

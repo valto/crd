@@ -99,6 +99,12 @@
       "type": "array",
       "description": "Optional links or references to audience-specific views derived from this CRD.",
       "items": {"$ref": "#/$defs/audienceProjection"}
+    },
+    "tags": {
+      "type": "array",
+      "description": "Optional universal tags for dimensions not already derivable from another required field (e.g. network-touching/local-only, data-sensitive, identity-related, notification-triggering). Not for implementation-specific groupings -- see realization.implementationTags.",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
     }
   },
   "$defs": {
@@ -197,6 +203,12 @@
             "type": "string",
             "enum": ["ui", "api", "mcp", "tool", "event", "workflow", "internal"]
           },
+          "uniqueItems": true
+        },
+        "implementationTags": {
+          "type": "array",
+          "description": "Product-specific groupings meaningful only to this realization (e.g. a module or domain name). Never the CRD's own universal tags (see top-level tags); a consistent prefix such as 'impl:' is a common convention for keeping the two kinds visually distinct.",
+          "items": {"type": "string", "minLength": 1},
           "uniqueItems": true
         }
       }

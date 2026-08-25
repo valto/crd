@@ -13,15 +13,18 @@ A Capability Inventory is a catalogue of available or planned Capability MLEs. I
 | `CRD` | Link or reference to the Capability Requirements Document, if available. |
 | `realization status` | Available, partial, planned, deprecated, or unknown. |
 | `known realizations` | Products, services, or apps already known to realize this capability, each linked to that realization's own CRD/Operational Capability Documentation, if any exist yet. |
+| `tags` | The CRD's own universal tags (crd-specification.md §7.3), plus this row's implementation tags if any, each prefixed `impl:` so the two kinds are never mistaken for each other (e.g. `local-only, impl:inbox`). Also useful for grouping or filtering a long inventory by domain/module without inventing a separate taxonomy field. |
 | `notes` | Important discovery, boundary, or unknown note. |
 
 `known realizations` matters most for a general/reusable inventory (§3.4): it turns a claim that a capability is "reusable" into a checkable fact. A capability with zero known realizations is not yet demonstrated reusable — it is a hypothesis. When a generic capability was itself generalized from one specific product's capability, that product is realization #1 by construction and should be listed, not omitted. A single-service inventory documenting one product's own capabilities may leave this column empty or omit it — a service is usually not tracking who else realizes its own capabilities.
 
+`tags` is optional in both inventory types and MAY be omitted entirely if it adds nothing beyond what `purpose` or `realization status` already conveys — don't populate it just to fill the column.
+
 ## Example
 
-| id | name | status | purpose | CRD | realization status | known realizations |
-|---|---|---|---|---|---|---|
-| `moving.quote.request` | Request a moving quote | draft | Enable a move to be presented to a provider for quote consideration. | [Example CRD](examples/request-moving-quote.md) | illustrative | none yet |
+| id | name | status | purpose | CRD | realization status | known realizations | tags |
+|---|---|---|---|---|---|---|---|
+| `moving.quote.request` | Request a moving quote | draft | Enable a move to be presented to a provider for quote consideration. | [Example CRD](examples/request-moving-quote.md) | illustrative | none yet | network-touching |
 
 ## Independence from product planning
 

@@ -38,6 +38,7 @@ You're inside the `valto/crd` repository. Worked/illustrative examples belong in
 5. Add optional sections (operational realization, shared elements/approved reuse, agentic mappings, audience projections) only where you have real content — an empty optional section is worse than an omitted one.
 6. When declaring a realization, state its execution mode explicitly: `software-primary`, `agent-primary-using-software`, `software-primary-calling-agents`, or `unknown`. Don't conflate this with `agent-built-software`, which is provenance (how it was built), not runtime control.
 7. Optional: add a Mermaid diagram (see "Optional: Mermaid diagrams" below) when a visual rendering of the states/transitions or the shared-element/skill/tool relationships would help a reader, without introducing anything not already stated in the CRD's text.
+8. Optional: add universal tags (`../../crd-specification.md` §7.3) only for a dimension not already derivable from another field — e.g. `network-touching`/`local-only`, `data-sensitive`, `identity-related`, `notification-triggering`. Don't tag `read-only` when a contract's `transition` already says none, and don't tag `internal`/`user-facing` when `exposure` already says so. Keep implementation-specific groupings (a module/domain name) in the realization's implementation tags instead, prefixed (e.g. `impl:inbox`) so they're never mistaken for universal ones.
 
 ## Step 3 — Extract mode
 
@@ -101,7 +102,7 @@ Before presenting output:
 
 ## Step 5 — Register in the Capability Inventory
 
-Add or update one row per capability in `capability-inventory.md` using the format it already defines: `id`, `name`, `status`, `purpose`, link to the CRD, `realization status`, `known realizations`, `notes`. Never let the inventory drift from the CRDs it links to — if a CRD's status or realization status changes, update the row in the same pass.
+Add or update one row per capability in `capability-inventory.md` using the format it already defines: `id`, `name`, `status`, `purpose`, link to the CRD, `realization status`, `known realizations`, `tags`, `notes`. Never let the inventory drift from the CRDs it links to — if a CRD's status or realization status changes, update the row in the same pass. `tags` combines the CRD's own universal tags with this row's implementation tags (each prefixed, e.g. `impl:inbox`) — omit the column entirely if it adds nothing beyond `purpose`.
 
 For a generic/reusable inventory, populate `known realizations` honestly: list every product/service/app already known to realize the capability, linked to that realization's own CRD or Operational Capability Documentation if one exists. If the generic capability was itself generalized from one specific product's capability (the common case when you produced both sets from one Extract-mode run), that product is realization #1 — list it, don't leave the column empty just because it feels like the "obvious" source. A capability with zero known realizations is an unproven hypothesis about reusability, not a demonstrated one; the inventory should make that visible rather than implying otherwise through silence.
 
@@ -129,6 +130,7 @@ Do not add a build pipeline, JS framework, or external dependency; every page sh
 - Do not treat a manually-run developer verification tool as a capability just because it has its own doc, test, or CLI target — check for a recurring operational role or third-party/agent exposure first.
 - Do not assert a build-membership or other machine-checkable fact without citing the exact file/line you traced to confirm it.
 - Do not present a declared type, enum case, or schema value as a live, reachable outcome without confirming a real code path constructs or reaches it.
+- Do not tag a dimension another field already settles, and do not leave an implementation tag unprefixed so it could be mistaken for a universal one.
 - Do not modify, operate, or publish changes to a live service, repository, or external system as a side effect of documenting it, unless explicitly authorized.
 
 ## Reference material

@@ -24,7 +24,14 @@
      rule); a labeled code block is sufficient for a reading aid.
   6. Keep this file dependency-free (no CDN scripts, no build step, no
      external stylesheet) — same rule as inventory-html-template.html.
+  7. If the CRD has universal tags (crd-specification.md §7.3), render each
+     as <span class="tag">{{tag}}</span> in {{TAGS_AS_SPANS}} -- omit that
+     line entirely if there are none. If a realization declares
+     implementation tags, render each as <span class="tag
+     tag-impl">{{tag}}</span> so they read as visually distinct from
+     universal tags -- omit that <dt>/<dd> pair if there are none.
 -->
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -40,6 +47,8 @@
       .status-active, .status-available { background: #e6f4ea; color: #1e7e34; }
       .status-draft, .status-planned { background: #fff4e0; color: #9a5b00; }
       .status-deprecated, .status-unknown { background: #eee; color: #666; }
+      .tag { display: inline-block; padding: 0.08rem 0.5rem; margin-left: 0.3rem; border-radius: 3px; font-size: 0.78rem; background: #eef2ff; color: #3b4cb8; }
+      .tag-impl { background: #f5f0e6; color: #7a5c1e; }
       dl { margin: 0.6rem 0; }
       dt { font-weight: 600; font-size: 0.85rem; color: #555; margin-top: 0.7rem; }
       dd { margin: 0.15rem 0 0 0; }
@@ -61,7 +70,10 @@
   <body>
     <a class="backlink" href="../capability-inventory.html">← Back to inventory</a>
     <h1>{{CRD_NAME}}</h1>
-    <p><span class="status status-{{STATUS}}">{{STATUS}}</span></p>
+    <p><span class="status status-{{STATUS}}">{{STATUS}}</span>
+      <!-- Optional: one <span class="tag"> per universal tag (crd-specification.md §7.3),
+           only if the CRD has any -- omit this whole line otherwise -->
+      {{TAGS_AS_SPANS}}</p>
     <p>{{DEFINITION}}</p>
 
     <h2>Core meaning</h2>
@@ -118,6 +130,8 @@
       <dt>Owner / operating context</dt><dd>{{OWNER_CONTEXT}}</dd>
       <dt>Operational constraints</dt><dd>{{OPERATIONAL_CONSTRAINTS}}</dd>
       <dt>Exposure</dt><dd>{{EXPOSURE}}</dd>
+      <!-- Optional: only if this realization declares implementation tags (crd-specification.md §7.3) -->
+      <dt>Implementation tags</dt><dd>{{IMPLEMENTATION_TAGS_AS_SPANS}}<!-- use class="tag tag-impl" so these read as visually distinct from universal tags --></dd>
       <dt>Implementation references</dt><dd>{{IMPLEMENTATION_REFERENCES}}</dd>
       <dt>Tests / verification</dt><dd>{{TESTS_VERIFICATION}}</dd>
     </dl>
