@@ -1,0 +1,81 @@
+<!--
+  Capability Inventory HTML showcase template.
+
+  Purpose: a single, dependency-free static page for browsing a
+  capability-inventory.md and its CRDs — a reading aid for humans, not a
+  build pipeline or a new source of truth. The inventory markdown remains
+  canonical; this page is a projection of it, same as any audience
+  projection (crd-specification.md §7.2) — it must not introduce content
+  absent from the inventory/CRDs it summarizes.
+
+  How to use:
+  1. Copy this file next to your capability-inventory.md.
+  2. Replace {{INVENTORY_TITLE}} and {{INVENTORY_SUBTITLE}} with your
+     product/inventory name and a one-line description (from the inventory's
+     own intro paragraph — don't invent new framing).
+  3. Replace {{CAPABILITY_ROWS}} with one <tr> per capability-inventory.md
+     row, in the same order, using the row template in the HTML comment
+     below it. Do not add capabilities not present in the inventory table.
+  4. Replace or remove the links in the .meta paragraph to point at
+     whichever of source-context.md / decision-log.md / unresolved.md
+     actually exist for this inventory.
+  5. Produce this only when asked, or when the user wants to browse/publish
+     the inventory — not by default alongside every extraction.
+
+  Keep this file dependency-free (no CDN scripts, no build step, no
+  external stylesheet). It should work opened directly from disk or hosted
+  as a static file (e.g. GitHub Pages) with zero configuration.
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{INVENTORY_TITLE}} — Capability Inventory</title>
+    <style>
+      body { font-family: -apple-system, "Segoe UI", system-ui, sans-serif; max-width: 920px; margin: 2.5rem auto; padding: 0 1.25rem; color: #1a1a1a; line-height: 1.55; }
+      h1 { font-size: 1.6rem; margin-bottom: 0.2rem; }
+      .meta { color: #555; font-size: 0.92rem; margin-top: 0.3rem; }
+      .meta a { color: #1a56db; }
+      table { width: 100%; border-collapse: collapse; margin-top: 1.75rem; }
+      th, td { text-align: left; padding: 0.55rem 0.75rem; border-bottom: 1px solid #e2e2e2; vertical-align: top; font-size: 0.94rem; }
+      th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: #666; border-bottom: 2px solid #ccc; }
+      tr:hover td { background: #fafafa; }
+      a { color: #1a56db; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      .status { display: inline-block; padding: 0.08rem 0.5rem; border-radius: 3px; font-size: 0.78rem; white-space: nowrap; }
+      .status-active, .status-available { background: #e6f4ea; color: #1e7e34; }
+      .status-draft, .status-planned { background: #fff4e0; color: #9a5b00; }
+      .status-deprecated, .status-unknown { background: #eee; color: #666; }
+      footer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid #eee; color: #999; font-size: 0.82rem; }
+    </style>
+  </head>
+  <body>
+    <h1>{{INVENTORY_TITLE}}</h1>
+    <p class="meta">{{INVENTORY_SUBTITLE}} — projected from <code>capability-inventory.md</code>, which remains canonical. See
+      <a href="source-context.md">source context</a> ·
+      <a href="decision-log.md">decision log</a> ·
+      <a href="unresolved.md">unresolved questions</a>
+      (omit any link whose file doesn't exist for this inventory).</p>
+    <table>
+      <thead>
+        <tr><th>Capability</th><th>Status</th><th>Realization</th><th>Purpose</th></tr>
+      </thead>
+      <tbody>
+        {{CAPABILITY_ROWS}}
+        <!--
+          Row template — one per capability-inventory.md row, same order,
+          no additions or omissions:
+
+          <tr>
+            <td><a href="crds/{{slug}}.md">{{name}}</a></td>
+            <td><span class="status status-{{status}}">{{status}}</span></td>
+            <td>{{realization_status}}</td>
+            <td>{{purpose}}</td>
+          </tr>
+        -->
+      </tbody>
+    </table>
+    <footer>Generated from a Capability Inventory using the CRD framework (github.com/valto/crd). This page is a reading aid, not a source of truth — the linked markdown files govern.</footer>
+  </body>
+</html>

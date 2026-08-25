@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Added a rule (`crd-specification.md` §3.6) distinguishing a capability from a tool/test scaffolding: a candidate whose actor is only "a developer manually running this for pre-release verification," with no recurring operational role and no exposure beyond that developer, is presumptively a tool, however well-documented and well-tested it is. Added to the specification, the agent transformation instructions, the CRD Author skill, and the corresponding site pages.
+- Added `inventory-html-template.html` — a dependency-free static-page template for browsing a Capability Inventory and its CRDs, produced only on request.
+
 - Hardened `agent-transformation-instructions.md` and the CRD Author skill against four failure modes found by a second, independently-run extraction test (a real codebase, not a PRD) and a fresh blind audit of its output: cross-session/cross-source terminology leakage (don't carry over facts or terms from other work handled earlier in the same session; prefer isolated subagents over forks for extraction); unverified machine-checkable claims (don't assert build-membership or similar facts without citing the exact file/line traced); a disclosed-but-not-resolved rule violation (recording that a combine decision breaks the individual-MLE-test rule doesn't satisfy the rule); and declared-but-unreached values presented as live outcomes.
 
 - Added a Source Context Reference template (`source-context-template.md`) for product-wide/cross-cutting content (intent, cross-cutting constraints, platform exposure, build sequencing) that no single CRD should own but that shouldn't be lost between capability-scoped documents either.

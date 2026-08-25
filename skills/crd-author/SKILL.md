@@ -30,6 +30,7 @@ You're inside the `valto/crd` repository. Worked/illustrative examples belong in
    - Can success or failure be determined?
    - Would splitting it further cause the pieces to lose their purpose context?
    - Would enlarging it fold in other independently meaningful abilities?
+   - Is the candidate's actor really just "a developer manually running this for pre-release verification," with no recurring operational role and no exposure beyond that developer? If so, it's presumptively a tool or test scaffolding (`../../crd-specification.md` §3.6), not a capability, even if it passes every question above and has its own doc, test, and CLI target. Good documentation and test coverage make it good engineering, not a capability.
 2. If the candidate fails the test, propose a split (multiple CRDs) or a merge (one CRD) and say why, before drafting.
 3. Fill `../../crd-template.md` for the capability. Required core: name, definition, capability purpose, boundaries (includes/excludes), meaningful outcome, at least one Interaction Contract MLE (or an explicit unknown explaining why none exists yet), rules/invariants (or "none known"), recommended defaults (or "none known"), unknowns.
    - **Terms and concepts:** for a reusable/generic CRD, ground terms in an applicable open standard vocabulary (schema.org first choice; Dublin Core, ActivityStreams, or another IANA/W3C vocabulary where a better fit exists) instead of inventing bespoke terminology, unless the source material specifies a concrete term that should be preserved as-is. Cite the standard type/property alongside the plain-language term (e.g. `participant (schema.org/Person)`, `comment (schema.org/Comment)`, `rating/confidence (schema.org/Rating.ratingValue)`). This is guidance for the reusable CRD's terms only — an Operational Capability Documentation extension should use the actual system's own terminology, not the standard vocabulary.
@@ -102,6 +103,10 @@ Add or update one row per capability in `capability-inventory.md` using the form
 
 For a generic/reusable inventory, populate `known realizations` honestly: list every product/service/app already known to realize the capability, linked to that realization's own CRD or Operational Capability Documentation if one exists. If the generic capability was itself generalized from one specific product's capability (the common case when you produced both sets from one Extract-mode run), that product is realization #1 — list it, don't leave the column empty just because it feels like the "obvious" source. A capability with zero known realizations is an unproven hypothesis about reusability, not a demonstrated one; the inventory should make that visible rather than implying otherwise through silence.
 
+## Optional: showcase the inventory as HTML
+
+A Capability Inventory and its CRDs are markdown by default — good for agents, not always pleasant for a human browsing their own product's capabilities. When the user wants to browse or publish an inventory, render it using `../../inventory-html-template.html`: copy it next to `capability-inventory.md`, fill in the title/subtitle from the inventory's own intro, and generate one table row per inventory row in the same order — no additions, no omissions, no content beyond what's already in the inventory/CRDs (this page is a projection, like any audience projection, not a new source of truth). Do not add a build pipeline, JS framework, or external dependency; it should open directly from disk or host as a static file with zero configuration. Produce this only when asked or when publishing — not by default alongside every extraction.
+
 ## What not to do
 
 - Do not treat a component, endpoint, screen, or database table as a capability merely because it is callable or reusable.
@@ -113,6 +118,7 @@ For a generic/reusable inventory, populate `known realizations` honestly: list e
 - Do not let a Mermaid diagram assert a state, transition, or relationship that the CRD's own text doesn't already establish.
 - Do not produce a generic/reusable CRD set by default — only when asked, or when a second real consumer already exists or is imminent — and do not claim a generic capability is reusable without listing its known realizations.
 - Do not document in your own decision log that an element passes the MLE test alone and then combine it anyway — that is a rule violation, not a disclosed judgment call.
+- Do not treat a manually-run developer verification tool as a capability just because it has its own doc, test, or CLI target — check for a recurring operational role or third-party/agent exposure first.
 - Do not assert a build-membership or other machine-checkable fact without citing the exact file/line you traced to confirm it.
 - Do not present a declared type, enum case, or schema value as a live, reachable outcome without confirming a real code path constructs or reaches it.
 - Do not modify, operate, or publish changes to a live service, repository, or external system as a side effect of documenting it, unless explicitly authorized.
@@ -126,6 +132,7 @@ For a generic/reusable inventory, populate `known realizations` honestly: list e
 - `../../agent-transformation-instructions.md` — canonical Extract-mode procedure.
 - `../../capability-inventory.md` — Capability Inventory entry format, including known realizations.
 - `../../source-context-template.md` — companion document for product-wide/cross-cutting context that no single CRD should own.
+- `../../inventory-html-template.html` — dependency-free static-page template for browsing a capability inventory.
 - `../../schema/crd.schema.json` — machine-readable schema for JSON instances.
 - `../../scripts/validate.py` — schema validator.
 - `../../examples/` — worked examples (external-facing and internal capabilities).

@@ -45,6 +45,8 @@ Propose a Capability MLE only when there is a complete ability with a meaningful
 - Can its success or failure be determined?
 - Would further splitting cause the pieces to lose their purpose context?
 
+A candidate that only passes these questions because its actor is "a developer manually running this for pre-release verification," with no recurring operational role in the running system and no exposure beyond that developer, is presumptively a **tool** or **implementation/test scaffolding** (§3.6), not a capability—even with its own dedicated doc, test, and CLI target. Good documentation and test coverage make it good engineering; they do not make it a capability. Promote it only when it serves a recurring operational purpose in the product, or is exposed for someone other than the building developer to invoke.
+
 ### 4. Combine and decompose
 
 Decompose one apparent feature when it contains several independent complete abilities. Combine low-level endpoints, components, or functions only when they jointly form one ability and none is meaningful alone.
@@ -116,5 +118,6 @@ Reject or revise the output if it:
 - uses a Mermaid diagram to assert a state, transition, or relationship that the CRD text does not establish;
 - presents a speculative generic capability as demonstrated reusable without known realizations;
 - documents in its own decision log that a candidate element passes the Capability MLE test alone, then combines it anyway;
+- treats a manually-run developer verification tool as a capability solely because it has its own doc, test, or CLI target, with no recurring operational role and no exposure beyond the building developer;
 - asserts a build-membership or other machine-checkable fact without citing the exact file/line traced to support it; or
 - presents a declared type, enum case, or schema value as a live outcome without confirming it is ever actually constructed or reached.

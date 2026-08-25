@@ -73,6 +73,8 @@ Capability MLE ↔ Skill ↔ Tool
 
 A capability MAY be the MLE of a skill when the skill has one complete contextual purpose. A skill MUST NOT be assumed to equal one capability merely because it has a name or a tool interface.
 
+A candidate that passes the MLE test's five questions (§3.1) on a literal reading — it has an actor, a command, a determinable result — is not automatically a capability if that actor is only "a developer manually running this for pre-release verification" and the candidate has no recurring operational role in the running system and is not itself exposed for a third party or agent to invoke. Such a candidate is presumptively a **tool** or **implementation/test scaffolding**, not a capability, regardless of how well-documented or well-tested it is. Documentation quality and test coverage establish that a tool is good engineering; they do not establish that it is a capability. Promote it to a capability only when it serves a recurring operational purpose within the product (compare the internal `Reconcile payments` example, which runs repeatedly as real business operation, not a one-time developer check) or when it is exposed for someone other than the building developer to invoke.
+
 ## 4. Capability Requirements Document (CRD): required core
 
 A conforming CRD MUST contain:

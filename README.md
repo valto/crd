@@ -55,6 +55,7 @@ Capability Documentation
 - [JSON Schema](schema/crd.schema.json) — portable machine-readable representation of the required core.
 - [JSON example](examples/request-moving-quote.json) — schema-conforming illustrative instance.
 - [CRD Author skill](skills/crd-author/SKILL.md) — a packaged agent skill that writes CRDs (Define mode) or extracts them from existing material (Extract mode) and maintains a Capability Inventory.
+- [Inventory HTML template](inventory-html-template.html) — a dependency-free static page for browsing a Capability Inventory and its CRDs, produced only on request.
 
 ## Quick start
 
