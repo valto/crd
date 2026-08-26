@@ -1,10 +1,10 @@
 # Capability Documentation
 
-Draft 0.4 — an open, technology- and implementation-agnostic framework for defining, cataloguing, and operating complete capabilities.
+Draft 0.4 (package release 0.6.0) — an open, technology- and implementation-agnostic framework for defining, cataloguing, and operating complete capabilities.
 
 The canonical artifact is a **Capability Requirements Document (CRD)**: the requirement document for one Capability MLE. A capability may belong to a product, service, system, agent, or reusable open inventory; a CRD can be created before implementation or derived from existing systems, and it remains independent of any one realization mechanism.
 
-This is an early, reviewable specification draft. It is not a software runtime, a required product-management process, or an attempt to replace domain-specific documentation.
+The core model and Extract-mode workflow are stable and validated: the required-core fields haven't changed since Draft 0.4, and the [CRD Author skill](skills/crd-author/SKILL.md)'s Extract mode has been run against four independent real sources (a PRD, a real codebase, a real API/webhook documentation set) and each result independently blind-audited for both framework conformance and factual accuracy — see [CHANGELOG.md](CHANGELOG.md) for what each audit found and fixed. Define mode and some optional extensions (Arazzo/OpenAPI structured extraction, audience projections, Mermaid diagrams beyond one worked example) are specified but have not yet been exercised and audited the same way — treat those as reasonable but less-proven guidance. It is not a software runtime, a required product-management process, or an attempt to replace domain-specific documentation.
 
 ## Start here
 
@@ -52,6 +52,7 @@ Capability Documentation
 - [Agent transformation instructions](agent-transformation-instructions.md) — derive documentation from existing material without inventing facts.
 - [Worked example](examples/request-moving-quote.md) — an illustrative CRD and realization.
 - [Internal-capability example](examples/reconcile-payments.md) — an illustrative internal CRD with a software-primary realization.
+- [Real-world example: Open a pull request](examples/open-pull-request.md) / [Merge a pull request](examples/merge-pull-request.md) — extracted from GitHub's own public REST API and webhook documentation (not synthetic), independently blind-audited for framework conformance and factual accuracy; see the accompanying [provenance table](examples/github-pull-request-provenance.md) and [decision log](examples/github-pull-request-decision-log.md).
 - [JSON Schema](schema/crd.schema.json) — portable machine-readable representation of the required core.
 - [JSON example](examples/request-moving-quote.json) — schema-conforming illustrative instance.
 - [CRD Author skill](skills/crd-author/SKILL.md) — a packaged agent skill that writes CRDs (Define mode) or extracts them from existing material (Extract mode) and maintains a Capability Inventory.
