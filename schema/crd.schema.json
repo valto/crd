@@ -102,7 +102,7 @@
     },
     "tags": {
       "type": "array",
-      "description": "Optional universal tags for dimensions not already derivable from another required field (e.g. network-touching/local-only, data-sensitive, identity-related, notification-triggering). Not for implementation-specific groupings -- see realization.implementationTags.",
+      "description": "Optional universal tags for dimensions not already derivable from another required field (e.g. network-touching/local-only, data-sensitive, identity-related, notification-triggering). Not for implementation-specific groupings -- see realization.implementationTags. In a rendered projection this typically drives structure (a grouping/section key) or plain text, not a badge -- the badge convention is reserved for implementationTags.",
       "items": {"type": "string", "minLength": 1},
       "uniqueItems": true
     }
@@ -207,7 +207,7 @@
         },
         "implementationTags": {
           "type": "array",
-          "description": "Product-specific groupings meaningful only to this realization (e.g. a module or domain name). Never the CRD's own universal tags (see top-level tags); a consistent prefix such as 'impl:' is a common convention for keeping the two kinds visually distinct.",
+          "description": "Product-specific groupings meaningful only to this realization (e.g. a module or domain name). Never the CRD's own universal tags (see top-level tags); a consistent prefix such as 'impl:' is a common convention for keeping the two kinds visually distinct. In a rendered projection this is the only kind of tag shown as a visual badge.",
           "items": {"type": "string", "minLength": 1},
           "uniqueItems": true
         }

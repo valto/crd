@@ -92,7 +92,7 @@ A skill may realize one capability or bundle several; a tool may support many sk
 
 ### 6.2 Tags (optional)
 
-Add a universal tag only for a dimension not already derivable from another required field — do not restate what `exposure` or a contract's `transition` already settles. Typical universal tags: `network-touching`/`local-only`, `data-sensitive`, `identity-related`, `notification-triggering`. Keep implementation-specific groupings (a module or domain name meaningful only to this realization) in the Operational Capability Documentation extension as implementation tags, prefixed (e.g. `impl:inbox`) so they are never mistaken for the CRD's own universal tags. Omit tags entirely when they would add nothing beyond what the inventory's `purpose` column already conveys.
+Add a universal tag only for a dimension not already derivable from another required field — do not restate what `exposure` or a contract's `transition` already settles. Typical universal tags: `network-touching`/`local-only`, `data-sensitive`, `identity-related`, `notification-triggering`. Keep implementation-specific groupings (a module or domain name meaningful only to this realization) in the Operational Capability Documentation extension as implementation tags, prefixed (e.g. `impl:inbox`) so they are never mistaken for the CRD's own universal tags. Omit tags entirely when they would add nothing beyond what the inventory's `purpose` column already conveys. When rendering an HTML showcase, keep the visual tag/badge convention exclusive to implementation tags — a universal tag becomes a grouping/section key (e.g. its own tab) or plain text instead.
 
 ### 7. Produce and validate the document
 
@@ -126,5 +126,6 @@ Reject or revise the output if it:
 - documents in its own decision log that a candidate element passes the Capability MLE test alone, then combines it anyway;
 - treats a manually-run developer verification tool as a capability solely because it has its own doc, test, or CLI target, with no recurring operational role and no exposure beyond the building developer;
 - asserts a build-membership or other machine-checkable fact without citing the exact file/line traced to support it;
-- presents a declared type, enum case, or schema value as a live outcome without confirming it is ever actually constructed or reached; or
-- tags a dimension that another required field already settles, or leaves an implementation tag unprefixed so it could be mistaken for a universal one.
+- presents a declared type, enum case, or schema value as a live outcome without confirming it is ever actually constructed or reached;
+- tags a dimension that another required field already settles, or leaves an implementation tag unprefixed so it could be mistaken for a universal one; or
+- renders a universal tag as a visual tag/badge in an HTML showcase instead of a grouping/section key or plain text (that badge convention is reserved for implementation tags).

@@ -38,7 +38,7 @@ You're inside the `valto/crd` repository. Worked/illustrative examples belong in
 5. Add optional sections (operational realization, shared elements/approved reuse, agentic mappings, audience projections) only where you have real content — an empty optional section is worse than an omitted one.
 6. When declaring a realization, state its execution mode explicitly: `software-primary`, `agent-primary-using-software`, `software-primary-calling-agents`, or `unknown`. Don't conflate this with `agent-built-software`, which is provenance (how it was built), not runtime control.
 7. Optional: add a Mermaid diagram (see "Optional: Mermaid diagrams" below) when a visual rendering of the states/transitions or the shared-element/skill/tool relationships would help a reader, without introducing anything not already stated in the CRD's text.
-8. Optional: add universal tags (`../../crd-specification.md` §7.3) only for a dimension not already derivable from another field — e.g. `network-touching`/`local-only`, `data-sensitive`, `identity-related`, `notification-triggering`. Don't tag `read-only` when a contract's `transition` already says none, and don't tag `internal`/`user-facing` when `exposure` already says so. Keep implementation-specific groupings (a module/domain name) in the realization's implementation tags instead, prefixed (e.g. `impl:inbox`) so they're never mistaken for universal ones.
+8. Optional: add universal tags (`../../crd-specification.md` §7.3) only for a dimension not already derivable from another field — e.g. `network-touching`/`local-only`, `data-sensitive`, `identity-related`, `notification-triggering`. Don't tag `read-only` when a contract's `transition` already says none, and don't tag `internal`/`user-facing` when `exposure` already says so. Keep implementation-specific groupings (a module/domain name) in the realization's implementation tags instead, prefixed (e.g. `impl:inbox`) so they're never mistaken for universal ones. In an HTML showcase, the visual tag/badge convention is reserved for implementation tags — a universal tag becomes a grouping/section key (its own tab) or plain text, never the same badge.
 
 ## Step 3 — Extract mode
 
@@ -110,11 +110,11 @@ For a generic/reusable inventory, populate `known realizations` honestly: list e
 
 A Capability Inventory and its CRDs are markdown by default — good for agents, not always pleasant for a human browsing their own product's capabilities. When the user wants to browse or publish an inventory, the showcase must be **entirely HTML** — a human should never click through from it and land on a raw `.md` file. That means three template files, all used together, not just the index:
 
-- `../../inventory-html-template.html` — the index page. Copy it next to `capability-inventory.md`, fill in the title/subtitle from the inventory's own intro, and generate one table row per inventory row in the same order — no additions, no omissions, no content beyond what's already in the inventory/CRDs (this page is a projection, like any audience projection, not a new source of truth).
-- `../../crd-html-template.html` — render **one of these per capability**, from its CRD's own fields (Identity, Core meaning, every Interaction Contract MLE, Rules and defaults, Unknown/unresolved, and any Optional sections the CRD actually has). Link the index's rows to these pages, not to the `.md` files.
+- `../../inventory-html-template.html` — the index page. Copy it next to `capability-inventory.md`, fill in the title/subtitle from the inventory's own intro, and generate the CSS-only two-tab structure the template documents — one tab segmented by universal tag, one by implementation tag/domain — from your `capability-inventory.md`/CRD data, in the same order, with no additions or omissions (this page is a projection, like any audience projection, not a new source of truth). Only build a tab your data actually supports; if neither kind of tag exists anywhere in the inventory, skip the tabs and render one flat table instead.
+- `../../crd-html-template.html` — render **one of these per capability**, from its CRD's own fields (Identity, Core meaning, every Interaction Contract MLE, Rules and defaults, Unknown/unresolved, and any Optional sections the CRD actually has). Link the index's rows to these pages, not to the `.md` files. Universal tags render as plain text; the `<span class="tag">` badge is reserved for implementation tags.
 - `../../doc-html-template.html` — render one of these for each supporting doc that exists (source context, decision log, unresolved questions, provenance), converting the markdown structure directly (headings, bold, lists, tables, code blocks, links) without summarizing or reorganizing it.
 
-Do not add a build pipeline, JS framework, or external dependency; every page should open directly from disk or host as a static file with zero configuration. Produce this only when asked or when publishing — not by default alongside every extraction.
+Do not add a build pipeline, JS framework, or external dependency; every page should open directly from disk or host as a static file with zero configuration — the two-tab UI uses only a radio-input/label/`:checked`-sibling CSS technique, no `<script>`. Produce this only when asked or when publishing — not by default alongside every extraction.
 
 ## What not to do
 
@@ -131,6 +131,7 @@ Do not add a build pipeline, JS framework, or external dependency; every page sh
 - Do not assert a build-membership or other machine-checkable fact without citing the exact file/line you traced to confirm it.
 - Do not present a declared type, enum case, or schema value as a live, reachable outcome without confirming a real code path constructs or reaches it.
 - Do not tag a dimension another field already settles, and do not leave an implementation tag unprefixed so it could be mistaken for a universal one.
+- Do not render a universal tag as a `<span class="tag">` badge in an HTML showcase — that badge convention is reserved for implementation tags; a universal tag becomes a grouping/section key or plain text instead.
 - Do not modify, operate, or publish changes to a live service, repository, or external system as a side effect of documenting it, unless explicitly authorized.
 
 ## Reference material

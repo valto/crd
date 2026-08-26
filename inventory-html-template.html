@@ -15,6 +15,29 @@
   questions, provenance) needs one too (doc-html-template.html). This page
   is the index; it is not the whole showcase by itself.
 
+  Two tabs, CSS-only (no <script>, works with JavaScript disabled):
+    - "By tag"    — sections keyed by each universal tag value present
+                    (crd-specification.md §7.3). A capability carrying more
+                    than one universal tag appears in more than one
+                    section here — that's correct, not a duplicate bug.
+                    Rows in this tab do NOT repeat the universal tag as a
+                    badge (the section heading already says it); if a row
+                    has implementation tags, show those as badges here too.
+    - "By domain" — sections keyed by each implementation tag / domain
+                    value the realizations declare (a module, product
+                    area, or internal team name). Rows in this tab show
+                    any universal tag(s) as plain text, not a badge —
+                    the visual tag/badge convention (<span class="tag">)
+                    is reserved for implementation tags only, so a reader
+                    never has to guess which kind of tag a badge means.
+
+  Only build the tabs your data actually supports: if no capability in this
+  inventory has any universal tag, omit the "By tag" tab and its input/
+  label entirely (don't render an empty tab); same for "By domain" if no
+  realization declares implementation tags. If neither exists, skip the
+  tabs wrapper and render one flat table instead (same row shape, no
+  sectioning) — don't force a tabbed UI onto an inventory with no tag data.
+
   How to use:
   1. Copy this file next to your capability-inventory.md.
   2. Replace {{INVENTORY_TITLE}} and {{INVENTORY_SUBTITLE}} with your
@@ -22,8 +45,7 @@
      own intro paragraph — don't invent new framing).
   3. For every capability in capability-inventory.md, render its CRD as an
      HTML page using crd-html-template.html (see that file's own
-     instructions), then replace {{CAPABILITY_ROWS}} with one <tr> per
-     inventory row, in the same order, linking to the rendered .html page —
+     instructions), then link to that page from every section row below —
      never to the .md source. Do not add capabilities not present in the
      inventory table.
   4. Render whichever of source-context.md / decision-log.md /
@@ -32,28 +54,28 @@
      paragraph — omit any link whose source file doesn't exist.
   5. Produce this only when asked, or when the user wants to browse/publish
      the inventory — not by default alongside every extraction.
-  6. If rows have tags (crd-specification.md §7.3), show them in the Tags
-     column as <span class="tag">{{tag}}</span> per tag; an implementation
-     tag gets class="tag tag-impl" instead, so it reads as visually
-     distinct from a universal one. Omit the whole Tags column if no row
-     has any.
-  7. Optional grouping: if the capabilities fall into natural domains (e.g.
-     from a shared ID prefix like product.domain.verb), you MAY replace the
-     single table with one <h2>{{domain name}}</h2><table>...</table> block
-     per domain instead of one flat table — same row template, just split
-     across sections. This is purely a reading aid: it must not change
-     what's in the inventory, only how it's grouped on this page. Only do
-     this when a real grouping already exists in the data; do not invent
-     categories to fill this in.
+  6. Build {{TAG_SECTIONS}}: one <section> per distinct universal tag value
+     across the inventory, each with an <h2>{{tag}}</h2> and a <table> of
+     the capabilities carrying that tag (same row shape as the illustrative
+     block below). A capability with two universal tags produces one <tr>
+     in each of the two matching sections — do not merge or dedupe across
+     sections, and do not invent a tag value no CRD actually declares.
+  7. Build {{DOMAIN_SECTIONS}} the same way, keyed by implementation tag /
+     domain value instead. Only derive a domain grouping from data that
+     already exists (a realization's declared implementation tags, or a
+     shared ID prefix convention already in use) — do not invent categories
+     to fill this in.
 
   Keep this file dependency-free (no CDN scripts, no build step, no
-  external stylesheet). It should work opened directly from disk or hosted
-  as a static file (e.g. GitHub Pages) with zero configuration. Grouping
-  (point 7) is achievable with plain HTML sectioning; if you ever want live
-  interactive filtering instead of static grouping, that needs a small
-  amount of inline vanilla JS — a real departure from "works with
-  JavaScript disabled," so treat it as a separate, deliberate decision
-  rather than assuming it's included here.
+  external stylesheet, no JavaScript). It should work opened directly from
+  disk or hosted as a static file (e.g. GitHub Pages) with zero
+  configuration, and the tabs must keep working with JavaScript disabled —
+  that's the point of the radio-input/label/:checked-sibling technique
+  below. The one honest tradeoff: CSS-only tabs are rougher for keyboard
+  and screen-reader navigation than a JS-driven tabs widget (no automatic
+  arrow-key roving, no aria-selected state) — acceptable here because the
+  content is fully available and in document order either way, just not
+  presented with the same assistive affordances a scripted widget gives.
 -->
 <!doctype html>
 <html lang="en">
@@ -64,9 +86,10 @@
     <style>
       body { font-family: -apple-system, "Segoe UI", system-ui, sans-serif; max-width: 920px; margin: 2.5rem auto; padding: 0 1.25rem; color: #1a1a1a; line-height: 1.55; }
       h1 { font-size: 1.6rem; margin-bottom: 0.2rem; }
+      h2 { font-size: 1rem; margin-top: 1.75rem; color: #333; }
       .meta { color: #555; font-size: 0.92rem; margin-top: 0.3rem; }
       .meta a { color: #1a56db; }
-      table { width: 100%; border-collapse: collapse; margin-top: 1.75rem; }
+      table { width: 100%; border-collapse: collapse; margin-top: 0.75rem; }
       th, td { text-align: left; padding: 0.55rem 0.75rem; border-bottom: 1px solid #e2e2e2; vertical-align: top; font-size: 0.94rem; }
       th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: #666; border-bottom: 2px solid #ccc; }
       tr:hover td { background: #fafafa; }
@@ -76,9 +99,23 @@
       .status-active, .status-available { background: #e6f4ea; color: #1e7e34; }
       .status-draft, .status-planned { background: #fff4e0; color: #9a5b00; }
       .status-deprecated, .status-unknown { background: #eee; color: #666; }
-      .tag { display: inline-block; padding: 0.08rem 0.5rem; margin: 0.1rem 0.15rem 0.1rem 0; border-radius: 3px; font-size: 0.78rem; background: #eef2ff; color: #3b4cb8; }
-      .tag-impl { background: #f5f0e6; color: #7a5c1e; }
+      /* .tag is reserved for implementation tags only — universal tags are
+         structural (a tab/section key) or plain text, never this badge. */
+      .tag { display: inline-block; padding: 0.08rem 0.5rem; margin: 0.1rem 0.15rem 0.1rem 0; border-radius: 3px; font-size: 0.78rem; background: #f5f0e6; color: #7a5c1e; }
+      .tag-plain { color: #777; font-size: 0.85rem; }
       footer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid #eee; color: #999; font-size: 0.82rem; }
+
+      /* CSS-only tabs: no <script>, degrades to both panels' content being
+         present either way (screen readers/no-CSS see everything). */
+      .tabs { margin-top: 1.5rem; }
+      .tabs input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+      .tab-bar { display: flex; gap: 0.4rem; }
+      .tab-bar label { cursor: pointer; padding: 0.5rem 1rem; border: 1px solid #d8d8d8; border-bottom: none; border-radius: 6px 6px 0 0; background: #f5f5f5; color: #555; font-size: 0.88rem; }
+      .tab-panel { display: none; border-top: 2px solid #ccc; padding-top: 0.25rem; }
+      #view-tag:checked ~ .tab-bar label[for="view-tag"],
+      #view-domain:checked ~ .tab-bar label[for="view-domain"] { background: #fff; color: #1a56db; font-weight: 600; border-color: #1a56db #1a56db #fff; }
+      #view-tag:checked ~ .panel-tag { display: block; border-top-color: #1a56db; }
+      #view-domain:checked ~ .panel-domain { display: block; border-top-color: #1a56db; }
     </style>
   </head>
   <body>
@@ -88,28 +125,69 @@
       <a href="decision-log.html">decision log</a> ·
       <a href="unresolved.html">unresolved questions</a>
       (omit any link whose source file doesn't exist for this inventory).</p>
-    <table>
-      <thead>
-        <tr><th>Capability</th><th>Status</th><th>Realization</th><th>Purpose</th><th>Tags</th></tr>
-      </thead>
-      <tbody>
-        {{CAPABILITY_ROWS}}
-        <!--
-          Row template — one per capability-inventory.md row, same order,
-          no additions or omissions. Link to the rendered HTML page, never
-          the .md source. Omit the Tags <td> (and the column above) if no
-          row has any tags:
 
-          <tr>
-            <td><a href="crds/{{slug}}.html">{{name}}</a></td>
-            <td><span class="status status-{{status}}">{{status}}</span></td>
-            <td>{{realization_status}}</td>
-            <td>{{purpose}}</td>
-            <td>{{tags_as_spans}}</td>
-          </tr>
+    <!--
+      Tabs wrapper — omit entirely (and render one flat table instead) if
+      the inventory has no universal tags and no implementation tags.
+      Omit just the "By tag" input/label/panel if there are no universal
+      tags but implementation tags do exist, or vice versa.
+    -->
+    <div class="tabs">
+      <input type="radio" name="view" id="view-tag" checked>
+      <input type="radio" name="view" id="view-domain">
+      <div class="tab-bar">
+        <label for="view-tag">By tag</label>
+        <label for="view-domain">By domain</label>
+      </div>
+
+      <div class="tab-panel panel-tag">
+        {{TAG_SECTIONS}}
+        <!--
+          One <section> per distinct universal tag value, e.g.:
+
+          <section>
+            <h2>local-only</h2>
+            <table>
+              <thead><tr><th>Capability</th><th>Status</th><th>Realization</th><th>Purpose</th><th>Tags</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="crds/{{slug}}.html">{{name}}</a></td>
+                  <td><span class="status status-{{status}}">{{status}}</span></td>
+                  <td>{{realization_status}}</td>
+                  <td>{{purpose}}</td>
+                  <td>{{implementation_tags_as_spans}}<!-- omit <td> if this row has none --></td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
         -->
-      </tbody>
-    </table>
+      </div>
+
+      <div class="tab-panel panel-domain">
+        {{DOMAIN_SECTIONS}}
+        <!--
+          One <section> per distinct implementation tag / domain value,
+          e.g.:
+
+          <section>
+            <h2>impl:inbox</h2>
+            <table>
+              <thead><tr><th>Capability</th><th>Status</th><th>Realization</th><th>Purpose</th><th>Tags</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="crds/{{slug}}.html">{{name}}</a></td>
+                  <td><span class="status status-{{status}}">{{status}}</span></td>
+                  <td>{{realization_status}}</td>
+                  <td>{{purpose}}</td>
+                  <td><span class="tag-plain">{{universal_tags_as_plain_text}}</span><!-- plain text, not a badge; omit <td> if this row has none --></td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        -->
+      </div>
+    </div>
+
     <footer>Generated from a Capability Inventory using the CRD framework (github.com/valto/crd). This page is a reading aid, not a source of truth — the source markdown files govern if you need the exact original text.</footer>
   </body>
 </html>
