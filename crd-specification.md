@@ -191,7 +191,16 @@ Projections SHOULD be traceable to the canonical CRD. They MUST NOT silently int
 
 ### 7.3 Tags
 
-A CRD MAY declare a small set of universal tags for dimensions that are not already derivable from its required fields (§4) and that stay meaningful regardless of which product realizes the capability. Reserve a tag for what isn't already implied elsewhere: do not tag `read-only` when every Interaction Contract's `transition` already states none; do not tag `internal`/`user-facing` when `exposure` (§7) already says so. Typical universal tags: `network-touching` / `local-only`, `data-sensitive`, `identity-related`, `notification-triggering`. A hand-authored tag that duplicates a derivable fact tends to drift from that fact over time — prefer deriving over tagging whenever a field already settles the question.
+A CRD MAY declare a small set of universal tags for dimensions that are not already derivable from its required fields (§4) and that stay meaningful regardless of which product realizes the capability. Reserve a tag for what isn't already implied elsewhere: do not tag `read-only` when every Interaction Contract's `transition` already states none; do not tag `internal`/`user-facing` when `exposure` (§7) already says so. A hand-authored tag that duplicates a derivable fact tends to drift from that fact over time — prefer deriving over tagging whenever a field already settles the question.
+
+Choose the tag whose dimension a statement is actually about, not the nearest-sounding one. A common mistake is reaching for `network-touching` whenever a source mentions an API call or a network-triggered side effect, when the statement's actual point is a different dimension:
+
+| Tag | Use it for | Do not use it for |
+|---|---|---|
+| `network-touching` / `local-only` | Whether reaching this capability's outcome requires leaving the local device or process — meaningful for a local-first, hybrid, or offline-capable system where some capabilities complete entirely on-device and others don't. | A capability inside a product that is uniformly a hosted network service, where every capability is network-touching by construction and the tag would only restate what `exposure` (§7) already implies. |
+| `notification-triggering` | Invoking this capability causes a notification, alert, or message to be sent to a person, as a side effect distinct from any network activity. | A side effect that is really about the network round-trip itself, not about a person being notified. |
+| `data-sensitive` | This capability reads, writes, or otherwise handles sensitive or private data as part of its core operation. | Data sensitivity that a boundary or a contract's `policies/invariants` already states explicitly. |
+| `identity-related` | This capability's core operation is about establishing, verifying, or managing who someone is. | A capability merely invoked by an already-authenticated actor — that's the contract's `actor` field, not a tag. |
 
 An Operational Capability Documentation extension MAY separately declare **implementation tags** — product-specific groupings (a module, domain, or internal team name) meaningful only within that realization. Implementation tags MUST be clearly distinguished from the CRD's own universal tags and MUST NOT be presented as if they describe the reusable capability generally (a common convention is prefixing each one, e.g. `impl:inbox`).
 

@@ -15,7 +15,7 @@ Use this template for a reusable Capability Requirements Document (CRD). Remove 
 - **Boundaries — includes:**
 - **Boundaries — excludes:**
 - **Terms and concepts:**
-- **Tags (optional):** universal only — a dimension not already derivable from another field (e.g. `network-touching`/`local-only`, `data-sensitive`, `identity-related`, `notification-triggering`). Omit rather than restate what `exposure` or a contract's `transition` already says. In a rendered projection, these typically become a grouping/section key (or plain text), not a badge — the visual tag/badge convention is reserved for implementation tags below.
+- **Tags (optional):** universal only — a dimension not already derivable from another field. Pick the tag whose dimension the statement is actually about, not the nearest-sounding one (see `crd-specification.md` §7.3's disambiguation table — e.g. a notification side effect is `notification-triggering`, not `network-touching`, and `network-touching`/`local-only` is only useful when some of the product's capabilities genuinely differ on this, not for a capability inside a uniformly hosted service). Omit rather than restate what `exposure` or a contract's `transition` already says. In a rendered projection, these typically become a grouping/section key (or plain text), not a badge — the visual tag/badge convention is reserved for implementation tags below.
 
 ## Interaction Contract MLEs
 
