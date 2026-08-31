@@ -3,8 +3,91 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Guided media resources for learning why Capability Documentation and CRDs matter." />
-    <title>Learning resources — Capability Documentation</title>
+    <!-- site-meta:start -->
+    <title>CRD Learning Resources: Articles, Video, Audio, and PDF</title>
+    <meta name="description" content="Read, watch, and listen to resources about capability requirements, semantic blueprints, agent-ready documentation, and architecting for AI agents." />
+    <link rel="canonical" href="https://valto.github.io/crd/resources.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Capability Documentation" />
+    <meta property="og:title" content="CRD Learning Resources: Articles, Video, Audio, and PDF" />
+    <meta property="og:description" content="Read, watch, and listen to resources about capability requirements, semantic blueprints, agent-ready documentation, and architecting for AI agents." />
+    <meta property="og:url" content="https://valto.github.io/crd/resources.html" />
+    <meta property="og:image" content="https://valto.github.io/crd/assets/crd-social-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CRD Learning Resources: Articles, Video, Audio, and PDF" />
+    <meta name="twitter:description" content="Read, watch, and listen to resources about capability requirements, semantic blueprints, agent-ready documentation, and architecting for AI agents." />
+    <meta name="twitter:image" content="https://valto.github.io/crd/assets/crd-social-card.png" />
+    <script id="site-structured-data" type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://valto.github.io/crd/#website",
+      "url": "https://valto.github.io/crd/",
+      "name": "Capability Documentation",
+      "alternateName": "CRD",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://valto.github.io/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://valto.github.io/#person",
+      "name": "Valto Loikkanen",
+      "url": "https://valto.github.io/",
+      "sameAs": [
+        "https://github.com/valto",
+        "https://www.linkedin.com/in/valto/",
+        "https://valtoai.com/"
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://valto.github.io/crd/resources.html#webpage",
+      "url": "https://valto.github.io/crd/resources.html",
+      "name": "CRD Learning Resources: Articles, Video, Audio, and PDF",
+      "headline": "CRD Learning Resources: Articles, Video, Audio, and PDF",
+      "description": "Read, watch, and listen to resources about capability requirements, semantic blueprints, agent-ready documentation, and architecting for AI agents.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://valto.github.io/crd/#website"
+      },
+      "author": {
+        "@id": "https://valto.github.io/#person"
+      },
+      "creator": {
+        "@id": "https://valto.github.io/#person"
+      },
+      "dateModified": "2026-08-31",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "image": "https://valto.github.io/crd/assets/crd-social-card.png"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://valto.github.io/crd/resources.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CRD",
+          "item": "https://valto.github.io/crd/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "CRD Learning Resources: Articles, Video, Audio, and PDF",
+          "item": "https://valto.github.io/crd/resources.html"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- site-meta:end -->
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
@@ -12,7 +95,7 @@
   <body>
     <header class="site-header">
       <div class="shell header-content">
-        <a class="brand" href="index.html" aria-label="Capability Documentation home"><img class="brand-mark" src="assets/crd-mark.png" alt="" /><span>CRD</span></a>
+        <a class="brand" href="index.html" aria-label="Capability Documentation home"><img class="brand-mark" src="assets/crd-mark.png" alt="" width="29" height="29" /><span>CRD</span></a>
         <nav aria-label="Primary navigation">
           <a href="learn.html">Learn</a>
           <a href="specification.html">Specification</a>
@@ -22,7 +105,11 @@
         </nav>
       </div>
     </header>
-
+    <!-- breadcrumbs:start -->
+    <nav class="breadcrumbs shell" aria-label="Breadcrumb">
+      <a href="index.html">CRD</a><span aria-hidden="true">/</span><span aria-current="page">CRD Learning Resources: Articles, Video, Audio, and PDF</span>
+    </nav>
+<!-- breadcrumbs:end -->
     <main>
       <section class="doc-hero">
         <div class="shell">
@@ -51,7 +138,7 @@
           <p class="eyebrow">Start here · video</p>
           <h2>Capability Requirements</h2>
           <p class="media-meta">9 min 35 sec · Video · MP4 · 44 MB</p>
-          <video controls preload="metadata" playsinline>
+          <video controls preload="none" playsinline>
             <source src="media/capability-requirements.mp4" type="video/mp4" />
             Your browser does not support embedded video. <a href="media/capability-requirements.mp4">Open the video file</a>.
           </video>
@@ -62,7 +149,7 @@
           <p class="eyebrow">Deepen · audio</p>
           <h2>Why AI agents break software documentation</h2>
           <p class="media-meta">34 min 57 sec · Audio · M4A · 64 MB</p>
-          <audio controls preload="metadata">
+          <audio controls preload="none">
             <source src="media/why-ai-agents-break-software-documentation.m4a" type="audio/mp4" />
             Your browser does not support embedded audio. <a href="media/why-ai-agents-break-software-documentation.m4a">Open the audio file</a>.
           </audio>
@@ -73,11 +160,7 @@
           <p class="eyebrow">PDF</p>
           <h2>The Semantic Blueprint</h2>
           <p class="media-meta">15 pages · PDF · 15 MB</p>
-          <div class="pdf-frame">
-            <object data="media/the-semantic-blueprint.pdf" type="application/pdf" aria-label="The Semantic Blueprint PDF">
-              <p>Your browser cannot show this PDF inline. <a href="media/the-semantic-blueprint.pdf">Open The Semantic Blueprint PDF</a>.</p>
-            </object>
-          </div>
+          <div class="pdf-frame"><p><strong>PDF preview is not loaded automatically.</strong> Open the document when you are ready to read or download the 15 MB file.</p></div>
           <p class="media-actions"><a href="media/the-semantic-blueprint.pdf">Open or download PDF ↗</a></p>
         </section>
 
@@ -85,13 +168,18 @@
           <p class="eyebrow">Deepen · video</p>
           <h2>Architecting for Agents: The Capability Requirements Document</h2>
           <p class="media-meta">7 min 9 sec · Video · MP4 · 63 MB</p>
-          <video controls preload="metadata" playsinline>
+          <video controls preload="none" playsinline>
             <source src="media/architecting-for-agents-capability-requirements-document.mp4" type="video/mp4" />
             Your browser does not support embedded video. <a href="media/architecting-for-agents-capability-requirements-document.mp4">Open the video file</a>.
           </video>
           <p class="media-actions"><a href="media/architecting-for-agents-capability-requirements-document.mp4">Open or download video ↗</a></p>
         </section>
       </article>
+    <!-- document-meta:start -->
+      <aside class="document-meta shell" aria-label="Document provenance">
+        <p><strong>Media resources</strong> · Specification Draft 0.4 · Package 0.6.0 · Updated 2026-08-31 · Valto Loikkanen</p>
+      </aside>
+<!-- document-meta:end -->
     </main>
 
     <footer class="site-footer"><div class="shell footer-content"><p>Capability Documentation by Valto Loikkanen.</p><p><a href="https://github.com/valto/crd/blob/main/LICENSE">CC BY 4.0</a> · <a href="index.html">Home</a></p></div></footer>

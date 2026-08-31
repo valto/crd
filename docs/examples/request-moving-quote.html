@@ -1,8 +1,101 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="description" content="Illustrative Capability Documentation example: Request a moving quote" /><title>Request a moving quote — Capability Documentation</title><link rel="stylesheet" href="../styles.css" />
+<html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- site-meta:start -->
+    <title>Request a Moving Quote — CRD Example</title>
+    <meta name="description" content="An illustrative Capability Requirements Document for requesting a moving quote, with draft, validation, submission, and realization details." />
+    <link rel="canonical" href="https://valto.github.io/crd/examples/request-moving-quote.html" />
+    <link rel="alternate" type="text/markdown" href="../examples/request-moving-quote.md" title="Markdown version" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Capability Documentation" />
+    <meta property="og:title" content="Request a Moving Quote — CRD Example" />
+    <meta property="og:description" content="An illustrative Capability Requirements Document for requesting a moving quote, with draft, validation, submission, and realization details." />
+    <meta property="og:url" content="https://valto.github.io/crd/examples/request-moving-quote.html" />
+    <meta property="og:image" content="https://valto.github.io/crd/assets/crd-social-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Request a Moving Quote — CRD Example" />
+    <meta name="twitter:description" content="An illustrative Capability Requirements Document for requesting a moving quote, with draft, validation, submission, and realization details." />
+    <meta name="twitter:image" content="https://valto.github.io/crd/assets/crd-social-card.png" />
+    <script id="site-structured-data" type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://valto.github.io/crd/#website",
+      "url": "https://valto.github.io/crd/",
+      "name": "Capability Documentation",
+      "alternateName": "CRD",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://valto.github.io/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://valto.github.io/#person",
+      "name": "Valto Loikkanen",
+      "url": "https://valto.github.io/",
+      "sameAs": [
+        "https://github.com/valto",
+        "https://www.linkedin.com/in/valto/",
+        "https://valtoai.com/"
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://valto.github.io/crd/examples/request-moving-quote.html#webpage",
+      "url": "https://valto.github.io/crd/examples/request-moving-quote.html",
+      "name": "Request a Moving Quote — CRD Example",
+      "headline": "Request a Moving Quote — CRD Example",
+      "description": "An illustrative Capability Requirements Document for requesting a moving quote, with draft, validation, submission, and realization details.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://valto.github.io/crd/#website"
+      },
+      "author": {
+        "@id": "https://valto.github.io/#person"
+      },
+      "creator": {
+        "@id": "https://valto.github.io/#person"
+      },
+      "dateModified": "2026-08-31",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "image": "https://valto.github.io/crd/assets/crd-social-card.png",
+      "proficiencyLevel": "Beginner to advanced",
+      "version": "Draft 0.4"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://valto.github.io/crd/examples/request-moving-quote.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CRD",
+          "item": "https://valto.github.io/crd/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Request a Moving Quote",
+          "item": "https://valto.github.io/crd/examples/request-moving-quote.html"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- site-meta:end --><link rel="stylesheet" href="../styles.css" />
     <link rel="icon" type="image/png" sizes="48x48" href="../assets/favicon-48.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png" /></head>
-  <body><header class="site-header"><div class="shell header-content"><a class="brand" href="../index.html"><img class="brand-mark" src="../assets/crd-mark.png" alt="" /><span>CRD</span></a><nav aria-label="Primary navigation"><a href="../learn.html">Learn</a><a href="../specification.html">Specification</a><a href="../template.html">Templates</a><a href="../examples.html">Examples</a><a class="github-link" href="https://github.com/valto/crd" aria-label="Open CRD on GitHub" title="Open CRD on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 4.8c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span class="sr-only">GitHub repository</span></a></nav></div></header>
+  <body><header class="site-header"><div class="shell header-content"><a class="brand" href="../index.html"><img class="brand-mark" src="../assets/crd-mark.png" alt="" width="29" height="29" /><span>CRD</span></a><nav aria-label="Primary navigation"><a href="../learn.html">Learn</a><a href="../specification.html">Specification</a><a href="../template.html">Templates</a><a href="../examples.html">Examples</a><a class="github-link" href="https://github.com/valto/crd" aria-label="Open CRD on GitHub" title="Open CRD on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 4.8c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span class="sr-only">GitHub repository</span></a></nav></div></header>
+    <!-- breadcrumbs:start -->
+    <nav class="breadcrumbs shell" aria-label="Breadcrumb">
+      <a href="../index.html">CRD</a><span aria-hidden="true">/</span><span aria-current="page">Request a Moving Quote</span>
+    </nav>
+<!-- breadcrumbs:end -->
     <main><section class="doc-hero"><div class="shell"><p class="eyebrow">Illustrative example</p><h1>Request a Moving Quote</h1><p class="lede">A an illustrative CRD with three Interaction Contract MLEs and one illustrative operational realization. It is not a specification for a particular moving company.</p><div class="meta-links"><a href="https://github.com/valto/crd/blob/main/examples/request-moving-quote.md">View Markdown source ↗</a><a href="https://github.com/valto/crd/blob/main/examples/request-moving-quote.json">View JSON representation ↗</a></div></div></section>
       <article class="doc-content"><section><h2>Identity and core meaning</h2><div class="template-block"><div class="template-field"><strong>Name</strong><span>Request a moving quote</span></div><div class="template-field"><strong>Definition</strong><span>Enable a prospective customer or authorized caller to submit sufficient moving details for a provider to begin the quote process.</span></div><div class="template-field"><strong>Capability purpose</strong><span>Enable a move to be presented to a provider for quote consideration.</span></div><div class="template-field"><strong>Meaningful outcome</strong><span>A quote request is accepted for processing, rejected with an intelligible reason, or identified as requiring more information.</span></div><div class="template-field"><strong>Includes</strong><span>Collecting and submitting move details; validating the request; communicating the immediate submission outcome.</span></div><div class="template-field"><strong>Excludes</strong><span>Calculating final price; accepting a quote; scheduling a move; payment; ongoing quote-status tracking.</span></div></div></section>
         <section><h2>Interaction Contract MLEs</h2><div class="contract"><h3>Create draft quote request</h3><dl><dt>Actor</dt><dd>Prospective customer or authorized agent</dd><dt>Command / intent</dt><dd>Begin a quote request</dd><dt>Current state</dt><dd>No draft request exists for this interaction</dd><dt>Policies / invariants</dt><dd>None specified in this illustrative example</dd><dt>Transition</dt><dd>No request → draft quote request</dd><dt>Result</dt><dd>Draft request available for completion</dd><dt>Events / effects</dt><dd><code>QuoteRequestDraftCreated</code> example event</dd><dt>Unknowns</dt><dd>Draft retention and identity requirements</dd></dl></div>
@@ -12,4 +105,9 @@
         <section><h2>Unknown / unresolved</h2><ul><li>Exact data schema</li><li>Provider rules</li><li>Authorization model</li><li>Operational workflow</li></ul></section>
         <section><h2>Illustrative operational realization</h2><div class="template-block"><div class="template-field"><strong>Exposure</strong><span>Responsive web form, customer-service tool, API, and agent tool.</span></div><div class="template-field"><strong>Operational constraint</strong><span>A particular provider may serve only configured geographic areas.</span></div><div class="template-field"><strong>Implementation choice</strong><span>An API may expose separate draft, validation, and submission endpoints.</span></div><div class="template-field"><strong>Rationale / intent</strong><span>A provider may implement this to obtain qualified leads; this is not part of the reusable capability purpose.</span></div></div></section>
         <section><h2>Provenance</h2><p>All statements here are illustrative examples. They must be replaced or confirmed when used for an actual service.</p></section></article>
+    <!-- document-meta:start -->
+      <aside class="document-meta shell" aria-label="Document provenance">
+        <p><strong>Illustrative example</strong> · Specification Draft 0.4 · Package 0.6.0 · Updated 2026-08-31 · Valto Loikkanen · <a href="https://github.com/valto/crd/blob/main/examples/request-moving-quote.md">Canonical source</a></p>
+      </aside>
+<!-- document-meta:end -->
     </main><footer class="site-footer"><div class="shell footer-content"><p>Capability Documentation by Valto Loikkanen.</p><p><a href="https://github.com/valto/crd/blob/main/LICENSE">CC BY 4.0</a> · <a href="../index.html">Home</a></p></div></footer></body></html>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- site-meta:start -->
+    <title>CRD vs PRD: Capability and Product Requirements Compared</title>
+    <meta name="description" content="Compare a Capability Requirements Document with a Product Requirements Document, feature specification, user story, API contract, skill, and tool." />
+    <link rel="canonical" href="https://valto.github.io/crd/crd-vs-prd.html" />
+    <link rel="alternate" type="text/markdown" href="crd-vs-prd.md" title="Markdown version" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Capability Documentation" />
+    <meta property="og:title" content="CRD vs PRD: Capability and Product Requirements Compared" />
+    <meta property="og:description" content="Compare a Capability Requirements Document with a Product Requirements Document, feature specification, user story, API contract, skill, and tool." />
+    <meta property="og:url" content="https://valto.github.io/crd/crd-vs-prd.html" />
+    <meta property="og:image" content="https://valto.github.io/crd/assets/crd-social-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CRD vs PRD: Capability and Product Requirements Compared" />
+    <meta name="twitter:description" content="Compare a Capability Requirements Document with a Product Requirements Document, feature specification, user story, API contract, skill, and tool." />
+    <meta name="twitter:image" content="https://valto.github.io/crd/assets/crd-social-card.png" />
+    <script id="site-structured-data" type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://valto.github.io/crd/#website",
+      "url": "https://valto.github.io/crd/",
+      "name": "Capability Documentation",
+      "alternateName": "CRD",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://valto.github.io/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://valto.github.io/#person",
+      "name": "Valto Loikkanen",
+      "url": "https://valto.github.io/",
+      "sameAs": [
+        "https://github.com/valto",
+        "https://www.linkedin.com/in/valto/",
+        "https://valtoai.com/"
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://valto.github.io/crd/crd-vs-prd.html#webpage",
+      "url": "https://valto.github.io/crd/crd-vs-prd.html",
+      "name": "CRD vs PRD: Capability and Product Requirements Compared",
+      "headline": "CRD vs PRD: Capability and Product Requirements Compared",
+      "description": "Compare a Capability Requirements Document with a Product Requirements Document, feature specification, user story, API contract, skill, and tool.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://valto.github.io/crd/#website"
+      },
+      "author": {
+        "@id": "https://valto.github.io/#person"
+      },
+      "creator": {
+        "@id": "https://valto.github.io/#person"
+      },
+      "dateModified": "2026-08-31",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "image": "https://valto.github.io/crd/assets/crd-social-card.png",
+      "proficiencyLevel": "Beginner to advanced",
+      "version": "Draft 0.4"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://valto.github.io/crd/crd-vs-prd.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CRD",
+          "item": "https://valto.github.io/crd/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "CRD vs PRD: Capability and Product Requirements Compared",
+          "item": "https://valto.github.io/crd/crd-vs-prd.html"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- site-meta:end -->
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  </head>
+  <body>
+    <header class="site-header"><div class="shell header-content"><a class="brand" href="index.html" aria-label="Capability Documentation home"><img class="brand-mark" src="assets/crd-mark.png" alt="" width="29" height="29" /><span>CRD</span></a><nav aria-label="Primary navigation"><a href="learn.html">Learn</a><a href="specification.html">Specification</a><a href="template.html">Templates</a><a href="examples.html">Examples</a><a class="github-link" href="https://github.com/valto/crd" aria-label="Open CRD on GitHub" title="Open CRD on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 4.8c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 8 0Z" /></svg><span class="sr-only">GitHub repository</span></a></nav></div></header>
+    <!-- breadcrumbs:start -->
+    <nav class="breadcrumbs shell" aria-label="Breadcrumb">
+      <a href="index.html">CRD</a><span aria-hidden="true">/</span><span aria-current="page">CRD vs PRD: Capability and Product Requirements Compared</span>
+    </nav>
+<!-- breadcrumbs:end -->
+    <main>
+      <section class="doc-hero"><div class="shell"><p class="eyebrow">Comparison guidance</p><h1>CRD vs PRD</h1><p class="lede">A Capability Requirements Document specifies one complete capability. A Product Requirements Document usually coordinates a broader product initiative. They solve different problems and can work together.</p><div class="meta-links"><a href="specification.html">Read the normative CRD specification →</a><a href="crd-vs-prd.md">Open Markdown version ↗</a></div></div></section>
+      <article class="doc-content">
+        <section><h2>The short answer</h2><p class="definition"><strong>A CRD preserves what one complete capability means and must keep true across implementations.</strong> A PRD coordinates product intent, audience, scope, priority, outcomes, and delivery context. A PRD may contain or point to several capabilities; each durable capability can have its own CRD.</p></section>
+        <section><h2>CRD and PRD compared</h2><table><thead><tr><th>Question</th><th>CRD</th><th>PRD</th></tr></thead><tbody><tr><td>Primary unit</td><td>One Capability MLE</td><td>A product, initiative, release, or problem space</td></tr><tr><td>Main purpose</td><td>Preserve the meaning and invariants of one complete capability</td><td>Coordinate product goals, scope, priorities, and delivery</td></tr><tr><td>Implementation stance</td><td>Technology- and implementation-agnostic at the reusable layer</td><td>May contain product- and implementation-specific decisions</td></tr><tr><td>Typical lifetime</td><td>Can remain stable across several realizations</td><td>Often tied to a planning or delivery cycle</td></tr><tr><td>Relationship</td><td>May exist independently or be derived from a PRD</td><td>May contain or reference several capabilities and CRDs</td></tr></tbody></table></section>
+        <section><h2>Adjacent artifacts</h2><h3>Feature specification</h3><p>A feature specification commonly describes a product-visible change. A CRD is scoped by a complete meaningful ability, whether or not it appears as a feature.</p><h3>User story</h3><p>A user story expresses a user-centered need or work slice. A CRD preserves the complete capability, including rules, contracts, evidence, and unknowns.</p><h3>API, MCP, skill, or tool</h3><p>These are realizations or implementation mechanisms. They are not automatically capabilities because they may not retain the complete purpose context.</p></section>
+        <section><h2>When should you use both?</h2><p>Use both when a product initiative contains capabilities whose meaning must remain traceable after its roadmap, UI, code, API, agent, or operating model changes.</p><p class="note">This page is guidance. The <a href="specification.html">CRD Specification</a> governs the framework's normative definitions and conformance rules.</p></section>
+      </article>
+    <!-- document-meta:start -->
+      <aside class="document-meta shell" aria-label="Document provenance">
+        <p><strong>Comparison guidance</strong> · Specification Draft 0.4 · Package 0.6.0 · Updated 2026-08-31 · Valto Loikkanen · <a href="https://github.com/valto/crd/blob/main/crd-vs-prd.md">Canonical source</a></p>
+      </aside>
+<!-- document-meta:end -->
+    </main>
+    <footer class="site-footer"><div class="shell footer-content"><p>Capability Documentation by Valto Loikkanen.</p><p><a href="https://github.com/valto/crd/blob/main/LICENSE">CC BY 4.0</a> · <a href="index.html">Home</a></p></div></footer>
+  </body>
+</html>

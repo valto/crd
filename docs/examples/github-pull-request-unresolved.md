@@ -1,0 +1,30 @@
+# Unresolved / Out of Scope: GitHub Pull Request Examples
+
+## Resolved after audit (2026-08-26, same day as initial extraction)
+
+- **Merge queue mechanics.** Initially unresolved: whether GitHub's merge queue itself performs the merge, or only sequences pull requests before a separately-triggered merge (the dedicated docs page 404'd at the URL guessed during extraction). A blind audit of this extraction re-searched and located the current page — `docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue` — independently re-confirmed: "GitHub will merge all these changes into the `base_branch` once the checks required by the branch protections of `base_branch` pass." The merge queue is now listed as a confirmed automated realization in `merge-pull-request.md`.
+
+## Genuinely ambiguous or unconfirmed in GitHub's own documentation (fetched 2026-08-26)
+
+- **Duplicate/equivalent open pull requests.** No statement was found confirming or denying whether GitHub blocks opening a second pull request for the same head→base branch pair while one is already open.
+- **`mergeable_state` enumeration.** Only one example value (`clean`) was observed in a response example. The full set of possible values and their individual meanings were not documented on any page fetched today.
+- **Webhook `closed`-action payload detail.** The `pull_request` webhook event's action list (including `opened` and `closed`) was confirmed from GitHub's own structured docs data, but the *per-action* description text and the nested `pull_request` object's own property list (in particular, whether the webhook documentation itself calls out the `merged` boolean as the way to distinguish "closed via merge" from "closed without merging") could not be retrieved — that content loads client-side and only the default (`assigned`) action's data was present in the static payload available to both direct fetch and WebFetch. The existence of a `merged` field is independently confirmed from the REST pull-request resource schema, and is used in the merge CRD as a **reasonable inference**, clearly labeled as such rather than asserted as a directly quoted webhook fact.
+- **Default `merge_method`.** GitHub's REST reference lists the `merge`/`squash`/`rebase` enum for the merge endpoint's `merge_method` parameter but states no default value. Whether the API applies an implicit default when the parameter is omitted, and if so which one, is unresolved. (The *web UI's* plain merge button is documented as using a merge commit with `--no-ff`, but that default is scoped to the web UI only in these documents and was not extended by inference to the API.)
+- **`405` vs `422` boundary.** The merge endpoint documents `405` as "Method Not Allowed if merge cannot be performed" and `422` as "Validation failed, or the endpoint has been spammed," but does not enumerate the specific conditions that route a given failure to one code versus the other (e.g., which specific branch-protection or conflict states produce `405`).
+- **GraphQL mutation detail.** GitHub's own webhook documentation states, in its own words, that a GraphQL API exists for managing pull requests, alongside the REST API. That existence is an explicit, sourced fact. The specific mutation names and input/output fields (commonly expected to include something like `createPullRequest`/`mergePullRequest`) were **not** independently confirmed today — the GraphQL mutations reference page loads its content from a separate data asset that a static fetch did not retrieve, and no mutation name matched in the raw HTML. GraphQL is listed in both CRDs' known realizations at the existence level only, with this limitation stated plainly rather than filled in from memory.
+- **GITHUB_TOKEN / Actions bot merge permission scope.** Two attempts to confirm the exact `pull-requests` permission-scope table for GitHub Actions' automatic token (to establish whether a bot/workflow can be the "merge" actor under the same `Write`/`Maintain`/`Admin` rule, or needs something additional) were inconclusive — the relevant permissions table did not load in the WebFetch-retrieved content on either of the two pages tried.
+- **VS Code extension's create/merge support.** The `microsoft/vscode-pull-request-github` extension's existence, ownership, and general purpose ("review and manage pull requests") were confirmed, but no source fetched today explicitly stated it implements the create or merge actions specifically (as opposed to browsing/reviewing/checking out). Left out of both CRDs' known-realizations tables for this reason; see `github-pull-request-decision-log.md`.
+
+## Deliberately out of scope for this run (per task instruction, not a documentation gap)
+
+These are all candidates that independently pass the Capability MLE test (see `github-pull-request-decision-log.md` §2) and would each be a legitimate third (fourth, fifth...) CRD in a fuller extraction, but the task fixed scope at exactly two capabilities:
+
+- Updating a pull request's metadata, or closing it without merging (`PATCH /repos/{owner}/{repo}/pulls/{pull_number}`).
+- Checking whether a pull request has already been merged (`GET /repos/{owner}/{repo}/pulls/{pull_number}/merge`).
+- Enabling or disabling auto-merge (`auto_merge_enabled`/`auto_merge_disabled`, `gh pr merge --auto`).
+- Updating a pull request's branch from its base branch (`PUT /repos/{owner}/{repo}/pulls/{pull_number}/update-branch`).
+- Reviewing a pull request (approve / request changes / comment) — the `pull_request_review`, `pull_request_review_comment`, `issue_comment`, and `pull_request_review_thread` events/operations that GitHub's own docs explicitly separate from the `pull_request` event.
+- Configuring branch protection rules themselves (as opposed to being subject to them when merging).
+- Creating issues, comments, forks, or branches — explicitly excluded by the task from the outset.
+
+None of these were drafted into a CRD, per the task's explicit "do not go beyond this scope" instruction.

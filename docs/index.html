@@ -3,8 +3,74 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Capability Documentation: a technology-agnostic requirement document for each complete capability." />
-    <title>Capability Documentation · CRD</title>
+    <!-- site-meta:start -->
+    <title>Capability Requirements Document (CRD) Framework</title>
+    <meta name="description" content="Define complete software and AI-agent capabilities with CRD, an open framework for requirements, interaction contracts, evidence, realizations, and unknowns." />
+    <link rel="canonical" href="https://valto.github.io/crd/" />
+    <link rel="alternate" type="text/markdown" href="index.md" title="Markdown version" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Capability Documentation" />
+    <meta property="og:title" content="Capability Requirements Document (CRD) Framework" />
+    <meta property="og:description" content="Define complete software and AI-agent capabilities with CRD, an open framework for requirements, interaction contracts, evidence, realizations, and unknowns." />
+    <meta property="og:url" content="https://valto.github.io/crd/" />
+    <meta property="og:image" content="https://valto.github.io/crd/assets/crd-social-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Capability Requirements Document (CRD) Framework" />
+    <meta name="twitter:description" content="Define complete software and AI-agent capabilities with CRD, an open framework for requirements, interaction contracts, evidence, realizations, and unknowns." />
+    <meta name="twitter:image" content="https://valto.github.io/crd/assets/crd-social-card.png" />
+    <script id="site-structured-data" type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://valto.github.io/crd/#website",
+      "url": "https://valto.github.io/crd/",
+      "name": "Capability Documentation",
+      "alternateName": "CRD",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://valto.github.io/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://valto.github.io/#person",
+      "name": "Valto Loikkanen",
+      "url": "https://valto.github.io/",
+      "sameAs": [
+        "https://github.com/valto",
+        "https://www.linkedin.com/in/valto/",
+        "https://valtoai.com/"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://valto.github.io/crd/#webpage",
+      "url": "https://valto.github.io/crd/",
+      "name": "Capability Requirements Document (CRD) Framework",
+      "headline": "Capability Requirements Document (CRD) Framework",
+      "description": "Define complete software and AI-agent capabilities with CRD, an open framework for requirements, interaction contracts, evidence, realizations, and unknowns.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://valto.github.io/crd/#website"
+      },
+      "author": {
+        "@id": "https://valto.github.io/#person"
+      },
+      "creator": {
+        "@id": "https://valto.github.io/#person"
+      },
+      "dateModified": "2026-08-31",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "image": "https://valto.github.io/crd/assets/crd-social-card.png"
+    }
+  ]
+}
+    </script>
+    <!-- site-meta:end -->
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
@@ -13,7 +79,7 @@
   <body>
     <header class="site-header">
       <div class="shell header-content">
-        <a class="brand" href="#top" aria-label="Capability Documentation home"><img class="brand-mark" src="assets/crd-mark.png" alt="" /><span>CRD</span></a>
+        <a class="brand" href="#top" aria-label="Capability Documentation home"><img class="brand-mark" src="assets/crd-mark.png" alt="" width="29" height="29" /><span>CRD</span></a>
         <nav aria-label="Primary navigation">
           <a href="learn.html">Learn</a>
           <a href="specification.html">Specification</a>
@@ -27,13 +93,14 @@
     <main id="top">
       <section class="hero shell">
         <p class="eyebrow">Capability Documentation · CRD framework</p>
-        <h1>A clear requirement document for every complete capability.</h1>
+        <h1>A Capability Requirements Document for every complete capability.</h1>
         <aside class="analogy" aria-label="CRD analogy">
           <p class="eyebrow">Start here</p>
           <h2>A CRD is like a feature specification for the agentic era.</h2>
           <p>It is smaller than a PRD and more rigorous than a typical feature definition: it specifies one complete capability’s purpose, boundaries, requirements, interaction contracts, realizations, evidence, and unknowns—so people, agents, and software can work from the same durable meaning.</p>
         </aside>
         <p class="lede">Capability Documentation is the open framework. A capability may belong to a product, service, system, agent, or reusable open inventory; its Capability Requirements Document (CRD) makes purpose, boundaries, requirements, interaction contracts, and realizations understandable before that meaning fragments across UX, code, APIs, agents, and operations.</p>
+        <p class="definition"><strong>A Capability Requirements Document specifies one complete, contextually meaningful ability independently of its current implementation.</strong> It gives people, AI agents, applications, and developers one durable source for what the capability means and must keep true.</p>
         <div class="actions">
           <a class="button primary" href="specification.html">Read the specification</a>
           <a class="button secondary" href="https://github.com/valto/crd">View the repository</a>
@@ -67,61 +134,20 @@
           <div>
             <p class="eyebrow">Use with your AI agent</p>
             <h2 id="agent-activation-heading">Give your agent the CRD context once.</h2>
-            <p>Copy this prompt into your AI agent. It directs the agent to the CRD source material, lets it answer questions for its owner, and gives it a disciplined way to begin drafting CRDs from product, design, code, and service evidence.</p>
+            <p>Open the dedicated CRD prompt when an agent cannot install the CRD Author skill. It provides the canonical source order, vocabulary, authority rules, and transformation safeguards without overwhelming the homepage.</p>
             <p class="agent-note">The agent is instructed to preserve unknowns, distinguish facts from inference, and not change a live service without explicit approval.</p>
-            <p class="agent-note"><strong>For agents that support installable skills:</strong> use the <a href="https://github.com/valto/crd/blob/main/skills/crd-author/SKILL.md">CRD Author skill</a>. It provides the same technology-agnostic model in Define mode for new reusable CRDs and Extract mode for existing plans, code, APIs, MCP servers, and services.</p>
+            <p class="agent-note"><strong>For agents that support installable skills:</strong> use the <a href="skills/crd-author/SKILL.md">CRD Author skill</a>. It provides Define and Extract workflows grounded in the same technology-agnostic model.</p>
           </div>
-          <div class="prompt-panel">
-            <div class="prompt-panel-header">
-              <span>CRD agent prompt</span>
-              <button class="copy-button" type="button" data-copy-target="crd-agent-prompt" aria-describedby="copy-status">Copy prompt</button>
+          <div class="prompt-panel prompt-summary">
+            <div class="prompt-panel-header"><span>CRD agent resources</span></div>
+            <div class="prompt-summary-content">
+              <h3>Use the complete prompt or installable skill.</h3>
+              <p>The prompt is available as a focused HTML page, Markdown, and plain text. Agents that support skills can read the published <code>SKILL.md</code> directly.</p>
+              <div class="actions">
+                <a class="button primary" href="agent-prompt.html">Open agent prompt</a>
+                <a class="button secondary on-dark" href="skills/crd-author/SKILL.md">Open CRD Author skill</a>
+              </div>
             </div>
-            <textarea id="crd-agent-prompt" class="agent-prompt" readonly aria-label="Prompt for an AI agent">You are my Capability Requirements Document (CRD) assistant.
-
-First, read these CRD resources before answering substantive questions or drafting CRDs:
-- https://valto.github.io/crd/
-- https://valto.github.io/crd/learn.html
-- https://valto.github.io/crd/why-crd.html
-- https://valto.github.io/crd/specification.html
-- https://valto.github.io/crd/template.html
-- https://valto.github.io/crd/agent-transformation.html
-- https://valto.github.io/crd/mle.html
-- https://valto.github.io/crd/inventory.html
-- https://valto.github.io/crd/source-context.html
-- https://valto.github.io/crd/working-with-crds.html
-- https://valto.github.io/crd/examples.html
-
-Use this vocabulary precisely:
-- Capability Documentation = the overall framework.
-- Capability MLE = the smallest complete, contextually meaningful ability that produces a meaningful outcome.
-- Capability Requirements Document (CRD) = the canonical technology- and implementation-agnostic requirement specification for one Capability MLE.
-- Interaction Contract MLE = the smallest contextually meaningful executable behaviour.
-- Operational Capability Documentation = realization-specific documentation for a particular service or system.
-- Skill = an agentic realization package that may realize one capability or bundle several.
-- Tool = an executable primitive that may support many skills and capabilities.
-
-Your responsibilities:
-1. Answer my questions about CRD clearly and concisely, distinguishing the reusable CRD from any product, service, system, agent, or current implementation.
-2. When I provide or authorize access to source material, create draft CRDs from any combination of:
-   - PRDs, product plans, feature lists, user stories, and business material
-   - GitHub repositories, application code, schemas, APIs, MCP servers, skills, tests, and runbooks
-   - UX/UI documentation, components, prototypes, screenshots, and UI screens
-   - public or explicitly authorized live services
-3. Follow the CRD transformation method: identify, combine, decompose, classify, trace, and document candidate capabilities.
-4. For every claim, distinguish explicit fact, reasonable inference, recommended default, example, implementation choice, operational constraint, rationale/intent, and unknown/unresolved information.
-5. In Extract mode, default to the specific/operational CRD set. Produce a generic/reusable projection only when I request it or a second real consumer is established or imminent; record known realizations, and treat zero known realizations as an unproven hypothesis.
-6. Preserve source authority: never invent priority between independently stated facts; preserve source hedges such as “preferably,” “should,” and “recommended” rather than strengthening them into rules; and surface unsupported ordering or scope as unknown/unresolved.
-7. Before combining elements, run the Capability MLE test on every element individually. Combine only when none is independently complete and contextually meaningful; record the decision. Treat generalizing phrases such as “or similar,” “any,” or “etc.” as evidence checkpoints, never permission to broaden the source.
-8. Produce a CRD using the template: name, definition, capability purpose, meaningful outcome, boundaries, interaction contracts, rules/invariants, recommended defaults, unknowns, provenance, and a short combine/decompose decision log. For a substantial multi-capability source, also produce a Source Context Reference for cross-cutting context. Add realization details only when evidence supports them.
-9. Use Mermaid only as an illustrative projection of stated CRD facts. Do not add diagram-only states, transitions, or relationships; a retained, persistent, or historical state is not terminal unless the source says so.
-10. Resolve conflicts in this order: rule/invariant → explicit implementation requirement → explicit owner or user choice → recommended default → agent judgment. Escalate same-level conflicts or unclear scope as unknown/unresolved.
-11. Where applicable, record execution mode, shared-element created-for and approved-reuse context, skill/tool mappings, and audience projections.
-12. Do not treat a component, endpoint, database table, screen, tool, or skill as a capability unless it retains complete purpose context. Do not inflate a vague feature bucket into one CRD when it contains several independent Capability MLEs.
-13. Do not invent facts, policies, ownership, or implementation details. Preserve uncertainty and ask targeted questions where needed.
-14. Do not modify, operate, or publish changes to a live service, repository, or external system unless I explicitly authorize that action.
-
-Start by asking what material I want to understand or transform into CRDs, or inspect the source I explicitly provide.</textarea>
-            <p id="copy-status" class="copy-status" role="status" aria-live="polite"></p>
           </div>
         </div>
       </section>
@@ -244,6 +270,21 @@ Start by asking what material I want to understand or transform into CRDs, or in
             <p>Give an installable AI-agent skill the CRD workflow for defining and extracting capabilities.</p>
             <span>Open on GitHub →</span>
           </a>
+          <a class="resource" href="crd-vs-prd.html">
+            <h3>CRD vs PRD</h3>
+            <p>Compare capability requirements with product requirements, feature specifications, user stories, APIs, skills, and tools.</p>
+            <span>Compare →</span>
+          </a>
+          <a class="resource" href="glossary.html">
+            <h3>CRD glossary</h3>
+            <p>Use canonical definitions for the framework’s controlled vocabulary.</p>
+            <span>Browse terms →</span>
+          </a>
+          <a class="resource" href="agent-prompt.html">
+            <h3>CRD prompt for AI agents</h3>
+            <p>Give an agent the source order, vocabulary, authority model, and safe transformation workflow.</p>
+            <span>Open prompt →</span>
+          </a>
         </div>
       </section>
 
@@ -263,6 +304,11 @@ Start by asking what material I want to understand or transform into CRDs, or in
           <li>Unknown / unresolved</li>
         </ul>
       </section>
+    <!-- document-meta:start -->
+      <aside class="document-meta shell" aria-label="Document provenance">
+        <p><strong>Framework overview</strong> · Specification Draft 0.4 · Package 0.6.0 · Updated 2026-08-31 · Valto Loikkanen · <a href="https://github.com/valto/crd/blob/main/README.md">Canonical source</a></p>
+      </aside>
+<!-- document-meta:end -->
     </main>
 
     <footer class="site-footer">
@@ -271,23 +317,6 @@ Start by asking what material I want to understand or transform into CRDs, or in
         <p><a href="https://github.com/valto/crd/blob/main/LICENSE">CC BY 4.0</a> · <a href="https://github.com/valto/crd">GitHub</a></p>
       </div>
     </footer>
-    <script>
-      document.querySelectorAll("[data-copy-target]").forEach((button) => {
-        button.addEventListener("click", async () => {
-          const target = document.getElementById(button.dataset.copyTarget);
-          const status = document.getElementById("copy-status");
-          try {
-            await navigator.clipboard.writeText(target.value);
-          } catch {
-            target.focus();
-            target.select();
-            document.execCommand("copy");
-          }
-          button.textContent = "Copied";
-          status.textContent = "CRD agent prompt copied to your clipboard.";
-          window.setTimeout(() => { button.textContent = "Copy prompt"; }, 1800);
-        });
-      });
-    </script>
+
   </body>
 </html>

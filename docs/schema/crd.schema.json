@@ -1,0 +1,268 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/valto/crd/schema/crd.schema.json",
+  "title": "Capability Requirements Document (CRD)",
+  "description": "Draft 0.3 machine-readable representation of the required Capability Requirements Document (CRD) core.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "definition",
+    "capabilityPurpose",
+    "boundaries",
+    "meaningfulOutcome",
+    "interactionContracts",
+    "rulesInvariants",
+    "recommendedDefaults",
+    "unknowns"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri-reference",
+      "description": "Optional schema reference for a structured instance."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable concise capability name."
+    },
+    "definition": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Implementation-agnostic description of the ability."
+    },
+    "capabilityPurpose": {
+      "type": "string",
+      "minLength": 1,
+      "description": "General outcome the ability exists to enable."
+    },
+    "boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["includes", "excludes"],
+      "properties": {
+        "includes": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        },
+        "excludes": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "meaningfulOutcome": {
+      "type": "string",
+      "minLength": 1
+    },
+    "interactionContracts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/interactionContract"}
+    },
+    "rulesInvariants": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/statement"}
+    },
+    "recommendedDefaults": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/statement"}
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "terms": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "realizations": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/realization"}
+    },
+    "provenance": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/statement"}
+    },
+    "sharedElements": {
+      "type": "array",
+      "description": "Optional provenance and approved-reuse declarations for shared lower-level elements.",
+      "items": {"$ref": "#/$defs/sharedElement"}
+    },
+    "agenticMappings": {
+      "type": "array",
+      "description": "Optional mappings between this capability and agentic skills or tools.",
+      "items": {"$ref": "#/$defs/agenticMapping"}
+    },
+    "audienceProjections": {
+      "type": "array",
+      "description": "Optional links or references to audience-specific views derived from this CRD.",
+      "items": {"$ref": "#/$defs/audienceProjection"}
+    },
+    "tags": {
+      "type": "array",
+      "description": "Optional universal tags for dimensions not already derivable from another required field (e.g. network-touching/local-only, data-sensitive, identity-related, notification-triggering). Not for implementation-specific groupings -- see realization.implementationTags. In a rendered projection this typically drives structure (a grouping/section key) or plain text, not a badge -- the badge convention is reserved for implementationTags.",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "interactionContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "actor",
+        "commandIntent",
+        "currentState",
+        "policiesInvariants",
+        "transition",
+        "result",
+        "eventsEffects"
+      ],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "actor": {"type": "string", "minLength": 1},
+        "commandIntent": {"type": "string", "minLength": 1},
+        "currentState": {"type": "string", "minLength": 1},
+        "policiesInvariants": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/statement"}
+        },
+        "transition": {"type": "string", "minLength": 1},
+        "result": {"type": "string", "minLength": 1},
+        "eventsEffects": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        },
+        "unknowns": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "statement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "semanticClass", "evidenceStatus"],
+      "properties": {
+        "text": {"type": "string", "minLength": 1},
+        "semanticClass": {
+          "type": "string",
+          "enum": [
+            "capability-purpose",
+            "rationale-intent",
+            "rule-invariant",
+            "implementation-requirement",
+            "recommended-default",
+            "example",
+            "implementation-choice",
+            "operational-constraint",
+            "unknown-unresolved"
+          ]
+        },
+        "evidenceStatus": {
+          "type": "string",
+          "enum": ["explicit-fact", "reasonable-inference", "unknown-unresolved"]
+        },
+        "source": {"type": "string"}
+      }
+    },
+    "realization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "kind", "executionMode"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "kind": {
+          "type": "string",
+          "enum": ["software", "agent", "software-agent", "agent-built-software", "unknown"]
+        },
+        "rationaleIntent": {"type": "string"},
+        "executionMode": {
+          "type": "string",
+          "enum": [
+            "software-primary",
+            "agent-primary-using-software",
+            "software-primary-calling-agents",
+            "unknown"
+          ]
+        },
+        "implementationRequirements": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/statement"}
+        },
+        "operationalConstraints": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/statement"}
+        },
+        "exposure": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["ui", "api", "mcp", "tool", "event", "workflow", "internal"]
+          },
+          "uniqueItems": true
+        },
+        "implementationTags": {
+          "type": "array",
+          "description": "Product-specific groupings meaningful only to this realization (e.g. a module or domain name). Never the CRD's own universal tags (see top-level tags); a consistent prefix such as 'impl:' is a common convention for keeping the two kinds visually distinct. In a rendered projection this is the only kind of tag shown as a visual badge.",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        }
+      }
+    },
+    "sharedElement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "createdFor", "approvedReuse"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "kind": {
+          "type": "string",
+          "enum": ["component", "schema", "prompt", "workflow", "tool", "skill", "test", "other"]
+        },
+        "createdFor": {"type": "string", "minLength": 1},
+        "approvedReuse": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "notes": {"type": "string"}
+      }
+    },
+    "agenticMapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "relationship"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "kind": {"type": "string", "enum": ["skill", "tool"]},
+        "relationship": {
+          "type": "string",
+          "enum": ["realizes-capability", "bundles-capabilities", "supports-contract", "supports-capability", "unknown"]
+        },
+        "capabilityRefs": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "notes": {"type": "string"}
+      }
+    },
+    "audienceProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["audience", "reference"],
+      "properties": {
+        "audience": {
+          "type": "string",
+          "enum": ["business-domain", "ux", "frontend", "backend", "api-mcp-tools", "agent", "operations"]
+        },
+        "reference": {"type": "string", "minLength": 1},
+        "notes": {"type": "string"}
+      }
+    }
+  }
+}

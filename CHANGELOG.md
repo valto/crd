@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased — 2026-08-31
+
+- Added complete technical SEO metadata across the documentation site: canonical URLs, unique search-focused titles and descriptions, Open Graph and social-card metadata, structured data, breadcrumbs, visible provenance, a complete sitemap, and `noindex` handling for the 404 page.
+- Added agent-facing publication assets: `llms.txt`, generated `llms-full.txt`, direct Markdown copies, the published JSON Schema, JSON/Markdown examples, and the CRD Author `SKILL.md` endpoint.
+- Added dedicated CRD-vs-PRD, glossary, and AI-agent prompt resources; reduced homepage prompt duplication while preserving direct prompt and skill access.
+- Added deterministic build and validation scripts plus CI gates for metadata, links, sitemap parity, generated-source consistency, and machine-readable endpoints.
+- Fixed the homepage agent-resource link contrast and prevented large media and PDF resources from loading eagerly.
+
 ## 0.6.0 — 2026-08-26
 
 - Sharpened tag-selection guidance (`crd-specification.md` §7.3) with a disambiguation table after a real extraction reached for `network-touching` when the actual dimension was `notification-triggering`: `network-touching`/`local-only` is only meaningful for a local-first/hybrid system where capabilities genuinely differ on this, not for a capability inside a uniformly hosted service (where it would only restate `exposure`). Mirrored into `crd-template.md`, `agent-transformation-instructions.md`, the CRD Author skill (both copies), and the corresponding site pages, plus a new "what not to do" bullet warning against defaulting to `network-touching`.

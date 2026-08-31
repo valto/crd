@@ -1,0 +1,251 @@
+{
+  "$schema": "../schema/crd.schema.json",
+  "name": "Merge a pull request",
+  "definition": "The ability for an authorized actor to integrate the changes proposed by an already-open, non-draft pull request into its target branch, subject to the repository's own merge policies, producing a definitive merged/closed outcome or an identifiable failure reason.",
+  "capabilityPurpose": "Enable the changes proposed by an open pull request to be incorporated into the target branch, using one of a small set of documented merge strategies, once the repository's own conditions for merging are satisfied.",
+  "boundaries": {
+    "includes": [
+      "Choosing (or accepting a default for) the merge strategy: merge commit, squash, or rebase",
+      "Optionally overriding the automatic commit title/message",
+      "Optionally requiring the head branch to match a specific commit before merging, as a safety check",
+      "The immediate success/failure outcome of the merge attempt itself"
+    ],
+    "excludes": [
+      "Opening the pull request being merged -- a separate Capability MLE with a different actor and timing",
+      "Reviewing/approving the pull request -- governed by separate review mechanisms (pull_request_review) that this capability's policies may depend on, but do not themselves perform",
+      "Closing a pull request without merging -- a distinct, separately documented operation (state: closed via the update operation), not the merge endpoint",
+      "Enabling or disabling auto-merge (merging automatically once conditions are later satisfied) -- a distinct, separately documented set of webhook actions and CLI flag whose immediate effect is 'schedule a future merge,' not 'merge now'; excluded from this run's scope as a deliberate choice, not a GitHub-documented boundary",
+      "Checking whether a pull request has already been merged -- a distinct, separately documented read-only operation",
+      "Updating a pull request's branch with the latest base-branch changes -- a distinct, separately documented operation",
+      "Configuring branch protection itself (required reviews, required status checks, required linear history) -- those are policies this capability's contract is subject to, not actions this capability performs",
+      "Merging a draft pull request: GitHub's docs state you can't merge a draft pull request"
+    ]
+  },
+  "meaningfulOutcome": "The pull request becomes merged (target branch now contains the proposed changes; response confirms merged: true), or the attempt is rejected with an identifiable reason (forbidden, not found, merge not currently possible, head-SHA mismatch, or validation failure).",
+  "interactionContracts": [
+    {
+      "name": "Merge a pull request",
+      "actor": "A repository member holding the Write, Maintain, or Admin repository role (or an actor whose access is otherwise elevated) -- Read and Triage roles cannot merge.",
+      "commandIntent": "Integrate the pull request's proposed commits into its base branch using a specified or repository-permitted merge method, optionally supplying a commit title/message and a head-SHA precondition.",
+      "currentState": "An open, non-draft pull request exists. Its mergeable/mergeable_state may or may not currently be clean, depending on branch protection and conflict status; the full set of possible mergeable_state values is not documented in the material fetched.",
+      "policiesInvariants": [
+        {
+          "text": "The actor must hold Write, Maintain, or Admin repository access (or bypass rights).",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "explicit-fact",
+          "source": "docs.github.com/en/organizations/.../repository-roles-for-an-organization"
+        },
+        {
+          "text": "A draft pull request cannot be merged.",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "explicit-fact",
+          "source": "docs.github.com/en/pull-requests/.../merging-a-pull-request"
+        },
+        {
+          "text": "If the target branch requires reviews, collaborators can only merge via a pull request approved by the required number of reviewers; pending or rejected reviews produce an error message on merge attempt.",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "explicit-fact",
+          "source": "docs.github.com/en/repositories/.../managing-protected-branches/about-protected-branches"
+        },
+        {
+          "text": "If the target branch requires status checks, all required status checks must reach successful, skipped, or neutral status before a merge can succeed.",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "explicit-fact",
+          "source": "docs.github.com/en/repositories/.../managing-protected-branches/about-protected-branches"
+        },
+        {
+          "text": "If the target branch requires linear history, only squash or rebase merges are permitted (merge commits are blocked).",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "explicit-fact",
+          "source": "docs.github.com/en/repositories/.../managing-protected-branches/about-protected-branches"
+        },
+        {
+          "text": "By default, branch-protection restrictions do not apply to actors with admin permissions or an explicit bypass-branch-protections role; an organization may choose to apply the restrictions to them as well.",
+          "semanticClass": "recommended-default",
+          "evidenceStatus": "explicit-fact",
+          "source": "docs.github.com/en/repositories/.../managing-protected-branches/about-protected-branches"
+        },
+        {
+          "text": "If sha is supplied, it must match the pull request's current head commit, or the merge fails with 409.",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "explicit-fact",
+          "source": "docs.github.com/en/rest/pulls/pulls#merge-a-pull-request"
+        },
+        {
+          "text": "merge_method, when supplied, must be one of merge, squash, or rebase; no documented default value for this parameter was found.",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "explicit-fact",
+          "source": "docs.github.com/en/rest/pulls/pulls#merge-a-pull-request"
+        }
+      ],
+      "transition": "Open, non-draft pull request (mergeable state permitting) to merged pull request; the pull request's state also becomes closed as a result of merging.",
+      "result": "On success (200): sha (resulting merge commit SHA), merged: true, and a message. On failure: 403 Forbidden; 404 Not Found; 405 Method Not Allowed if merge cannot be performed; 409 Conflict if sha was provided and pull request head did not match; 422 validation failed or the endpoint has been spammed.",
+      "eventsEffects": [
+        "pull_request webhook event with action: closed",
+        "GitHub's REST pull-request resource carries a merged boolean field distinguishing a merge from a plain close (reasonable inference for its role specifically inside the closed webhook payload, as opposed to only the REST resource schema)",
+        "Notifications to other users/systems, subject to secondary rate limiting"
+      ],
+      "unknowns": [
+        "The full enumeration and meaning of mergeable_state values",
+        "Whether the webhook closed payload's own description text ties merged to that action",
+        "Whether a default merge_method is applied when the parameter is omitted",
+        "The precise conditions that distinguish a 405 from a 422 failure"
+      ]
+    }
+  ],
+  "rulesInvariants": [
+    {
+      "text": "Only actors with Write, Maintain, or Admin repository access (or explicit bypass rights) may merge a pull request.",
+      "semanticClass": "rule-invariant",
+      "evidenceStatus": "explicit-fact",
+      "source": "docs.github.com/en/organizations/.../repository-roles-for-an-organization"
+    },
+    {
+      "text": "A draft pull request cannot be merged.",
+      "semanticClass": "rule-invariant",
+      "evidenceStatus": "explicit-fact",
+      "source": "docs.github.com/en/pull-requests/.../merging-a-pull-request"
+    },
+    {
+      "text": "Required reviews, if configured, must be satisfied before a merge can succeed.",
+      "semanticClass": "rule-invariant",
+      "evidenceStatus": "explicit-fact",
+      "source": "docs.github.com/en/repositories/.../about-protected-branches"
+    },
+    {
+      "text": "Required status checks, if configured, must reach a successful/skipped/neutral state before a merge can succeed.",
+      "semanticClass": "rule-invariant",
+      "evidenceStatus": "explicit-fact",
+      "source": "docs.github.com/en/repositories/.../about-protected-branches"
+    },
+    {
+      "text": "Required linear history, if configured, restricts the permitted merge_method to squash or rebase.",
+      "semanticClass": "rule-invariant",
+      "evidenceStatus": "explicit-fact",
+      "source": "docs.github.com/en/repositories/.../about-protected-branches"
+    },
+    {
+      "text": "If sha is supplied, it must match the pull request's current head commit, or the merge fails with 409.",
+      "semanticClass": "rule-invariant",
+      "evidenceStatus": "explicit-fact",
+      "source": "docs.github.com/en/rest/pulls/pulls#merge-a-pull-request"
+    }
+  ],
+  "recommendedDefaults": [
+    {
+      "text": "By default, branch-protection restrictions (required reviews/status checks) do not apply to actors with admin permissions or an explicit bypass-branch-protections role.",
+      "semanticClass": "recommended-default",
+      "evidenceStatus": "explicit-fact",
+      "source": "docs.github.com/en/repositories/.../about-protected-branches"
+    },
+    {
+      "text": "The web UI's plain merge button uses a merge commit with --no-ff; whether the REST API's merge_method parameter shares an equivalent unstated default is unknown/unresolved.",
+      "semanticClass": "recommended-default",
+      "evidenceStatus": "explicit-fact",
+      "source": "docs.github.com/en/pull-requests/.../about-pull-request-merges"
+    },
+    {
+      "text": "Optionally deleting the head branch after a successful merge is a convenience, not a requirement.",
+      "semanticClass": "recommended-default",
+      "evidenceStatus": "explicit-fact",
+      "source": "docs.github.com/en/pull-requests/.../merging-a-pull-request"
+    }
+  ],
+  "unknowns": [
+    "The full set of mergeable_state values and what each one means",
+    "Whether the webhook payload's own documentation explicitly states that pull_request.merged distinguishes a closed-via-merge outcome from a plain close",
+    "Whether a default merge_method is applied by the REST/GraphQL API when the parameter is omitted",
+    "The precise, general conditions that distinguish a 405 from a 422 failure",
+    "Whether GitHub Actions workflows or other bot tokens can be the actor for this capability under the general Write/Maintain/Admin rule",
+    "Whether any third-party GitHub-native bot is documented as ever merging (as opposed to only opening) a pull request -- Dependabot pull requests are documented as manually reviewed and merged by the user"
+  ],
+  "terms": ["actor", "merge a pull request", "review", "merge method", "merge commit", "squash", "rebase", "mergeable_state", "SHA", "status check"],
+  "tags": ["notification-triggering"],
+  "realizations": [
+    {
+      "name": "github.com web UI",
+      "kind": "software",
+      "executionMode": "software-primary",
+      "exposure": ["ui"]
+    },
+    {
+      "name": "GitHub REST API (PUT /repos/{owner}/{repo}/pulls/{pull_number}/merge)",
+      "kind": "software",
+      "executionMode": "software-primary",
+      "exposure": ["api"]
+    },
+    {
+      "name": "GitHub REST API asynchronous merge (PUT .../merge-async, GET .../merge-async/{uuid})",
+      "kind": "software",
+      "executionMode": "unknown",
+      "rationaleIntent": "Existence confirmed in GitHub's own REST reference; internal mechanics not fetched.",
+      "exposure": ["api"]
+    },
+    {
+      "name": "GitHub GraphQL API (existence confirmed via cross-reference only; mutation not independently confirmed)",
+      "kind": "software",
+      "executionMode": "unknown",
+      "exposure": ["api"]
+    },
+    {
+      "name": "GitHub CLI (gh pr merge)",
+      "kind": "software",
+      "executionMode": "software-primary",
+      "exposure": ["tool"]
+    },
+    {
+      "name": "GitHub merge queue",
+      "kind": "software",
+      "executionMode": "software-primary",
+      "rationaleIntent": "Confirmed, GitHub-native automated realization: GitHub merges all queued changes into the base branch once the checks required by that branch's protections pass. Not just a sequencing mechanism.",
+      "exposure": ["workflow"]
+    }
+  ],
+  "sharedElements": [
+    {
+      "id": "Pull request resource schema (merged, mergeable, mergeable_state, merged_by, state, etc.)",
+      "kind": "schema",
+      "createdFor": "Open a pull request (first returned on creation)",
+      "approvedReuse": ["Merge a pull request"],
+      "notes": "Same schema-overlap basis as noted in open-pull-request.json; a reasonable inference, not an explicit GitHub shared-schema statement."
+    },
+    {
+      "id": "Branch protection rule (required reviews, required status checks, required linear history, admin bypass)",
+      "kind": "other",
+      "createdFor": "Not created for either pull-request capability specifically -- a repository-level configuration documented independently",
+      "approvedReuse": ["Merge a pull request"],
+      "notes": "GitHub documents branch protection as its own feature area, not as belonging to the merge capability; the merge capability's policies section only consumes it."
+    }
+  ],
+  "agenticMappings": [
+    {
+      "id": "PUT /repos/{owner}/{repo}/pulls/{pull_number}/merge",
+      "kind": "tool",
+      "relationship": "realizes-capability",
+      "capabilityRefs": ["Merge a pull request"],
+      "notes": "REST operation, confirmed 2026-08-26."
+    },
+    {
+      "id": "gh pr merge",
+      "kind": "tool",
+      "relationship": "realizes-capability",
+      "capabilityRefs": ["Merge a pull request"],
+      "notes": "Confirmed 2026-08-26 via cli.github.com."
+    },
+    {
+      "id": "PUT .../merge-async + GET .../merge-async/{uuid}",
+      "kind": "tool",
+      "relationship": "realizes-capability",
+      "capabilityRefs": ["Merge a pull request"],
+      "notes": "Alternate executable primitive pair for the same capability; existence confirmed, internal mechanics not fetched."
+    }
+  ],
+  "provenance": [
+    {
+      "text": "This is a real extraction from GitHub's own public REST API and webhook documentation, fetched 2026-08-26, and independently blind-audited for framework conformance and factual accuracy. The full statement-provenance table is in github-pull-request-provenance.md.",
+      "semanticClass": "example",
+      "evidenceStatus": "explicit-fact",
+      "source": "examples/merge-pull-request.json"
+    }
+  ]
+}

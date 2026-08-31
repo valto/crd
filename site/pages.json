@@ -1,0 +1,222 @@
+{
+  "site": {
+    "name": "Capability Documentation",
+    "alternateName": "CRD",
+    "url": "https://valto.github.io/crd/",
+    "author": "Valto Loikkanen",
+    "authorUrl": "https://valto.github.io/",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "specificationVersion": "Draft 0.4",
+    "packageVersion": "0.6.0",
+    "modified": "2026-08-31",
+    "image": "https://valto.github.io/crd/assets/crd-social-card.png",
+    "sameAs": [
+      "https://github.com/valto",
+      "https://www.linkedin.com/in/valto/",
+      "https://valtoai.com/"
+    ]
+  },
+  "pages": [
+    {
+      "file": "index.html",
+      "url": "https://valto.github.io/crd/",
+      "title": "Capability Requirements Document (CRD) Framework",
+      "description": "Define complete software and AI-agent capabilities with CRD, an open framework for requirements, interaction contracts, evidence, realizations, and unknowns.",
+      "type": "WebPage",
+      "classification": "Framework overview",
+      "source": "README.md",
+      "markdown": "index.md",
+      "priority": "1.0"
+    },
+    {
+      "file": "learn.html",
+      "url": "https://valto.github.io/crd/learn.html",
+      "title": "Learn Capability Requirements Documents | CRD",
+      "description": "Learn the Capability Documentation model, Capability MLEs, CRDs, interaction contracts, realizations, and the recommended reading path.",
+      "type": "TechArticle",
+      "classification": "Learning guidance",
+      "priority": "0.8"
+    },
+    {
+      "file": "why-crd.html",
+      "url": "https://valto.github.io/crd/why-crd.html",
+      "title": "Why Capability Requirements Documents Matter for AI Agents",
+      "description": "Why capability-centered requirements help people, software, and AI agents preserve meaning across products, code, APIs, skills, and operations.",
+      "type": "TechArticle",
+      "classification": "Learning guidance",
+      "priority": "0.9"
+    },
+    {
+      "file": "crd-vs-prd.html",
+      "url": "https://valto.github.io/crd/crd-vs-prd.html",
+      "title": "CRD vs PRD: Capability and Product Requirements Compared",
+      "description": "Compare a Capability Requirements Document with a Product Requirements Document, feature specification, user story, API contract, skill, and tool.",
+      "type": "TechArticle",
+      "classification": "Comparison guidance",
+      "source": "crd-vs-prd.md",
+      "markdown": "crd-vs-prd.md",
+      "priority": "0.9"
+    },
+    {
+      "file": "mle.html",
+      "url": "https://valto.github.io/crd/mle.html",
+      "title": "Minimum Logical Element (MLE) for Capability Design",
+      "description": "Understand Minimum Logical Element, the scope discipline behind Capability MLEs and Capability Requirements Documents.",
+      "type": "TechArticle",
+      "classification": "Concept guidance",
+      "source": "minimum-logical-element.md",
+      "markdown": "mle.md",
+      "priority": "0.8"
+    },
+    {
+      "file": "specification.html",
+      "url": "https://valto.github.io/crd/specification.html",
+      "title": "Capability Requirements Document Specification | CRD",
+      "description": "The normative CRD specification for documenting one complete Capability MLE, including required semantics, interaction contracts, evidence, and conformance.",
+      "type": "TechArticle",
+      "classification": "Normative specification",
+      "source": "crd-specification.md",
+      "markdown": "specification.md",
+      "priority": "1.0"
+    },
+    {
+      "file": "template.html",
+      "url": "https://valto.github.io/crd/template.html",
+      "title": "Capability Requirements Document Template | CRD",
+      "description": "Use the CRD template to define a complete capability's purpose, boundaries, contracts, rules, defaults, unknowns, provenance, and realizations.",
+      "type": "TechArticle",
+      "classification": "Template",
+      "source": "crd-template.md",
+      "markdown": "template.md",
+      "priority": "0.9"
+    },
+    {
+      "file": "agent-transformation.html",
+      "url": "https://valto.github.io/crd/agent-transformation.html",
+      "title": "Create CRDs from Product Docs, Code, APIs, and Agents",
+      "description": "Canonical instructions for extracting Capability Requirements Documents from plans, UX, code, APIs, MCP servers, skills, tests, and live services without inventing facts.",
+      "type": "TechArticle",
+      "classification": "Agent transformation guidance",
+      "source": "agent-transformation-instructions.md",
+      "markdown": "agent-transformation.md",
+      "priority": "0.9"
+    },
+    {
+      "file": "agent-prompt.html",
+      "url": "https://valto.github.io/crd/agent-prompt.html",
+      "title": "CRD Prompt for AI Agents | Capability Documentation",
+      "description": "Copy a grounded prompt that teaches an AI agent to understand, define, and extract Capability Requirements Documents while preserving authority and uncertainty.",
+      "type": "TechArticle",
+      "classification": "Agent resource",
+      "source": "agent-prompt.md",
+      "markdown": "agent-prompt.md",
+      "priority": "0.9"
+    },
+    {
+      "file": "working-with-crds.html",
+      "url": "https://valto.github.io/crd/working-with-crds.html",
+      "title": "Working with CRDs: Precedence, Reuse, Skills, and Tools",
+      "description": "Apply Capability Requirements Documents safely using precedence rules, shared-element reuse, skills, tools, audience projections, and clear feature boundaries.",
+      "type": "TechArticle",
+      "classification": "Practical guidance",
+      "source": "working-with-crds.md",
+      "markdown": "working-with-crds.md",
+      "priority": "0.8"
+    },
+    {
+      "file": "glossary.html",
+      "url": "https://valto.github.io/crd/glossary.html",
+      "title": "CRD Glossary: Capability Documentation Terms",
+      "description": "Canonical definitions for Capability Documentation, Capability MLE, CRD, Interaction Contract MLE, realization, skill, tool, rules, defaults, and unknowns.",
+      "type": "DefinedTermSet",
+      "classification": "Controlled vocabulary",
+      "source": "glossary.md",
+      "markdown": "glossary.md",
+      "priority": "0.8"
+    },
+    {
+      "file": "inventory.html",
+      "url": "https://valto.github.io/crd/inventory.html",
+      "title": "Capability Inventory | Capability Documentation",
+      "description": "Catalogue available or planned Capability MLEs and link them to their Capability Requirements Documents without requiring a product-level PRD.",
+      "type": "TechArticle",
+      "classification": "Companion reference",
+      "source": "capability-inventory.md",
+      "markdown": "inventory.md",
+      "priority": "0.7"
+    },
+    {
+      "file": "source-context.html",
+      "url": "https://valto.github.io/crd/source-context.html",
+      "title": "Source Context Reference for Multi-Capability CRD Work",
+      "description": "Preserve product-wide and cross-cutting source context when plans, code, or services are decomposed into multiple capability-scoped CRDs.",
+      "type": "TechArticle",
+      "classification": "Companion reference",
+      "source": "source-context-template.md",
+      "markdown": "source-context.md",
+      "priority": "0.7"
+    },
+    {
+      "file": "examples.html",
+      "url": "https://valto.github.io/crd/examples.html",
+      "title": "Capability Requirements Document Examples | CRD",
+      "description": "Explore illustrative and real-system Capability Requirements Document examples for customer-facing, internal, API, and automated capabilities.",
+      "type": "CollectionPage",
+      "classification": "Example index",
+      "priority": "0.9"
+    },
+    {
+      "file": "examples/request-moving-quote.html",
+      "url": "https://valto.github.io/crd/examples/request-moving-quote.html",
+      "title": "Request a Moving Quote — CRD Example",
+      "description": "An illustrative Capability Requirements Document for requesting a moving quote, with draft, validation, submission, and realization details.",
+      "type": "TechArticle",
+      "classification": "Illustrative example",
+      "source": "examples/request-moving-quote.md",
+      "markdown": "examples/request-moving-quote.md",
+      "priority": "0.7"
+    },
+    {
+      "file": "examples/reconcile-payments.html",
+      "url": "https://valto.github.io/crd/examples/reconcile-payments.html",
+      "title": "Reconcile Payments — CRD Example",
+      "description": "An illustrative Capability Requirements Document for internal payment reconciliation, review outcomes, rules, and a software-primary realization.",
+      "type": "TechArticle",
+      "classification": "Illustrative example",
+      "source": "examples/reconcile-payments.md",
+      "markdown": "examples/reconcile-payments.md",
+      "priority": "0.7"
+    },
+    {
+      "file": "examples/open-pull-request.html",
+      "url": "https://valto.github.io/crd/examples/open-pull-request.html",
+      "title": "Open a Pull Request — Real-World CRD Example",
+      "description": "A real-world Capability Requirements Document for opening a GitHub pull request, extracted from public API and webhook documentation with audited provenance.",
+      "type": "TechArticle",
+      "classification": "Real-world example",
+      "source": "examples/open-pull-request.md",
+      "markdown": "examples/open-pull-request.md",
+      "priority": "0.8"
+    },
+    {
+      "file": "examples/merge-pull-request.html",
+      "url": "https://valto.github.io/crd/examples/merge-pull-request.html",
+      "title": "Merge a Pull Request — Real-World CRD Example",
+      "description": "A real-world Capability Requirements Document for merging a GitHub pull request, including policies, automated realization, and audited provenance.",
+      "type": "TechArticle",
+      "classification": "Real-world example",
+      "source": "examples/merge-pull-request.md",
+      "markdown": "examples/merge-pull-request.md",
+      "priority": "0.8"
+    },
+    {
+      "file": "resources.html",
+      "url": "https://valto.github.io/crd/resources.html",
+      "title": "CRD Learning Resources: Articles, Video, Audio, and PDF",
+      "description": "Read, watch, and listen to resources about capability requirements, semantic blueprints, agent-ready documentation, and architecting for AI agents.",
+      "type": "CollectionPage",
+      "classification": "Media resources",
+      "priority": "0.6"
+    }
+  ]
+}

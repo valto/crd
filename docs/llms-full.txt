@@ -1,0 +1,883 @@
+# Capability Documentation (CRD) — full context
+
+Generated 2026-08-31 from canonical repository sources. Specification status: Draft 0.4. Package release: 0.6.0.
+
+---
+
+# Source: Framework overview
+URL: https://valto.github.io/crd/index.md
+
+# Capability Documentation
+
+Draft 0.4 (package release 0.6.0) — an open, technology- and implementation-agnostic framework for defining, cataloguing, and operating complete capabilities.
+
+The canonical artifact is a **Capability Requirements Document (CRD)**: the requirement document for one Capability MLE. A capability may belong to a product, service, system, agent, or reusable open inventory; a CRD can be created before implementation or derived from existing systems, and it remains independent of any one realization mechanism.
+
+The core model and Extract-mode workflow are stable and validated: the required-core fields haven't changed since Draft 0.4, and the [CRD Author skill](skills/crd-author/SKILL.md)'s Extract mode has been run against four independent real sources (a PRD, a real codebase, a real API/webhook documentation set) and each result independently blind-audited for both framework conformance and factual accuracy — see [CHANGELOG.md](CHANGELOG.md) for what each audit found and fixed. Define mode and some optional extensions (Arazzo/OpenAPI structured extraction, audience projections, Mermaid diagrams beyond one worked example) are specified but have not yet been exercised and audited the same way — treat those as reasonable but less-proven guidance. It is not a software runtime, a required product-management process, or an attempt to replace domain-specific documentation.
+
+## Start here
+
+> **A CRD is like a feature specification for the agentic era.**
+
+It is smaller than a PRD and more rigorous than a typical feature definition. A CRD specifies one complete capability’s purpose, boundaries, requirements, interaction contracts, realizations, evidence, and unknowns—so people, agents, and software can work from the same durable meaning.
+
+| Question | Short answer |
+|---|---|
+| **What?** | A CRD is the requirement document for one complete Capability MLE, not merely a feature, endpoint, component, or function. |
+| **For whom?** | Product, domain, UX, and engineering people; AI agents; applications; and other software. |
+| **Why?** | To prevent purpose, requirements, defaults, examples, implementation choices, operational constraints, and unknowns from being confused or lost between systems. |
+| **How?** | Define a Capability MLE, its Interaction Contract MLEs, and one or more realizations; then trace the CRD to relevant UX, APIs, tools, code, tests, and operations. |
+
+Read the public introduction at [valto.github.io/crd](https://valto.github.io/crd/).
+
+## Core model
+
+```text
+Capability Documentation
+  ├─ Capability Inventory
+  │    └─ Capability MLE
+  │         └─ Capability Requirements Document (CRD)
+  │              ├─ one or more Interaction Contract MLEs
+  │              └─ Operational Capability Documentation
+  │                   └─ one or more Realizations
+```
+
+- **Capability Documentation**: the overall methodology, open standard, and resource.
+- **Capability Inventory**: a catalogue of available or planned Capability MLEs and their CRDs.
+- **Capability MLE**: the smallest complete, contextually meaningful ability that produces a meaningful outcome.
+- **Capability Requirements Document (CRD)**: the canonical technology- and implementation-agnostic specification of one Capability MLE.
+- **Interaction Contract MLE**: the smallest contextually meaningful executable behaviour.
+- **Operational Capability Documentation**: documentation of a CRD’s current realization in a particular service or system.
+- **Realization**: a software, agent, or combined implementation of a capability or interaction contract.
+
+## Package
+
+- [CRD Specification](crd-specification.md) — semantic model and conformance rules.
+- [CRD template](crd-template.md) — minimal document form with optional extensions.
+- [Minimum Logical Element (MLE)](minimum-logical-element.md) — origin, rationale, and the conceptual path to CRDs.
+- [Working with CRDs](working-with-crds.md) — precedence, shared-element reuse, skill/tool mapping, audience projections, and why CRD is not merely a feature.
+- [CRD vs PRD](crd-vs-prd.md) — concise boundaries between capability requirements, product requirements, feature specifications, user stories, APIs, skills, and tools.
+- [CRD glossary](glossary.md) — canonical short definitions for the framework vocabulary.
+- [CRD prompt for AI agents](agent-prompt.md) — a portable prompt for agents that cannot install the CRD Author skill.
+- [Capability Inventory](capability-inventory.md) — a lightweight catalogue form for available or planned Capability MLEs, including known realizations.
+- [Source Context Reference template](source-context-template.md) — a companion document for product-wide/cross-cutting context (why it exists, cross-cutting constraints, platform exposure, build sequencing) that no single CRD should own, but that shouldn't be lost either.
+- [Agent transformation instructions](agent-transformation-instructions.md) — derive documentation from existing material without inventing facts.
+- [Worked example](examples/request-moving-quote.md) — an illustrative CRD and realization.
+- [Internal-capability example](examples/reconcile-payments.md) — an illustrative internal CRD with a software-primary realization.
+- [Real-world example: Open a pull request](examples/open-pull-request.md) / [Merge a pull request](examples/merge-pull-request.md) — extracted from GitHub's own public REST API and webhook documentation (not synthetic), independently blind-audited for framework conformance and factual accuracy; see the accompanying [provenance table](examples/github-pull-request-provenance.md) and [decision log](examples/github-pull-request-decision-log.md).
+- [JSON Schema](schema/crd.schema.json) — portable machine-readable representation of the required core.
+- [JSON example](examples/request-moving-quote.json) — schema-conforming illustrative instance.
+- [CRD Author skill](skills/crd-author/SKILL.md) — a packaged agent skill that writes CRDs (Define mode) or extracts them from existing material (Extract mode) and maintains a Capability Inventory.
+- [Inventory HTML template](inventory-html-template.html) — a dependency-free static index page for browsing a Capability Inventory, produced only on request. Used together with [crd-html-template.html](crd-html-template.html) (one per capability) and [doc-html-template.html](doc-html-template.html) (one per supporting doc), so the whole showcase is HTML — no link in it lands on a raw `.md` file.
+
+The published documentation also exposes an [LLM resource map](https://valto.github.io/crd/llms.txt), generated Markdown views, the JSON Schema, examples, and the CRD Author skill directly from the documentation host.
+
+## Quick start
+
+1. Read the [CRD Specification](crd-specification.md).
+2. Copy the [CRD template](crd-template.md) for a reusable capability.
+3. Use the [Agent transformation instructions](agent-transformation-instructions.md) to derive documentation from existing material without inventing facts, producing a [Source Context Reference](source-context-template.md) alongside the CRDs when extracting from one substantial source. An agent can also run this end to end via the [CRD Author skill](skills/crd-author/SKILL.md).
+4. Validate a structured representation against the JSON Schema where machine interchange is useful.
+
+## License and attribution
+
+This repository is licensed under [Creative Commons Attribution 4.0 International](LICENSE). Reuse and adaptation are welcome, including commercially, provided appropriate attribution is given to **Valto Loikkanen**. See [NOTICE](NOTICE) for the requested attribution form.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). This first draft intentionally keeps the required core small; proposed additions should demonstrate why they preserve contextual logical meaning rather than turn a CRD into a mini-PRD.
+
+The initial draft deliberately does not prescribe a single serialization format, repository layout, or runtime. Markdown is the human form and JSON Schema is the initial portable machine-interchange form.
+
+## Compatibility note
+
+The project was briefly published under the name **Capability Requirements Documentation (CRD)**. The refined vocabulary restores **Capability Documentation** as the overall framework and reserves **CRD** for the canonical per-capability artifact.
+
+---
+
+# Source: CRD specification
+URL: https://valto.github.io/crd/specification.md
+
+# Capability Documentation: CRD Specification
+
+Status: Draft 0.4
+
+## 1. Purpose
+
+**Capability Documentation** is the common, implementation- and technology-agnostic framework through which humans, agents, applications, and developers can understand, use, build, compose, and operate capabilities.
+
+Its canonical per-capability artifact is a **Capability Requirements Document (CRD)**: the requirement document for one Capability MLE. A CRD defines what must remain meaningful and true regardless of whether the capability is realized through software, an agent, MCP, an API, UI, or a future mechanism.
+
+This specification preserves the Minimum Logical Element (MLE) principle: the document requires only the information necessary for a capability to retain contextual logical meaning. Detail that belongs to a particular implementation is optional.
+
+## 2. Normative terms
+
+**MUST** means required for a conforming Capability Requirements Document (CRD). **SHOULD** means recommended unless a documented reason exists not to follow it. **MAY** means optional.
+
+## 3. Model
+
+### 3.1 Capability MLE
+
+A Capability MLE is the smallest complete ability that retains sufficient contextual logical meaning and produces a meaningful outcome.
+
+It MAY be externally visible, agent-facing, application-facing, or internal. It MUST NOT be enlarged merely because a larger grouping is possible.
+
+### 3.2 Interaction Contract MLE
+
+An Interaction Contract MLE is the smallest contextually meaningful executable behaviour within a capability. Its abstract kernel is:
+
+```text
+Actor + Command + Current State
+  -- subject to Policies/Invariants -->
+New State + Result + Events/Effects
+```
+
+An interaction contract is independent of whether it is exposed through a UI, API, MCP tool, workflow, event consumer, function, or agent.
+
+### 3.3 Realization
+
+A realization is a particular operational implementation of a capability or interaction contract. A capability can have zero, one, or many realizations. A realization can be software, an agent, software plus agents, or agent-built software.
+
+Every realization MUST declare its **execution mode**:
+
+| Execution mode | Meaning |
+|---|---|
+| `software-primary` | Software or a deterministic workflow controls the capability flow. |
+| `agent-primary-using-software` | An agent controls the capability flow and invokes software, tools, or services as needed. |
+| `software-primary-calling-agents` | Software or a deterministic workflow controls the flow and calls an agent only at defined steps. |
+| `unknown` | The runtime control relationship is not yet established. |
+
+`agent-built-software` is implementation provenance, not an execution mode: it says how a realization was constructed, not what controls it at runtime. The distinction between `agent-primary-using-software` and `software-primary-calling-agents` is material because it determines authority, fallback, observability, and failure handling.
+
+**Operational Capability Documentation** describes the current realization of a CRD in a particular service or system. It records realization-specific rationale, constraints, exposures, dependencies, evidence, and operating context without changing the reusable CRD itself.
+
+### 3.4 Capability Inventory
+
+A Capability Inventory is a catalogue of available or planned Capability MLEs. Each entry SHOULD link to a CRD when one exists. A CRD MAY exist independently in a reusable or open inventory; it does not require a Product Requirements Document (PRD) above it.
+
+### 3.5 Cardinality
+
+A capability MAY have one or many interaction contracts. A contract MAY have one or many realizations. The same component, endpoint, function, or tool MAY support multiple capabilities. No one-to-one mapping is implied.
+
+### 3.6 Skill and tool relationship
+
+A **tool** is an executable primitive, such as a function, API operation, MCP tool, command, or workflow step. A tool is not automatically a capability: it may be too small to retain complete purpose context.
+
+A **skill** is an agentic realization package that guides an agent in performing work. A skill MAY realize one Capability MLE, bundle several Capability MLEs, or use tools that support many capabilities.
+
+The relationship is therefore many-to-many:
+
+```text
+Capability MLE ↔ Skill ↔ Tool
+```
+
+A capability MAY be the MLE of a skill when the skill has one complete contextual purpose. A skill MUST NOT be assumed to equal one capability merely because it has a name or a tool interface.
+
+A candidate that passes the MLE test's five questions (§3.1) on a literal reading — it has an actor, a command, a determinable result — is not automatically a capability if that actor is only "a developer manually running this for pre-release verification" and the candidate has no recurring operational role in the running system and is not itself exposed for a third party or agent to invoke. Such a candidate is presumptively a **tool** or **implementation/test scaffolding**, not a capability, regardless of how well-documented or well-tested it is. Documentation quality and test coverage establish that a tool is good engineering; they do not establish that it is a capability. Promote it to a capability only when it serves a recurring operational purpose within the product (compare the internal `Reconcile payments` example, which runs repeatedly as real business operation, not a one-time developer check) or when it is exposed for someone other than the building developer to invoke.
+
+## 4. Capability Requirements Document (CRD): required core
+
+A conforming CRD MUST contain:
+
+| Field | Meaning |
+|---|---|
+| `name` | Stable, concise capability name. |
+| `definition` | What the ability is, without implementation detail. |
+| `capability purpose` | The general outcome the ability exists to enable. |
+| `boundaries` | What belongs inside the capability and what explicitly does not. |
+| `meaningful outcome` | The condition or result that makes the ability complete. |
+| `interaction contracts` | At least one named contract, or an explicit unknown explaining why none is defined yet. |
+| `rules/invariants` | Binding statements, or an explicit statement that none are known. |
+| `recommended defaults` | Normal behaviour when no explicit choice overrides it, or an explicit statement that none are known. |
+| `unknowns/unresolved questions` | Deliberately unspecified, uncertain, or pending information. |
+
+The definition SHOULD be independently understandable and meaningfully invokable. It SHOULD be split when its parts retain the same purpose context independently; it SHOULD be combined when isolated parts lose that context.
+
+## 5. Interaction Contract: required core
+
+Each defined Interaction Contract MUST include:
+
+| Field | Meaning |
+|---|---|
+| `name` | Concise behaviour name. |
+| `actor` | Who or what initiates it; use `unknown` if not established. |
+| `command/intent` | The requested action or intent. |
+| `current state` | Required starting state or context. |
+| `policies/invariants` | Conditions that govern validity. |
+| `transition` | State change, or an explicit statement that no state changes. |
+| `result` | Direct outcome delivered to the actor or caller. |
+| `events/effects` | Material emitted events, side effects, or an explicit `none known`. |
+
+## 6. Documentation semantics
+
+Every substantive statement SHOULD be assigned one of these semantic classes:
+
+| Class | Meaning |
+|---|---|
+| `capability purpose` | General outcome the ability exists to enable. |
+| `rationale/intent` | Why a particular organization chose the capability or realization. |
+| `rule/invariant` | Binding requirement. |
+| `implementation-requirement` | Explicit requirement of a particular realization. |
+| `recommended default` | Normal behaviour unless deliberately overridden. |
+| `example` | Illustrative and non-binding unless explicitly promoted to a rule. |
+| `implementation choice` | Current, replaceable realization. |
+| `operational constraint` | Restriction of one realization, not the reusable capability. |
+| `unknown/unresolved` | Intentionally unspecified, uncertain, or awaiting decision. |
+| `explicit fact` | Directly supported by a source. |
+| `reasonable inference` | Supported interpretation that is not directly stated. |
+
+`capability purpose` MUST remain distinct from `rationale/intent`. For example, the general purpose of `Convert currency` is enabling conversion of monetary values; a business rationale might be that a particular service has international customers.
+
+### 6.1 Decision precedence
+
+When a consumer, implementation, or agent encounters competing applicable guidance, it MUST resolve it in this order:
+
+```text
+1. Rule / invariant
+2. Explicit implementation requirement
+3. Explicit owner or user choice
+4. Recommended default
+5. Agent judgment
+```
+
+A lower-precedence item MUST NOT override a higher-precedence item. If two items at the same precedence level conflict or their scope is unclear, the consumer MUST surface the conflict as `unknown/unresolved` or request a decision rather than silently choosing.
+
+## 7. Optional extensions
+
+The following are optional and MUST NOT be required merely to classify something as a capability:
+
+- operational realization and availability
+- ownership, lifecycle, and implementation/business rationale
+- API, MCP, tool, event, or UI exposure
+- implementation and dependency references
+- UX representations and user stories
+- test evidence, telemetry, SLOs, or audit trail
+- provenance and source links
+- authorization, agent authority, grounding/context, and approval gates
+- execution mode and agentic mappings
+- shared-element reuse approvals
+- audience projections
+- tags
+
+These become important when documenting a particular operational realization.
+
+### 7.1 Shared elements and approved reuse
+
+When a lower-level element is shared across capabilities, a CRD MAY declare its provenance and approved reuse:
+
+```text
+shared element: customer-identity-validation
+created for: customer-onboarding
+approved reuse: [request-moving-quote, submit-insurance-claim]
+```
+
+This does not imply exclusive ownership. It records the capability context in which an element originated and the capability contexts in which reuse has been explicitly accepted. Reuse approval is especially useful when shared tools, components, prompts, schemas, or workflows carry domain assumptions that should not be silently generalized.
+
+### 7.2 Audience projections
+
+One canonical CRD MAY be projected into audience-specific views without creating divergent requirements. Typical projections answer:
+
+| Audience | Primary questions |
+|---|---|
+| Business / domain | Why does this capability exist, what outcome and rules matter? |
+| UX | Who acts, what states and choices exist, and what outcomes must be intelligible? |
+| Frontend | What representations and interaction constraints are required? |
+| Backend | What transitions, invariants, effects, and integrations must hold? |
+| API / MCP / tools | What commands, contracts, inputs, outputs, and authority boundaries exist? |
+| Agent | What authority, grounding, precedence, approval, and escalation rules apply? |
+| Operations | Which realization is active, how is it observed, and what constraints or fallback paths exist? |
+
+Projections SHOULD be traceable to the canonical CRD. They MUST NOT silently introduce requirements that are absent from it.
+
+### 7.3 Tags
+
+A CRD MAY declare a small set of universal tags for dimensions that are not already derivable from its required fields (§4) and that stay meaningful regardless of which product realizes the capability. Reserve a tag for what isn't already implied elsewhere: do not tag `read-only` when every Interaction Contract's `transition` already states none; do not tag `internal`/`user-facing` when `exposure` (§7) already says so. A hand-authored tag that duplicates a derivable fact tends to drift from that fact over time — prefer deriving over tagging whenever a field already settles the question.
+
+Choose the tag whose dimension a statement is actually about, not the nearest-sounding one. A common mistake is reaching for `network-touching` whenever a source mentions an API call or a network-triggered side effect, when the statement's actual point is a different dimension:
+
+| Tag | Use it for | Do not use it for |
+|---|---|---|
+| `network-touching` / `local-only` | Whether reaching this capability's outcome requires leaving the local device or process — meaningful for a local-first, hybrid, or offline-capable system where some capabilities complete entirely on-device and others don't. | A capability inside a product that is uniformly a hosted network service, where every capability is network-touching by construction and the tag would only restate what `exposure` (§7) already implies. |
+| `notification-triggering` | Invoking this capability causes a notification, alert, or message to be sent to a person, as a side effect distinct from any network activity. | A side effect that is really about the network round-trip itself, not about a person being notified. |
+| `data-sensitive` | This capability reads, writes, or otherwise handles sensitive or private data as part of its core operation. | Data sensitivity that a boundary or a contract's `policies/invariants` already states explicitly. |
+| `identity-related` | This capability's core operation is about establishing, verifying, or managing who someone is. | A capability merely invoked by an already-authenticated actor — that's the contract's `actor` field, not a tag. |
+
+An Operational Capability Documentation extension MAY separately declare **implementation tags** — product-specific groupings (a module, domain, or internal team name) meaningful only within that realization. Implementation tags MUST be clearly distinguished from the CRD's own universal tags and MUST NOT be presented as if they describe the reusable capability generally (a common convention is prefixing each one, e.g. `impl:inbox`).
+
+A rendered projection (e.g. an HTML showcase) SHOULD keep the visual "tag" badge convention exclusive to implementation tags. A universal tag conventionally drives structure instead — a grouping or section key (e.g. one tab segmented by universal tag, another by implementation tag) — or appears as plain text where structure isn't practical, rather than as an inline badge indistinguishable from an implementation tag's.
+
+## 8. Boundary rules
+
+Boundaries MUST identify included and excluded concerns. They SHOULD distinguish a capability from adjacent capabilities, reusable primitives, and implementation detail. Boundaries are the primary protection against a capability expanding into a vague feature bucket.
+
+## 9. Conformance
+
+A document conforms as a **Capability Requirements Document (CRD)** when it satisfies section 4 and all defined contracts satisfy section 5. It conforms as an **Operational Capability Realization** when it additionally documents the realization-specific constraints, references, and evidence it chooses to expose.
+
+---
+
+# Source: CRD template
+URL: https://valto.github.io/crd/template.md
+
+# Capability Requirements Document (CRD) Template
+
+Use this template for a reusable Capability Requirements Document (CRD). Remove optional sections that add no contextual meaning; do not replace unknown information with invention.
+
+## Identity
+
+- **Name:**
+- **Definition:**
+- **Status:** draft | active | deprecated | unknown
+
+## Core meaning
+
+- **Capability purpose:**
+- **Meaningful outcome:**
+- **Boundaries — includes:**
+- **Boundaries — excludes:**
+- **Terms and concepts:**
+- **Tags (optional):** universal only — a dimension not already derivable from another field. Pick the tag whose dimension the statement is actually about, not the nearest-sounding one (see `crd-specification.md` §7.3's disambiguation table — e.g. a notification side effect is `notification-triggering`, not `network-touching`, and `network-touching`/`local-only` is only useful when some of the product's capabilities genuinely differ on this, not for a capability inside a uniformly hosted service). Omit rather than restate what `exposure` or a contract's `transition` already says. In a rendered projection, these typically become a grouping/section key (or plain text), not a badge — the visual tag/badge convention is reserved for implementation tags below.
+
+## Interaction Contract MLEs
+
+### [Contract name]
+
+- **Actor:**
+- **Command / intent:**
+- **Current state:**
+- **Policies / invariants:**
+- **Transition:**
+- **Result:**
+- **Events / effects:**
+- **Unknowns:**
+
+## Rules and defaults
+
+### Rules / invariants
+
+-
+
+### Recommended defaults
+
+-
+
+### Decision precedence
+
+Apply the standard order unless a higher-level governing policy explicitly establishes another order:
+
+```text
+Rule / invariant
+→ explicit implementation requirement
+→ explicit owner or user choice
+→ recommended default
+→ agent judgment
+```
+
+## Unknown / unresolved
+
+-
+
+## Optional: operational realization
+
+- **Realization name and status:**
+- **Execution mode:** software-primary | agent-primary-using-software | software-primary-calling-agents | unknown
+- **Implementation/business rationale:**
+- **Owner / operating context:**
+- **Operational constraints:**
+- **Exposure:** UI | API | MCP | tool | event | workflow | internal
+- **Implementation tags (optional):** product-specific groupings meaningful only to this realization (e.g. `impl:inbox`) — never the CRD's own universal tags, and always distinguishable from them (a consistent prefix such as `impl:` is a common convention). In a rendered projection, this is the only kind of tag shown as a visual badge.
+- **Implementation references:**
+- **UX representations:**
+- **Tests / verification:**
+- **Telemetry / audit:**
+- **Authority, grounding, approval gates:**
+- **Provenance:**
+
+## Optional: shared elements and approved reuse
+
+| Shared element | Kind | Created for capability | Approved reuse by capabilities | Notes |
+|---|---|---|---|---|
+|  | tool |  |  |  |
+
+## Optional: agentic mappings
+
+| Element | Kind | Relationship to this Capability MLE | Notes |
+|---|---|---|---|
+|  | skill | realizes one capability |  |
+|  | tool | executable primitive used by a contract |  |
+
+## Optional: audience projections
+
+List or link projections for business/domain, UX, frontend, backend, API/MCP/tools, agents, or operations. Each projection must trace back to this CRD and must not create divergent requirements.
+
+## Statement provenance
+
+For material extracted or generated from sources, label statements as:
+
+| Statement | Semantic class | Evidence status | Source / note |
+|---|---|---|---|
+|  | explicit fact | sourced |  |
+
+---
+
+# Source: Agent transformation
+URL: https://valto.github.io/crd/agent-transformation.md
+
+# Agent Transformation Instructions
+
+## Objective
+
+Transform existing material into Capability Requirements Documents (CRDs), Interaction Contract MLEs, and—only where evidence supports them—Operational Capability Realizations.
+
+Possible source material includes PRDs, plans, applications, codebases, Storybook, OpenAPI, Arazzo workflow documents, MCP servers, skills, API documentation, database schemas, user stories, tests, and operational runbooks.
+
+Extract mode defaults to a **specific/operational CRD set**. Produce an additional generic/reusable projection only when the user asks for it, or when reuse by a second real consumer is already established or clearly imminent. A generic capability with zero known realizations is an unproven hypothesis, not demonstrated reuse.
+
+For a substantial source that yields multiple capabilities, also produce a [Source Context Reference](source-context-template.md): a companion reference for product-wide and cross-cutting context that belongs to no single CRD.
+
+## Non-negotiable rules
+
+1. Do not invent product facts, policies, ownership, outcomes, or implementation details.
+2. Preserve source uncertainty. Mark it `unknown/unresolved` rather than filling it with a plausible answer.
+3. Distinguish an explicit fact from a reasonable inference, recommended default, example, implementation choice, and operational constraint.
+4. Do not derive a reusable CRD solely from one operational realization without marking realization-specific facts.
+5. Keep a capability small enough to retain a single contextual purpose; do not split it merely because it has multiple steps.
+6. Resolve competing guidance in this order: rule/invariant → explicit implementation requirement → explicit owner/user choice → recommended default → agent judgment. Surface same-level conflicts or unclear scope as `unknown/unresolved`.
+7. Do not infer a priority or conflict-ordering relationship between independently stated facts. If the source does not establish which applies first, record that ordering as `unknown/unresolved`.
+8. Preserve source hedge language. A statement expressed as “preferably,” “should,” “recommended,” or an equivalent hedge is a recommended default or implementation choice—not a rule/invariant—unless the source explicitly makes it binding.
+9. Do not carry over terminology, facts, or conclusions from any other source, project, or prior work not included in the material assigned for this extraction—including other material handled earlier in the same session. If a term seems relevant but you cannot point to where in the assigned source it appears, omit it; do not include it hedged as “possibly used elsewhere.”
+10. When extracting from a codebase or structured configuration (build/target definitions, schemas, manifests), do not assert a machine-checkable fact—such as which build target includes a file, or which route a client calls—as confirmed unless you have traced it directly in the specific file and line that governs it. If you have not traced it, mark it `unknown/unresolved` rather than stating it with confidence.
+11. A declared type, enum case, schema field, or similar construct that you cannot find an actual code path constructing, assigning, or reaching must not be presented as a live, reachable, user-visible outcome. Either omit it, or explicitly mark it “declared but reachability not confirmed.”
+
+## Procedure
+
+### 1. Inventory and classify sources
+
+For each source, record its type, scope, date/version if known, and whether it describes intent, rules, interaction, implementation, operations, or evidence.
+
+When a substantial source contains product-wide context that no one capability should own, create a Source Context Reference. Capture source citation, product/system intent, cross-cutting constraints, platform/client exposure, build sequencing, cross-capability verification material, and material not mapped elsewhere. The SCR carries no binding requirements of its own: every binding constraint must also appear in each CRD it governs.
+
+### 2. Extract candidate statements
+
+Extract statements about actors, goals, commands, states, policies, constraints, inputs, results, events, effects, interfaces, and tests. Label each as `explicit fact`, `reasonable inference`, or `unknown/unresolved`.
+
+### 3. Identify candidate capabilities
+
+Propose a Capability MLE only when there is a complete ability with a meaningful outcome and coherent purpose context. Test each candidate:
+
+- Is it understandable independently?
+- Can it be invoked or used meaningfully?
+- Can its success or failure be determined?
+- Would further splitting cause the pieces to lose their purpose context?
+
+A candidate that only passes these questions because its actor is "a developer manually running this for pre-release verification," with no recurring operational role in the running system and no exposure beyond that developer, is presumptively a **tool** or **implementation/test scaffolding** (§3.6), not a capability—even with its own dedicated doc, test, and CLI target. Good documentation and test coverage make it good engineering; they do not make it a capability. Promote it only when it serves a recurring operational purpose in the product, or is exposed for someone other than the building developer to invoke.
+
+When the source includes an Arazzo workflow document alongside an OpenAPI (or other API) description, treat each declared workflow as a candidate-capability hypothesis and each of its steps as candidate Interaction Contract evidence—not as an automatic capability boundary. Still run the MLE test on the workflow as a whole: a vendor-declared workflow may bundle several independently meaningful capabilities, or be too narrow to be one on its own. A step's referenced operation is evidence for a tool (§3.6), not a capability by itself. Most sources will not have an Arazzo document; a raw OpenAPI spec alone requires the same combine/decompose work described in §4, with less structural evidence to work from.
+
+### 4. Combine and decompose
+
+Decompose one apparent feature when it contains several independent complete abilities. Combine low-level endpoints, components, or functions only when they jointly form one ability and none is meaningful alone.
+
+Before combining elements, run the Capability MLE test on **each element individually**, not only on the proposed combined result. Combine only when every candidate element fails the test alone. If one element has its own actor, command, state, and result, it is likely its own Capability MLE; record the decision in the log.
+
+This is not a discretionary judgment call once an element passes the test alone: split it out. Recording in the decision log that an element passed individually and combining it anyway does not satisfy this rule—disclosure is not compliance.
+
+When a generic/reusable projection is authorized, treat generalizing phrases such as “or otherwise,” “or similar,” “any,” or “etc.” as a source-grounding checkpoint. They are not permission to broaden a requirement beyond what the source supports.
+
+### 5. Define interaction contracts and optional diagrams
+
+For each capability, derive one or more contracts using:
+
+```text
+Actor + Command + Current State
+  -- subject to Policies/Invariants -->
+New State + Result + Events/Effects
+```
+
+Do not infer a state transition, policy, or effect from a name alone. Mark it unknown until supported by evidence.
+
+Mermaid diagrams are optional illustrative projections. Every state, transition, edge, and relationship MUST already be stated in the CRD text. In a state diagram, do not route a retained, persistent, or historical state to the `[*]` exit pseudostate unless the source explicitly describes it as terminal.
+
+### 6. Separate reusable definition from realization
+
+Place general purpose, boundaries, and reusable rules in the CRD. Put deployment, API/MCP exposure, code references, organizational rationale, ownership, and operational restrictions in a realization extension.
+
+Record the realization’s execution mode when known. Distinguish an agent-primary flow that uses software from a software-primary flow that calls an agent at defined steps; the controlling runtime changes authority and failure handling.
+
+### 6.1 Identify shared elements and agentic mappings
+
+When a component, schema, prompt, workflow, tool, or skill supports more than one candidate capability:
+
+- do not treat it as a capability merely because it is reusable;
+- record the element’s `created for` capability context when evidence establishes it;
+- record `approved reuse` only when approval is explicit; otherwise mark reuse approval unknown;
+- distinguish a **tool** (executable primitive) from a **skill** (agentic realization package) and from the Capability MLE they may support.
+
+A skill may realize one capability or bundle several; a tool may support many skills and capabilities.
+
+### 6.2 Tags (optional)
+
+Add a universal tag only for a dimension not already derivable from another required field — do not restate what `exposure` or a contract's `transition` already settles. Choose the tag whose dimension the statement is actually about, not the nearest-sounding one — the most common mistake is reaching for `network-touching` whenever a source mentions an API call or a network-triggered side effect (like a notification), when `network-touching`/`local-only` is only a meaningful distinction for a local-first or hybrid system where some capabilities genuinely complete on-device and others don't; inside a product that is uniformly a hosted service, every capability is network-touching by construction, so the tag adds nothing and `notification-triggering` (or `data-sensitive`, `identity-related`) is very likely the actual dimension. See `crd-specification.md` §7.3's disambiguation table before choosing. Keep implementation-specific groupings (a module or domain name meaningful only to this realization) in the Operational Capability Documentation extension as implementation tags, prefixed (e.g. `impl:inbox`) so they are never mistaken for the CRD's own universal tags. Omit tags entirely when they would add nothing beyond what the inventory's `purpose` column already conveys. When rendering an HTML showcase, keep the visual tag/badge convention exclusive to implementation tags — a universal tag becomes a grouping/section key (e.g. its own tab) or plain text instead.
+
+### 7. Produce and validate the document
+
+Use the human template. Verify that every required core field is present or explicitly unknown; every claimed fact has provenance; examples are non-binding; and implementation choices are not misrepresented as capability requirements.
+
+## Required output format
+
+Return:
+
+1. A CRD using the template for each identified Capability MLE.
+2. A statement-provenance table.
+3. A short decision log for combination/decomposition, including each individual MLE check used before combination.
+4. An unresolved-questions list.
+5. Where applicable, a shared-element/reuse table, agentic mapping, and audience projection links.
+6. For a substantial multi-capability source, a Source Context Reference.
+
+## Quality checks
+
+Reject or revise the output if it:
+
+- treats an API endpoint, UI component, or database table as a capability without purpose context;
+- expands a capability into a vague product area;
+- hides unknowns behind generic language;
+- confuses a business rationale with a reusable capability purpose;
+- makes an example or current implementation appear binding;
+- lets a recommended default or agent judgment override a rule/invariant or explicit requirement;
+- treats a skill or tool name as proof of a Capability MLE without purpose context;
+- invents a priority ordering, strengthens a source hedge into a rule, or generalizes beyond the evidence;
+- uses a Mermaid diagram to assert a state, transition, or relationship that the CRD text does not establish;
+- presents a speculative generic capability as demonstrated reusable without known realizations;
+- documents in its own decision log that a candidate element passes the Capability MLE test alone, then combines it anyway;
+- treats a manually-run developer verification tool as a capability solely because it has its own doc, test, or CLI target, with no recurring operational role and no exposure beyond the building developer;
+- asserts a build-membership or other machine-checkable fact without citing the exact file/line traced to support it;
+- presents a declared type, enum case, or schema value as a live outcome without confirming it is ever actually constructed or reached;
+- tags a dimension that another required field already settles, or leaves an implementation tag unprefixed so it could be mistaken for a universal one;
+- reaches for `network-touching` as a default whenever a source mentions an API call or network-triggered side effect, without checking whether `notification-triggering`, `data-sensitive`, or `identity-related` is the dimension the statement is actually about; or
+- renders a universal tag as a visual tag/badge in an HTML showcase instead of a grouping/section key or plain text (that badge convention is reserved for implementation tags).
+
+---
+
+# Source: Working with CRDs
+URL: https://valto.github.io/crd/working-with-crds.md
+
+# Working with CRDs
+
+This guide explains four practical parts of CRD use that should remain visible without enlarging the required core: decision precedence, shared-element reuse, audience projections, and why a CRD is not simply a feature specification, PRD, API document, or skill.
+
+## Decision precedence
+
+When guidance conflicts, resolve it in this order:
+
+```text
+1. Rule / invariant
+2. Explicit implementation requirement
+3. Explicit owner or user choice
+4. Recommended default
+5. Agent judgment
+```
+
+For example, an agent may use judgment to choose how to summarize a discrepancy, but it cannot use judgment to bypass a reconciliation invariant. If two same-level requirements conflict, preserve the conflict as `unknown/unresolved` and ask for a decision.
+
+## Shared elements and approved reuse
+
+Reusable code and tools are not automatically reusable capability meaning. A shared element can retain assumptions from the capability it was first created for. Record that relationship where it matters:
+
+```text
+shared element: customer-identity-validation
+created for: customer-onboarding
+approved reuse: [request-moving-quote, submit-insurance-claim]
+```
+
+This enables safe reuse without claiming exclusive ownership. It is useful for tools, prompts, components, schemas, workflows, and tests that are reused across capability boundaries.
+
+## Capability, skill, and tool
+
+| Concept | Meaning | Typical relationship |
+|---|---|---|
+| Capability MLE | Complete contextual ability that produces an outcome. | Defined by one CRD. |
+| Skill | Agentic realization package: instructions, context, tools, and workflow. | May realize one Capability MLE or bundle several. |
+| Tool | Executable primitive: API operation, MCP tool, function, command, or workflow step. | May support many skills and capabilities. |
+
+The relationship is many-to-many. A skill is not automatically a capability, and a tool is not automatically a skill. A capability can be the MLE of a skill when the skill has one coherent outcome; otherwise the skill should map to several CRDs.
+
+## Why a CRD is not merely a feature or existing artifact
+
+Existing artifacts remain useful, but each answers only part of the capability question:
+
+| Artifact | Useful for | What it does not establish alone |
+|---|---|---|
+| PRD | Product/application rationale and scope. | A reusable, independently bounded capability. |
+| User story | A human actor's desired outcome. | Domain rules, state transitions, machine contracts, and realization independence. |
+| UI screen or Storybook component | An interface representation. | The complete capability purpose, policies, effects, and non-UI use. |
+| API/OpenAPI/GraphQL module | Technical interface and data contract. | Whether technical operations together form one meaningful capability. |
+| Skill | Agentic realization and instructions. | Whether the skill bundles one or multiple Capability MLEs. |
+| MCP tool | Executable interface for an agent. | The product/domain purpose, boundaries, and approved use context. |
+
+“Feature” is often a useful informal word, but its boundary is typically negotiated case by case. A CRD makes the boundary explicit through purpose, meaningful outcome, included/excluded concerns, interaction contracts, rules, defaults, and unknowns.
+
+## Audience projections
+
+One canonical CRD can be projected for different readers without duplicating or diverging its requirements:
+
+| Projection | Questions it should answer |
+|---|---|
+| Business/domain | Why does this capability exist? What outcome, rule, and rationale matter? |
+| UX | Who acts? What choices, states, and outcomes must be understandable? |
+| Frontend | What representations and interaction constraints are needed? |
+| Backend | What state transitions, invariants, effects, and dependencies must hold? |
+| API/MCP/tools | What commands, contracts, inputs, outputs, and authority bounds exist? |
+| Agent | What authority, grounding, precedence, approval, and escalation rules apply? |
+| Operations | Which realization is active? How is it observed, constrained, recovered, and retired? |
+
+The projection is a view of the CRD, not a new source of truth. It must trace back to the canonical document.
+
+---
+
+# Source: Minimum Logical Element
+URL: https://valto.github.io/crd/mle.md
+
+# Minimum Logical Element (MLE)
+
+## Definition
+
+An MLE is the smallest bundled unit that still retains logical sense and context when considered across business, design, and development perspectives.
+
+The word **logical** matters. An MLE is not simply the smallest technical artifact, the smallest UI part, or the smallest backlog item. It is the smallest unit that can still be understood as something meaningful in its own context.
+
+## Why MLE was needed
+
+Software work is commonly fragmented into requirements, stories, screens, components, APIs, functions, schemas, tests, and operational processes. Each is useful, but none alone necessarily represents a complete, meaningful unit of the product.
+
+The MLE lens asks two complementary questions:
+
+1. What is the smallest meaningful unit within this discipline?
+2. What is the smallest meaningful unit when the relevant disciplines are considered together?
+
+It prevents two opposite failures:
+
+- **Feature buckets** that become too broad to explain, govern, implement, or reuse coherently.
+- **Fragments** such as a component, endpoint, or data field that are too small to retain the purpose they serve.
+
+## Early cross-discipline framing
+
+The original EcosystemOS material applied the MLE idea to several disciplines:
+
+| Discipline | Example MLE |
+|---|---|
+| UX/UI | User Story |
+| Data modelling | Bounded Context |
+| Frontend | Element Component |
+| Backend | Use Case |
+
+These are not a claim that every discipline has a universal one-to-one unit. They demonstrate the core observation: every relevant level has its own minimum logical element.
+
+## From MLE to Capability MLE
+
+The next question was: what is the MLE of a complete software capability?
+
+The answer is a **Capability MLE**:
+
+> The smallest complete, contextually meaningful ability that produces a meaningful outcome.
+
+For example, `Request a moving quote` can be a Capability MLE. It can be independently understood, invoked, implemented, tested, and composed. Splitting it into arbitrary implementation pieces loses its purpose context; expanding it into all quote management makes it a vague feature bucket.
+
+## Why this leads to a CRD
+
+A Capability MLE needs a durable, technology-agnostic requirement specification. That is the role of the **Capability Requirements Document (CRD)**.
+
+```text
+Minimum Logical Element principle
+        ↓
+Capability MLE
+smallest complete meaningful ability
+        ↓
+Capability Requirements Document (CRD)
+canonical requirements specification for that ability
+        ↓
+Interaction Contract MLEs
+smallest executable behaviours
+        ↓
+Operational Capability Documentation
+current realizations in software, agents, APIs, MCP, UI, and workflows
+```
+
+The CRD does not replace a PRD. A PRD can describe a product or application and link to several CRDs. A CRD can also exist independently in a reusable Capability Inventory.
+
+## What MLE contributes to the CRD model
+
+MLE is the scope discipline that keeps a CRD useful:
+
+- The CRD is not a broad product area or undifferentiated feature request.
+- It is not a documentation wrapper around one endpoint, screen, component, or function.
+- It carries enough context—purpose, boundaries, requirements, contracts, and unknowns—to remain meaningful across implementations.
+
+This is why CRD can become common ground for people, agents, applications, and developers without being tied to one technology or one current realization.
+
+## Source and status
+
+This background is derived from Valto Loikkanen’s original *Tools of EcosystemOS — TechStack for Ecosystem Orchestration* material and subsequent CRD development. It is a conceptual background document, not a fixed claim that the discipline examples are universal or final.
+
+---
+
+# Source: Glossary
+URL: https://valto.github.io/crd/glossary.md
+
+# CRD glossary
+
+These definitions provide a concise controlled vocabulary for Capability Documentation. The [CRD Specification](crd-specification.md) remains authoritative where more detail or conformance language is required.
+
+## Capability Documentation
+
+The open, technology- and implementation-agnostic framework through which people, agents, applications, and developers can understand, use, build, compose, and operate capabilities.
+
+## Capability MLE
+
+The smallest complete, contextually meaningful ability that produces a meaningful outcome.
+
+## Capability Requirements Document (CRD)
+
+The canonical technology- and implementation-agnostic requirement specification for one Capability MLE.
+
+## Interaction Contract MLE
+
+The smallest contextually meaningful executable behaviour. It identifies the actor, command, relevant state, policies, transition, result, and effects required to perform part of a capability.
+
+## Realization
+
+A software, agent, human-operated, or combined implementation of a capability or one of its interaction contracts.
+
+## Operational Capability Documentation
+
+Realization-specific documentation for a particular service or system, including the implementation and operational details that do not belong in the reusable CRD.
+
+## Rule or invariant
+
+A condition that must remain true for the capability to retain its intended meaning and correctness.
+
+## Recommended default
+
+A preferred choice that may be changed by an authorized owner or implementation without violating a rule or invariant.
+
+## Example
+
+Illustrative content that explains a requirement but does not create a universal requirement by itself.
+
+## Implementation choice
+
+A realization-specific decision that is not part of the reusable capability requirement.
+
+## Operational constraint
+
+A limitation or condition belonging to a particular operating environment or realization.
+
+## Unknown or unresolved
+
+Information that is not established by current evidence and must not be silently invented or promoted into a requirement.
+
+## Skill
+
+An agentic realization package that may realize one capability or bundle several capabilities.
+
+## Tool
+
+An executable primitive that may support many skills and capabilities. A tool is not automatically a capability because it may lack complete purpose context.
+
+## Minimum Logical Element (MLE)
+
+The smallest bundled unit that still retains logical sense and context. Capability MLE and Interaction Contract MLE apply this scope discipline to complete abilities and executable behaviour.
+
+---
+
+# Source: CRD versus PRD
+URL: https://valto.github.io/crd/crd-vs-prd.md
+
+# CRD vs PRD
+
+A **Capability Requirements Document (CRD)** specifies one complete capability independently of its current implementation. A **Product Requirements Document (PRD)** usually coordinates a product initiative, including its goals, users, scope, priorities, delivery context, and multiple features or capabilities.
+
+Neither replaces the other. A PRD may explain why a product change should happen and how it fits a roadmap; one or more CRDs can preserve the durable meaning of the complete capabilities involved.
+
+## Comparison
+
+| Question | CRD | PRD |
+|---|---|---|
+| Primary unit | One Capability MLE | A product, initiative, release, or problem space |
+| Main purpose | Preserve what one complete capability means and must keep true | Coordinate product intent, outcomes, scope, priorities, and delivery |
+| Implementation stance | Technology- and implementation-agnostic at the reusable layer | May contain product- and implementation-specific decisions |
+| Typical contents | Purpose, outcome, boundaries, contracts, rules, defaults, unknowns, provenance, realizations | Goals, users, problems, requirements, priorities, milestones, metrics, dependencies |
+| Useful lifetime | Can remain stable across several realizations | Often tied to a product initiative or planning cycle |
+| Relationship | May be created independently or derived from a PRD | May contain or point to several capabilities and CRDs |
+
+## CRD versus adjacent artifacts
+
+- **Feature specification:** often describes a product-visible change. A CRD is scoped by a complete meaningful ability, whether or not it is presented as a feature.
+- **User story:** expresses a user-centered need or slice of work. A CRD preserves the complete capability, including rules, contracts, evidence, and unknowns.
+- **API or MCP specification:** defines an interface or protocol. It may realize part of a capability but does not necessarily preserve the capability's complete purpose context.
+- **Skill:** packages agent behavior and instructions. A skill may realize one capability or bundle several capabilities.
+- **Tool:** provides an executable primitive. A tool may support many skills and capabilities without being a complete capability itself.
+
+## When to use each
+
+Use a PRD when a team needs to align a product initiative, opportunity, audience, priority, and delivery context. Use a CRD when people, agents, and software need a durable specification of one complete capability that can survive changes in UI, code, API, agent, or operating model.
+
+Use both when a product initiative contains capabilities whose meaning must remain traceable after the original roadmap or implementation changes.
+
+## Authority
+
+This comparison is guidance. The normative definition and conformance rules are in the [CRD Specification](crd-specification.md).
+
+---
+
+# Source: Agent prompt
+URL: https://valto.github.io/crd/agent-prompt.md
+
+# CRD prompt for AI agents
+
+Use the following prompt to give an AI agent the Capability Documentation model and a disciplined workflow for defining or extracting Capability Requirements Documents.
+
+```text
+You are my Capability Requirements Document (CRD) assistant.
+
+First, read these CRD resources before answering substantive questions or drafting CRDs:
+- https://valto.github.io/crd/
+- https://valto.github.io/crd/learn.html
+- https://valto.github.io/crd/why-crd.html
+- https://valto.github.io/crd/specification.html
+- https://valto.github.io/crd/template.html
+- https://valto.github.io/crd/agent-transformation.html
+- https://valto.github.io/crd/mle.html
+- https://valto.github.io/crd/inventory.html
+- https://valto.github.io/crd/source-context.html
+- https://valto.github.io/crd/working-with-crds.html
+- https://valto.github.io/crd/examples.html
+
+Use this vocabulary precisely:
+- Capability Documentation = the overall framework.
+- Capability MLE = the smallest complete, contextually meaningful ability that produces a meaningful outcome.
+- Capability Requirements Document (CRD) = the canonical technology- and implementation-agnostic requirement specification for one Capability MLE.
+- Interaction Contract MLE = the smallest contextually meaningful executable behaviour.
+- Operational Capability Documentation = realization-specific documentation for a particular service or system.
+- Skill = an agentic realization package that may realize one capability or bundle several.
+- Tool = an executable primitive that may support many skills and capabilities.
+
+Your responsibilities:
+1. Answer questions about CRD clearly, distinguishing the reusable CRD from any product, service, system, agent, or current implementation.
+2. When source material is provided or access is authorized, create draft CRDs from product plans, code, schemas, APIs, MCP servers, skills, tests, runbooks, UX material, or public and explicitly authorized live services.
+3. Follow the CRD transformation method: identify, combine, decompose, classify, trace, and document candidate capabilities.
+4. Distinguish explicit fact, reasonable inference, recommended default, example, implementation choice, operational constraint, rationale or intent, and unknown or unresolved information.
+5. In Extract mode, default to the specific or operational CRD set. Produce a generic projection only when requested or a second real consumer is established or imminent. Treat zero known realizations as an unproven hypothesis.
+6. Preserve source authority. Do not invent priority between independent facts or strengthen hedged language into rules.
+7. Run the Capability MLE test on every element before combining it. Combine only when no element is independently complete and contextually meaningful.
+8. Produce CRDs using the canonical template: name, definition, purpose, meaningful outcome, boundaries, interaction contracts, rules, recommended defaults, unknowns, provenance, and a short combine or decompose decision log.
+9. Use diagrams only as projections of stated facts. Do not add diagram-only states, transitions, or relationships.
+10. Resolve conflicts in this order: rule or invariant, explicit implementation requirement, explicit owner choice, recommended default, then agent judgment. Escalate unclear same-level conflicts.
+11. Record execution mode, shared-element reuse context, skill and tool mappings, and audience projections where applicable.
+12. Do not treat a component, endpoint, database table, screen, tool, or skill as a capability unless it retains complete purpose context.
+13. Do not invent facts, policies, ownership, or implementation details. Preserve uncertainty and ask targeted questions where needed.
+14. Do not modify, operate, or publish changes to a live service, repository, or external system without explicit approval.
+
+Start by asking what material I want to understand or transform into CRDs, or inspect the source I explicitly provide.
+```
+
+For agents that support installable skills, use the [CRD Author skill](skills/crd-author/SKILL.md) instead of relying only on the prompt.

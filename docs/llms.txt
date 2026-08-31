@@ -1,0 +1,46 @@
+# Capability Documentation (CRD)
+
+> Capability Documentation is an open, technology-agnostic framework. A Capability Requirements Document specifies one complete Capability MLE for people, agents, applications, and developers.
+
+- Specification status: Draft 0.4
+- Package release: 0.6.0
+- Creator and steward: [Valto Loikkanen](https://valto.github.io/)
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- Canonical repository: [github.com/valto/crd](https://github.com/valto/crd)
+
+## Start here
+
+- [Capability Requirements Document (CRD) Framework](https://valto.github.io/crd/index.md): Define complete software and AI-agent capabilities with CRD, an open framework for requirements, interaction contracts, evidence, realizations, and unknowns.
+- [Learn Capability Requirements Documents](https://valto.github.io/crd/learn.html): Learn the Capability Documentation model, Capability MLEs, CRDs, interaction contracts, realizations, and the recommended reading path.
+- [Why Capability Requirements Documents Matter for AI Agents](https://valto.github.io/crd/why-crd.html): Why capability-centered requirements help people, software, and AI agents preserve meaning across products, code, APIs, skills, and operations.
+- [CRD vs PRD: Capability and Product Requirements Compared](https://valto.github.io/crd/crd-vs-prd.md): Compare a Capability Requirements Document with a Product Requirements Document, feature specification, user story, API contract, skill, and tool.
+
+## Normative and practical guidance
+
+- [Minimum Logical Element (MLE) for Capability Design](https://valto.github.io/crd/mle.md): Understand Minimum Logical Element, the scope discipline behind Capability MLEs and Capability Requirements Documents.
+- [Capability Requirements Document Specification](https://valto.github.io/crd/specification.md): The normative CRD specification for documenting one complete Capability MLE, including required semantics, interaction contracts, evidence, and conformance.
+- [Create CRDs from Product Docs, Code, APIs, and Agents](https://valto.github.io/crd/agent-transformation.md): Canonical instructions for extracting Capability Requirements Documents from plans, UX, code, APIs, MCP servers, skills, tests, and live services without inventing facts.
+- [Working with CRDs: Precedence, Reuse, Skills, and Tools](https://valto.github.io/crd/working-with-crds.md): Apply Capability Requirements Documents safely using precedence rules, shared-element reuse, skills, tools, audience projections, and clear feature boundaries.
+- [Capability Inventory](https://valto.github.io/crd/inventory.md): Catalogue available or planned Capability MLEs and link them to their Capability Requirements Documents without requiring a product-level PRD.
+- [Source Context Reference for Multi-Capability CRD Work](https://valto.github.io/crd/source-context.md): Preserve product-wide and cross-cutting source context when plans, code, or services are decomposed into multiple capability-scoped CRDs.
+- [Capability Requirements Document Examples](https://valto.github.io/crd/examples.html): Explore illustrative and real-system Capability Requirements Document examples for customer-facing, internal, API, and automated capabilities.
+- [CRD Learning Resources: Articles, Video, Audio, and PDF](https://valto.github.io/crd/resources.html): Read, watch, and listen to resources about capability requirements, semantic blueprints, agent-ready documentation, and architecting for AI agents.
+
+## Templates and machine-readable resources
+
+- [Capability Requirements Document Template](https://valto.github.io/crd/template.md): Use the CRD template to define a complete capability's purpose, boundaries, contracts, rules, defaults, unknowns, provenance, and realizations.
+- [CRD Prompt for AI Agents](https://valto.github.io/crd/agent-prompt.md): Copy a grounded prompt that teaches an AI agent to understand, define, and extract Capability Requirements Documents while preserving authority and uncertainty.
+- [CRD Glossary: Capability Documentation Terms](https://valto.github.io/crd/glossary.md): Canonical definitions for Capability Documentation, Capability MLE, CRD, Interaction Contract MLE, realization, skill, tool, rules, defaults, and unknowns.
+
+## Examples
+
+- [Request a Moving Quote — CRD Example](https://valto.github.io/crd/examples/request-moving-quote.md): An illustrative Capability Requirements Document for requesting a moving quote, with draft, validation, submission, and realization details.
+- [Reconcile Payments — CRD Example](https://valto.github.io/crd/examples/reconcile-payments.md): An illustrative Capability Requirements Document for internal payment reconciliation, review outcomes, rules, and a software-primary realization.
+- [Open a Pull Request — Real-World CRD Example](https://valto.github.io/crd/examples/open-pull-request.md): A real-world Capability Requirements Document for opening a GitHub pull request, extracted from public API and webhook documentation with audited provenance.
+- [Merge a Pull Request — Real-World CRD Example](https://valto.github.io/crd/examples/merge-pull-request.md): A real-world Capability Requirements Document for merging a GitHub pull request, including policies, automated realization, and audited provenance.
+
+## Direct machine-readable resources
+
+- [CRD JSON Schema](https://valto.github.io/crd/schema/crd.schema.json): Validation schema for structured CRDs.
+- [CRD Author skill](https://valto.github.io/crd/skills/crd-author/SKILL.md): Define and Extract workflows for capable agents.
+- [Agent prompt](https://valto.github.io/crd/agent-prompt.txt): Plain-text agent onboarding prompt.

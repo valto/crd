@@ -2,12 +2,103 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Practical CRD guidance for precedence, shared reuse, skills, tools, audience projections, and feature boundaries." />
-    <title>Working with CRDs — Capability Documentation</title><link rel="stylesheet" href="styles.css" />
+    <!-- site-meta:start -->
+    <title>Working with CRDs: Precedence, Reuse, Skills, and Tools</title>
+    <meta name="description" content="Apply Capability Requirements Documents safely using precedence rules, shared-element reuse, skills, tools, audience projections, and clear feature boundaries." />
+    <link rel="canonical" href="https://valto.github.io/crd/working-with-crds.html" />
+    <link rel="alternate" type="text/markdown" href="working-with-crds.md" title="Markdown version" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Capability Documentation" />
+    <meta property="og:title" content="Working with CRDs: Precedence, Reuse, Skills, and Tools" />
+    <meta property="og:description" content="Apply Capability Requirements Documents safely using precedence rules, shared-element reuse, skills, tools, audience projections, and clear feature boundaries." />
+    <meta property="og:url" content="https://valto.github.io/crd/working-with-crds.html" />
+    <meta property="og:image" content="https://valto.github.io/crd/assets/crd-social-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Working with CRDs: Precedence, Reuse, Skills, and Tools" />
+    <meta name="twitter:description" content="Apply Capability Requirements Documents safely using precedence rules, shared-element reuse, skills, tools, audience projections, and clear feature boundaries." />
+    <meta name="twitter:image" content="https://valto.github.io/crd/assets/crd-social-card.png" />
+    <script id="site-structured-data" type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://valto.github.io/crd/#website",
+      "url": "https://valto.github.io/crd/",
+      "name": "Capability Documentation",
+      "alternateName": "CRD",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://valto.github.io/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://valto.github.io/#person",
+      "name": "Valto Loikkanen",
+      "url": "https://valto.github.io/",
+      "sameAs": [
+        "https://github.com/valto",
+        "https://www.linkedin.com/in/valto/",
+        "https://valtoai.com/"
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://valto.github.io/crd/working-with-crds.html#webpage",
+      "url": "https://valto.github.io/crd/working-with-crds.html",
+      "name": "Working with CRDs: Precedence, Reuse, Skills, and Tools",
+      "headline": "Working with CRDs: Precedence, Reuse, Skills, and Tools",
+      "description": "Apply Capability Requirements Documents safely using precedence rules, shared-element reuse, skills, tools, audience projections, and clear feature boundaries.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://valto.github.io/crd/#website"
+      },
+      "author": {
+        "@id": "https://valto.github.io/#person"
+      },
+      "creator": {
+        "@id": "https://valto.github.io/#person"
+      },
+      "dateModified": "2026-08-31",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "image": "https://valto.github.io/crd/assets/crd-social-card.png",
+      "proficiencyLevel": "Beginner to advanced",
+      "version": "Draft 0.4"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://valto.github.io/crd/working-with-crds.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CRD",
+          "item": "https://valto.github.io/crd/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Working with CRDs: Precedence, Reuse, Skills, and Tools",
+          "item": "https://valto.github.io/crd/working-with-crds.html"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- site-meta:end --><link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png" /><link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
   </head>
   <body>
-    <header class="site-header"><div class="shell header-content"><a class="brand" href="index.html"><img class="brand-mark" src="assets/crd-mark.png" alt="" /><span>CRD</span></a><nav aria-label="Primary navigation"><a href="learn.html">Learn</a><a href="specification.html">Specification</a><a href="template.html">Templates</a><a href="examples.html">Examples</a><a class="github-link" href="https://github.com/valto/crd" aria-label="Open CRD on GitHub" title="Open CRD on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 4.8c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span class="sr-only">GitHub repository</span></a></nav></div></header>
+    <header class="site-header"><div class="shell header-content"><a class="brand" href="index.html"><img class="brand-mark" src="assets/crd-mark.png" alt="" width="29" height="29" /><span>CRD</span></a><nav aria-label="Primary navigation"><a href="learn.html">Learn</a><a href="specification.html">Specification</a><a href="template.html">Templates</a><a href="examples.html">Examples</a><a class="github-link" href="https://github.com/valto/crd" aria-label="Open CRD on GitHub" title="Open CRD on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 4.8c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span class="sr-only">GitHub repository</span></a></nav></div></header>
+    <!-- breadcrumbs:start -->
+    <nav class="breadcrumbs shell" aria-label="Breadcrumb">
+      <a href="index.html">CRD</a><span aria-hidden="true">/</span><span aria-current="page">Working with CRDs: Precedence, Reuse, Skills, and Tools</span>
+    </nav>
+<!-- breadcrumbs:end -->
     <main>
       <section class="doc-hero"><div class="shell"><p class="eyebrow">Practical guide</p><h1>Working with CRDs</h1><p class="lede">The operating guidance that keeps a CRD authoritative without turning it into a mini-PRD.</p><div class="meta-links"><a href="https://github.com/valto/crd/blob/main/working-with-crds.md">View Markdown source ↗</a><a href="specification.html">Read the specification →</a></div></div></section>
       <article class="doc-content">
@@ -23,6 +114,11 @@ approved reuse: [request-moving-quote, submit-insurance-claim]</code></pre><p>Us
         <section><h2>Why CRD is not merely a feature or existing artifact</h2><table><thead><tr><th>Artifact</th><th>Useful for</th><th>What it does not establish alone</th></tr></thead><tbody><tr><td>PRD</td><td>Product/application rationale and scope.</td><td>A reusable, independently bounded capability.</td></tr><tr><td>User story</td><td>A human actor’s desired outcome.</td><td>Rules, state transitions, machine contracts, and realization independence.</td></tr><tr><td>UI screen or Storybook component</td><td>An interface representation.</td><td>Complete capability purpose, policies, effects, and non-UI use.</td></tr><tr><td>API/OpenAPI/GraphQL module</td><td>Technical interface and data contract.</td><td>Whether operations together form one meaningful capability.</td></tr><tr><td>Skill or MCP tool</td><td>Agentic realization or executable interface.</td><td>Purpose, boundaries, and approved capability context.</td></tr></tbody></table><p>“Feature” is a useful informal word, but its boundary is often negotiated case by case. A CRD makes the boundary explicit through purpose, outcome, included/excluded concerns, contracts, rules, defaults, and unknowns.</p></section>
         <section><h2>Audience projections</h2><p>One canonical CRD may be projected for different readers without duplicating or diverging its requirements.</p><table><thead><tr><th>Projection</th><th>Questions it answers</th></tr></thead><tbody><tr><td>Business/domain</td><td>Why does it exist? What outcome, rules, and rationale matter?</td></tr><tr><td>UX</td><td>Who acts? What choices, states, and outcomes must be understandable?</td></tr><tr><td>Frontend</td><td>What representations and interaction constraints are needed?</td></tr><tr><td>Backend</td><td>What transitions, invariants, effects, and dependencies must hold?</td></tr><tr><td>API/MCP/tools</td><td>What commands, contracts, inputs, outputs, and authority bounds exist?</td></tr><tr><td>Agent</td><td>What authority, grounding, precedence, approval, and escalation rules apply?</td></tr><tr><td>Operations</td><td>Which realization is active and how is it observed, recovered, and retired?</td></tr></tbody></table><p>A projection is a view of the CRD, not a new source of truth.</p></section>
       </article>
+    <!-- document-meta:start -->
+      <aside class="document-meta shell" aria-label="Document provenance">
+        <p><strong>Practical guidance</strong> · Specification Draft 0.4 · Package 0.6.0 · Updated 2026-08-31 · Valto Loikkanen · <a href="https://github.com/valto/crd/blob/main/working-with-crds.md">Canonical source</a></p>
+      </aside>
+<!-- document-meta:end -->
     </main><footer class="site-footer"><div class="shell footer-content"><p>Capability Documentation by Valto Loikkanen.</p><p><a href="https://github.com/valto/crd/blob/main/LICENSE">CC BY 4.0</a> · <a href="index.html">Home</a></p></div></footer>
   </body>
 </html>

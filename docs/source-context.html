@@ -3,14 +3,105 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Source Context Reference: a companion document for product-wide and cross-cutting context that no single CRD should own." />
-    <title>Source Context Reference — Capability Documentation</title>
+    <!-- site-meta:start -->
+    <title>Source Context Reference for Multi-Capability CRD Work</title>
+    <meta name="description" content="Preserve product-wide and cross-cutting source context when plans, code, or services are decomposed into multiple capability-scoped CRDs." />
+    <link rel="canonical" href="https://valto.github.io/crd/source-context.html" />
+    <link rel="alternate" type="text/markdown" href="source-context.md" title="Markdown version" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Capability Documentation" />
+    <meta property="og:title" content="Source Context Reference for Multi-Capability CRD Work" />
+    <meta property="og:description" content="Preserve product-wide and cross-cutting source context when plans, code, or services are decomposed into multiple capability-scoped CRDs." />
+    <meta property="og:url" content="https://valto.github.io/crd/source-context.html" />
+    <meta property="og:image" content="https://valto.github.io/crd/assets/crd-social-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Source Context Reference for Multi-Capability CRD Work" />
+    <meta name="twitter:description" content="Preserve product-wide and cross-cutting source context when plans, code, or services are decomposed into multiple capability-scoped CRDs." />
+    <meta name="twitter:image" content="https://valto.github.io/crd/assets/crd-social-card.png" />
+    <script id="site-structured-data" type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://valto.github.io/crd/#website",
+      "url": "https://valto.github.io/crd/",
+      "name": "Capability Documentation",
+      "alternateName": "CRD",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://valto.github.io/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://valto.github.io/#person",
+      "name": "Valto Loikkanen",
+      "url": "https://valto.github.io/",
+      "sameAs": [
+        "https://github.com/valto",
+        "https://www.linkedin.com/in/valto/",
+        "https://valtoai.com/"
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://valto.github.io/crd/source-context.html#webpage",
+      "url": "https://valto.github.io/crd/source-context.html",
+      "name": "Source Context Reference for Multi-Capability CRD Work",
+      "headline": "Source Context Reference for Multi-Capability CRD Work",
+      "description": "Preserve product-wide and cross-cutting source context when plans, code, or services are decomposed into multiple capability-scoped CRDs.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://valto.github.io/crd/#website"
+      },
+      "author": {
+        "@id": "https://valto.github.io/#person"
+      },
+      "creator": {
+        "@id": "https://valto.github.io/#person"
+      },
+      "dateModified": "2026-08-31",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "image": "https://valto.github.io/crd/assets/crd-social-card.png",
+      "proficiencyLevel": "Beginner to advanced",
+      "version": "Draft 0.4"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://valto.github.io/crd/source-context.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CRD",
+          "item": "https://valto.github.io/crd/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Source Context Reference for Multi-Capability CRD Work",
+          "item": "https://valto.github.io/crd/source-context.html"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- site-meta:end -->
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
   </head>
   <body>
-    <header class="site-header"><div class="shell header-content"><a class="brand" href="index.html" aria-label="Capability Documentation home"><img class="brand-mark" src="assets/crd-mark.png" alt="" /><span>CRD</span></a><nav aria-label="Primary navigation"><a href="learn.html">Learn</a><a href="specification.html">Specification</a><a href="template.html">Templates</a><a href="examples.html">Examples</a><a class="github-link" href="https://github.com/valto/crd" aria-label="Open CRD on GitHub" title="Open CRD on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 4.8c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 8 0Z" /></svg><span class="sr-only">GitHub repository</span></a></nav></div></header>
+    <header class="site-header"><div class="shell header-content"><a class="brand" href="index.html" aria-label="Capability Documentation home"><img class="brand-mark" src="assets/crd-mark.png" alt="" width="29" height="29" /><span>CRD</span></a><nav aria-label="Primary navigation"><a href="learn.html">Learn</a><a href="specification.html">Specification</a><a href="template.html">Templates</a><a href="examples.html">Examples</a><a class="github-link" href="https://github.com/valto/crd" aria-label="Open CRD on GitHub" title="Open CRD on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 4.8c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 8 0Z" /></svg><span class="sr-only">GitHub repository</span></a></nav></div></header>
+    <!-- breadcrumbs:start -->
+    <nav class="breadcrumbs shell" aria-label="Breadcrumb">
+      <a href="index.html">CRD</a><span aria-hidden="true">/</span><span aria-current="page">Source Context Reference for Multi-Capability CRD Work</span>
+    </nav>
+<!-- breadcrumbs:end -->
     <main>
       <section class="doc-hero"><div class="shell"><p class="eyebrow">Companion reference</p><h1>Source Context Reference</h1><p class="lede">Keep product-wide and cross-cutting context visible when one source is decomposed into several capability-scoped CRDs.</p><div class="meta-links"><a href="https://github.com/valto/crd/blob/main/source-context-template.md">View Markdown template ↗</a><a href="agent-transformation.html">Read transformation instructions →</a></div></div></section>
       <article class="doc-content">
@@ -21,6 +112,11 @@
         <section><h2>Keep authority in the right place</h2><div class="definition">The SCR preserves context. The CRD governs the capability.</div><p>If a cross-cutting constraint is a rule/invariant or implementation requirement, verify that it is stated in every affected CRD. The SCR should name a gap rather than quietly letting a binding condition live only in the shared reference.</p></section>
         <section><h2>How it connects</h2><p>Use the SCR alongside a <a href="inventory.html">Capability Inventory</a> and its CRDs. The inventory answers what the system can meaningfully do; each CRD explains one ability; the SCR records the source-level context that should not disappear between them.</p><p><a class="button secondary" href="agent-transformation.html">Use in an extraction workflow →</a></p></section>
       </article>
+    <!-- document-meta:start -->
+      <aside class="document-meta shell" aria-label="Document provenance">
+        <p><strong>Companion reference</strong> · Specification Draft 0.4 · Package 0.6.0 · Updated 2026-08-31 · Valto Loikkanen · <a href="https://github.com/valto/crd/blob/main/source-context-template.md">Canonical source</a></p>
+      </aside>
+<!-- document-meta:end -->
     </main>
     <footer class="site-footer"><div class="shell footer-content"><p>Capability Documentation by Valto Loikkanen.</p><p><a href="learn.html">Learn</a> · <a href="index.html">Home</a></p></div></footer>
   </body>

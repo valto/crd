@@ -1,0 +1,110 @@
+{
+  "$schema": "../schema/crd.schema.json",
+  "name": "Reconcile payments",
+  "definition": "Enable an organization to compare recorded payment obligations and transactions against authoritative payment records, identify discrepancies, and produce a reviewable reconciliation outcome.",
+  "capabilityPurpose": "Maintain trustworthy financial records by detecting and resolving mismatches between expected and received payment information.",
+  "boundaries": {
+    "includes": [
+      "Importing or receiving authoritative payment records",
+      "Matching payments to recorded obligations",
+      "Classifying discrepancies",
+      "Producing reconciliation outcomes for review"
+    ],
+    "excludes": [
+      "Initiating a payment",
+      "Changing a payment provider settlement",
+      "Collecting payment from a payer",
+      "Writing off a balance without authorized review"
+    ]
+  },
+  "meaningfulOutcome": "A reconciliation run produces matched records and clearly identified discrepancies that can be reviewed or resolved by an authorized finance actor.",
+  "interactionContracts": [
+    {
+      "name": "Import payment records",
+      "actor": "Authorized scheduler, finance operator, or integration",
+      "commandIntent": "Make authoritative payment records available for reconciliation",
+      "currentState": "A reconciliation period is open",
+      "policiesInvariants": [],
+      "transition": "Payment records become available for the reconciliation period",
+      "result": "A reconcilable payment-record set",
+      "eventsEffects": ["PaymentRecordsImported"],
+      "unknowns": ["Authoritative source format", "Retention period"]
+    },
+    {
+      "name": "Run payment reconciliation",
+      "actor": "Reconciliation service or authorized finance operator",
+      "commandIntent": "Compare payment records with recorded obligations",
+      "currentState": "Reconcilable payment records and obligations are available",
+      "policiesInvariants": [
+        {
+          "text": "A payment record must not be marked matched when required identifying evidence is absent.",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "reasonable-inference",
+          "source": "Illustrative internal-capability example"
+        }
+      ],
+      "transition": "Open reconciliation period to reconciled records and discrepancy cases",
+      "result": "Matched, unmatched, duplicate, or ambiguous payment outcomes",
+      "eventsEffects": ["PaymentReconciliationCompleted", "PaymentDiscrepancyDetected"],
+      "unknowns": ["Matching tolerance", "Duplicate-payment policy"]
+    },
+    {
+      "name": "Review payment discrepancy",
+      "actor": "Authorized finance operator",
+      "commandIntent": "Review and classify a discrepancy",
+      "currentState": "A discrepancy case exists",
+      "policiesInvariants": [
+        {
+          "text": "Only an authorized finance actor may resolve or write off a discrepancy.",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "reasonable-inference",
+          "source": "Illustrative internal-capability example"
+        }
+      ],
+      "transition": "Discrepancy case remains open or is marked resolved with an audit note",
+      "result": "A documented discrepancy review outcome",
+      "eventsEffects": ["PaymentDiscrepancyReviewed"],
+      "unknowns": ["Approval thresholds", "Accounting adjustment workflow"]
+    }
+  ],
+  "rulesInvariants": [
+    {
+      "text": "Reconciliation outcomes must preserve sufficient evidence for an authorized reviewer to understand the match or discrepancy.",
+      "semanticClass": "rule-invariant",
+      "evidenceStatus": "reasonable-inference",
+      "source": "Illustrative internal-capability example"
+    }
+  ],
+  "recommendedDefaults": [
+    {
+      "text": "Ambiguous matches should be surfaced for review rather than automatically marked reconciled.",
+      "semanticClass": "recommended-default",
+      "evidenceStatus": "reasonable-inference",
+      "source": "Illustrative internal-capability example"
+    }
+  ],
+  "unknowns": [
+    "Payment-provider contracts",
+    "Matching tolerances",
+    "Authorization model",
+    "Accounting adjustment rules"
+  ],
+  "terms": ["payment record", "obligation", "reconciliation period", "discrepancy case"],
+  "realizations": [
+    {
+      "name": "Illustrative reconciliation service",
+      "kind": "software",
+      "executionMode": "software-primary",
+      "rationaleIntent": "An organization may implement this to improve financial-record integrity; this is not part of the reusable capability purpose.",
+      "exposure": ["workflow", "internal"]
+    }
+  ],
+  "provenance": [
+    {
+      "text": "This is an illustrative internal-capability example, not a specification for a particular financial system.",
+      "semanticClass": "example",
+      "evidenceStatus": "explicit-fact",
+      "source": "examples/reconcile-payments.json"
+    }
+  ]
+}

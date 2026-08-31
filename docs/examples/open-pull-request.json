@@ -1,0 +1,180 @@
+{
+  "$schema": "../schema/crd.schema.json",
+  "name": "Open a pull request",
+  "definition": "The ability for an authorized actor to propose that a set of committed changes on one branch (or fork) be reviewed for integration into another branch, creating a durable, addressable request that others can inspect, discuss, and act on independently of the actor who created it.",
+  "capabilityPurpose": "Enable a proposed set of changes to be formally presented for review and eventual integration, without itself performing that integration.",
+  "boundaries": {
+    "includes": [
+      "Supplying the two branches being compared (head and base) and enough metadata (title and/or body, or a source issue to convert) to make the proposal reviewable",
+      "Marking the proposal as a draft rather than ready for review at creation time",
+      "The immediate accept/reject outcome of the creation attempt itself"
+    ],
+    "excludes": [
+      "Reviewing the proposal (approving, requesting changes, or commenting) -- a separate documented capability area (pull_request_review, pull_request_review_comment)",
+      "Editing an already-open pull request's title, body, base branch, or open/closed state after creation -- a separate REST operation (Update a pull request); excluded from this run's scope as a deliberate choice, not a GitHub-documented boundary",
+      "Converting a draft pull request to ready for review once already open -- the ready_for_review webhook action, not part of the creation act itself",
+      "Merging the pull request -- a separate Capability MLE with its own actor, timing, and policies",
+      "Closing a pull request without merging (state: closed via the update operation)",
+      "Creating or pushing the underlying commits/branch being proposed -- a precondition, not part of this capability"
+    ]
+  },
+  "meaningfulOutcome": "A new pull request exists in an intelligible state (open, either \"ready for review\" or \"draft\") and is addressable for further action, or the attempt is rejected with an identifiable reason (e.g. permission denied, validation failure).",
+  "interactionContracts": [
+    {
+      "name": "Create a pull request",
+      "actor": "A repository collaborator (or organization member, for org-owned repositories) with write access to the head/source branch, which may be a branch in a fork the actor owns. Whether a GitHub App, bot, or scheduled automation can be this actor without a human present is confirmed for one case (Dependabot) but unresolved generally.",
+      "commandIntent": "Propose that the commits on a named branch be integrated into a named target branch, supplying a title/body directly, or converting an existing issue into the proposal.",
+      "currentState": "Two distinguishable branches exist (head/compare and base/target); whether GitHub enforces a uniqueness rule against a duplicate open pull request for the same pair is unknown/unresolved.",
+      "policiesInvariants": [
+        {
+          "text": "The actor must have write access to the head/source branch, or organization membership for org-owned repositories.",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "explicit-fact",
+          "source": "docs.github.com/en/rest/pulls/pulls"
+        },
+        {
+          "text": "Pull requests can only be opened between two different branches.",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "explicit-fact",
+          "source": "docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request"
+        },
+        {
+          "text": "Draft pull requests are only available on certain GitHub plans (public repositories with GitHub Free, Pro, Team, or Enterprise Cloud; private repositories need Team or Enterprise Cloud).",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "explicit-fact",
+          "source": "docs.github.com/en/rest/pulls/pulls"
+        },
+        {
+          "text": "The request must not be judged spam/invalid by GitHub's own validation.",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "explicit-fact",
+          "source": "docs.github.com/en/rest/pulls/pulls (422 status code)"
+        }
+      ],
+      "transition": "No pull request for this proposal to an open pull request, in either \"ready for review\" or \"draft\" state.",
+      "result": "On success, the created pull request resource (id, number, html_url, state, draft, and related fields). On failure, 403 Forbidden (insufficient access) or 422 (validation failed or judged spam).",
+      "eventsEffects": [
+        "pull_request webhook event with action: opened (reasonable inference; the opened action's exact per-action description text was not retrievable)",
+        "Notifications to other users/systems, subject to secondary rate limiting if done too quickly/repeatedly"
+      ],
+      "unknowns": [
+        "Whether a duplicate/equivalent open pull request for the same head-to-base pair is blocked",
+        "What a GitHub App/bot must additionally hold, beyond a human collaborator's write access, to be this actor in the general case"
+      ]
+    }
+  ],
+  "rulesInvariants": [
+    {
+      "text": "The actor must have write access to the head/source branch (or org membership for org-owned repos) to open or update a pull request in that repository.",
+      "semanticClass": "rule-invariant",
+      "evidenceStatus": "explicit-fact",
+      "source": "docs.github.com/en/rest/pulls/pulls"
+    },
+    {
+      "text": "A pull request requires two distinct branches (head and base); it cannot be opened against itself.",
+      "semanticClass": "rule-invariant",
+      "evidenceStatus": "explicit-fact",
+      "source": "docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request"
+    },
+    {
+      "text": "title is required unless issue is supplied, and vice versa.",
+      "semanticClass": "rule-invariant",
+      "evidenceStatus": "explicit-fact",
+      "source": "docs.github.com/en/rest/pulls/pulls"
+    },
+    {
+      "text": "Draft pull requests are gated by the repository's/organization's GitHub plan.",
+      "semanticClass": "rule-invariant",
+      "evidenceStatus": "explicit-fact",
+      "source": "docs.github.com/en/rest/pulls/pulls"
+    }
+  ],
+  "recommendedDefaults": [
+    {
+      "text": "The application/vnd.github.raw+json response media type (returning the raw markdown body) is the default if no specific media type is passed.",
+      "semanticClass": "recommended-default",
+      "evidenceStatus": "explicit-fact",
+      "source": "docs.github.com/en/rest/pulls/pulls"
+    },
+    {
+      "text": "A pull request is likely \"ready for review\" unless draft is explicitly set true, though GitHub's docs do not state this default in so many words for the create operation.",
+      "semanticClass": "recommended-default",
+      "evidenceStatus": "reasonable-inference",
+      "source": "docs.github.com/en/rest/pulls/pulls"
+    }
+  ],
+  "unknowns": [
+    "Whether GitHub blocks creating a second open pull request for the same head-to-base pair",
+    "The exact description text GitHub's webhook docs use for the opened action specifically",
+    "The general rule for which non-human actors may hold the write-access-to-head requirement without a human directly present, beyond the confirmed Dependabot case",
+    "Whether there is a limit on how many pull requests may be open at once between the same repositories/branches"
+  ],
+  "terms": ["actor", "open a pull request", "proposed changes", "title", "body", "draft pull request", "head", "base"],
+  "tags": ["notification-triggering"],
+  "realizations": [
+    {
+      "name": "github.com web UI",
+      "kind": "software",
+      "executionMode": "software-primary",
+      "exposure": ["ui"]
+    },
+    {
+      "name": "GitHub REST API (POST /repos/{owner}/{repo}/pulls)",
+      "kind": "software",
+      "executionMode": "software-primary",
+      "exposure": ["api"]
+    },
+    {
+      "name": "GitHub GraphQL API (existence confirmed via cross-reference only; mutation not independently confirmed)",
+      "kind": "software",
+      "executionMode": "unknown",
+      "exposure": ["api"]
+    },
+    {
+      "name": "GitHub CLI (gh pr create)",
+      "kind": "software",
+      "executionMode": "software-primary",
+      "exposure": ["tool"]
+    },
+    {
+      "name": "Dependabot",
+      "kind": "agent",
+      "executionMode": "unknown",
+      "rationaleIntent": "GitHub's own automated dependency-update bot; confirmed to open pull requests, not confirmed to merge them.",
+      "exposure": ["workflow"]
+    }
+  ],
+  "sharedElements": [
+    {
+      "id": "Pull request resource schema (id, number, html_url, state, draft, mergeable, merged, etc.)",
+      "kind": "schema",
+      "createdFor": "Open a pull request (returned on creation)",
+      "approvedReuse": ["Merge a pull request"],
+      "notes": "Reuse here is a reasonable inference from both operations documenting overlapping response fields on the same REST resource, not an explicit GitHub statement of shared schema, approved reuse."
+    }
+  ],
+  "agenticMappings": [
+    {
+      "id": "POST /repos/{owner}/{repo}/pulls",
+      "kind": "tool",
+      "relationship": "realizes-capability",
+      "capabilityRefs": ["Open a pull request"],
+      "notes": "REST operation, confirmed 2026-08-26."
+    },
+    {
+      "id": "gh pr create",
+      "kind": "tool",
+      "relationship": "realizes-capability",
+      "capabilityRefs": ["Open a pull request"],
+      "notes": "Confirmed 2026-08-26 via cli.github.com."
+    }
+  ],
+  "provenance": [
+    {
+      "text": "This is a real extraction from GitHub's own public REST API and webhook documentation, fetched 2026-08-26, and independently blind-audited for framework conformance and factual accuracy. The full statement-provenance table is in github-pull-request-provenance.md.",
+      "semanticClass": "example",
+      "evidenceStatus": "explicit-fact",
+      "source": "examples/open-pull-request.json"
+    }
+  ]
+}

@@ -15,3 +15,9 @@ jobs:
         uses: actions/checkout@v6
       - name: Validate structured examples
         run: python3 scripts/validate.py
+      - name: Build SEO and agent assets
+        run: python3 scripts/build_site_assets.py
+      - name: Validate documentation site
+        run: python3 scripts/validate_site.py
+      - name: Verify generated assets are committed
+        run: git diff --exit-code

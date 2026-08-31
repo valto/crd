@@ -1,8 +1,101 @@
 <!doctype html>
 <html lang="en">
-  <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="description" content="Real-world CRD example, extracted from GitHub's own public docs: Merge a pull request." /><title>Merge a pull request — Capability Documentation</title><link rel="stylesheet" href="../styles.css" /><link rel="icon" type="image/png" sizes="48x48" href="../assets/favicon-48.png" /></head>
+  <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- site-meta:start -->
+    <title>Merge a Pull Request — Real-World CRD Example</title>
+    <meta name="description" content="A real-world Capability Requirements Document for merging a GitHub pull request, including policies, automated realization, and audited provenance." />
+    <link rel="canonical" href="https://valto.github.io/crd/examples/merge-pull-request.html" />
+    <link rel="alternate" type="text/markdown" href="../examples/merge-pull-request.md" title="Markdown version" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Capability Documentation" />
+    <meta property="og:title" content="Merge a Pull Request — Real-World CRD Example" />
+    <meta property="og:description" content="A real-world Capability Requirements Document for merging a GitHub pull request, including policies, automated realization, and audited provenance." />
+    <meta property="og:url" content="https://valto.github.io/crd/examples/merge-pull-request.html" />
+    <meta property="og:image" content="https://valto.github.io/crd/assets/crd-social-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Merge a Pull Request — Real-World CRD Example" />
+    <meta name="twitter:description" content="A real-world Capability Requirements Document for merging a GitHub pull request, including policies, automated realization, and audited provenance." />
+    <meta name="twitter:image" content="https://valto.github.io/crd/assets/crd-social-card.png" />
+    <script id="site-structured-data" type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://valto.github.io/crd/#website",
+      "url": "https://valto.github.io/crd/",
+      "name": "Capability Documentation",
+      "alternateName": "CRD",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://valto.github.io/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://valto.github.io/#person",
+      "name": "Valto Loikkanen",
+      "url": "https://valto.github.io/",
+      "sameAs": [
+        "https://github.com/valto",
+        "https://www.linkedin.com/in/valto/",
+        "https://valtoai.com/"
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://valto.github.io/crd/examples/merge-pull-request.html#webpage",
+      "url": "https://valto.github.io/crd/examples/merge-pull-request.html",
+      "name": "Merge a Pull Request — Real-World CRD Example",
+      "headline": "Merge a Pull Request — Real-World CRD Example",
+      "description": "A real-world Capability Requirements Document for merging a GitHub pull request, including policies, automated realization, and audited provenance.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://valto.github.io/crd/#website"
+      },
+      "author": {
+        "@id": "https://valto.github.io/#person"
+      },
+      "creator": {
+        "@id": "https://valto.github.io/#person"
+      },
+      "dateModified": "2026-08-31",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "image": "https://valto.github.io/crd/assets/crd-social-card.png",
+      "proficiencyLevel": "Beginner to advanced",
+      "version": "Draft 0.4"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://valto.github.io/crd/examples/merge-pull-request.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CRD",
+          "item": "https://valto.github.io/crd/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Merge a Pull Request",
+          "item": "https://valto.github.io/crd/examples/merge-pull-request.html"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- site-meta:end --><link rel="stylesheet" href="../styles.css" /><link rel="icon" type="image/png" sizes="48x48" href="../assets/favicon-48.png" /></head>
   <body>
-    <header class="site-header"><div class="shell header-content"><a class="brand" href="../index.html"><img class="brand-mark" src="../assets/crd-mark.png" alt="" /><span>CRD</span></a><nav aria-label="Primary navigation"><a href="../learn.html">Learn</a><a href="../specification.html">Specification</a><a href="../template.html">Templates</a><a href="../examples.html">Examples</a><a class="github-link" href="https://github.com/valto/crd" aria-label="Open CRD on GitHub" title="Open CRD on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 4.8c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span class="sr-only">GitHub repository</span></a></nav></div></header>
+    <header class="site-header"><div class="shell header-content"><a class="brand" href="../index.html"><img class="brand-mark" src="../assets/crd-mark.png" alt="" width="29" height="29" /><span>CRD</span></a><nav aria-label="Primary navigation"><a href="../learn.html">Learn</a><a href="../specification.html">Specification</a><a href="../template.html">Templates</a><a href="../examples.html">Examples</a><a class="github-link" href="https://github.com/valto/crd" aria-label="Open CRD on GitHub" title="Open CRD on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 4.8c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span class="sr-only">GitHub repository</span></a></nav></div></header>
+    <!-- breadcrumbs:start -->
+    <nav class="breadcrumbs shell" aria-label="Breadcrumb">
+      <a href="../index.html">CRD</a><span aria-hidden="true">/</span><span aria-current="page">Merge a Pull Request</span>
+    </nav>
+<!-- breadcrumbs:end -->
     <main><section class="doc-hero"><div class="shell"><p class="eyebrow">Real-world example</p><h1>Merge a Pull Request</h1><p class="lede">A generic/reusable CRD extracted from GitHub's own public REST API and webhook documentation — paired with <a href="open-pull-request.html">Open a pull request</a> as the framework's first worked example grounded in a genuinely public, universally recognizable real system. Independently blind-audited for framework conformance and factual accuracy.</p><div class="meta-links"><a href="https://github.com/valto/crd/blob/main/examples/merge-pull-request.md">View Markdown source ↗</a><a href="https://github.com/valto/crd/blob/main/examples/merge-pull-request.json">View JSON representation ↗</a><a href="https://github.com/valto/crd/blob/main/examples/github-pull-request-provenance.md">View provenance table ↗</a><a href="https://github.com/valto/crd/blob/main/examples/github-pull-request-decision-log.md">View decision log ↗</a><a href="https://github.com/valto/crd/blob/main/examples/github-pull-request-unresolved.md">View unresolved questions ↗</a></div></div></section>
       <article class="doc-content">
         <section><h2>Identity and core meaning</h2><div class="template-block"><div class="template-field"><strong>Name</strong><span>Merge a pull request</span></div><div class="template-field"><strong>Definition</strong><span>The ability for an authorized actor to integrate the changes proposed by an already-open, non-draft pull request into its target branch, subject to the repository's own merge policies, producing a definitive merged/closed outcome or an identifiable failure reason.</span></div><div class="template-field"><strong>Capability purpose</strong><span>Enable the changes proposed by an open pull request to be incorporated into the target branch, using one of a small set of documented merge strategies, once the repository's own conditions for merging are satisfied.</span></div><div class="template-field"><strong>Meaningful outcome</strong><span>The pull request becomes merged (target branch updated, <code>merged: true</code>), or the attempt is rejected with an identifiable reason.</span></div><div class="template-field"><strong>Includes</strong><span>Choosing the merge strategy; optionally overriding the commit title/message; optionally requiring a head-SHA match; the immediate success/failure outcome.</span></div><div class="template-field"><strong>Excludes</strong><span>Opening the pull request; reviewing/approving it; closing it without merging; enabling/disabling auto-merge; checking if it's already merged; updating its branch; configuring branch protection; merging a draft PR.</span></div><div class="template-field"><strong>Tags</strong><span>notification-triggering — merging is documented as triggering notifications and secondary rate limiting; chosen over network-touching, which would add nothing beyond this capability's own API/UI exposure on a hosted product.</span></div></div></section>
@@ -21,6 +114,11 @@
         <section><h2>Unknown / unresolved</h2><ul><li>The full set of <code>mergeable_state</code> values.</li><li>Whether the webhook <code>closed</code> payload's own description ties <code>merged</code> to that action.</li><li>Whether a default <code>merge_method</code> is applied when omitted.</li><li>The precise conditions distinguishing <code>405</code> from <code>422</code>.</li></ul><p>See the full <a href="https://github.com/valto/crd/blob/main/examples/github-pull-request-unresolved.md">unresolved questions</a> document for the complete list shared with <a href="open-pull-request.html">Open a pull request</a>.</p></section>
         <section><h2>Provenance</h2><p>Extracted from GitHub's own public REST API and webhook documentation, fetched 2026-08-26, then independently blind-audited for framework conformance and factual accuracy against GitHub's live docs. The audit's one real finding — the merge queue's own documentation page had 404'd during extraction and was left unresolved, when in fact it confirms the queue performs the merge itself — has been fixed above. See the <a href="https://github.com/valto/crd/blob/main/examples/github-pull-request-provenance.md">provenance table</a> and <a href="https://github.com/valto/crd/blob/main/examples/github-pull-request-decision-log.md">decision log</a> for full detail, including why "open" and "merge" are two CRDs, not one.</p></section>
       </article>
+    <!-- document-meta:start -->
+      <aside class="document-meta shell" aria-label="Document provenance">
+        <p><strong>Real-world example</strong> · Specification Draft 0.4 · Package 0.6.0 · Updated 2026-08-31 · Valto Loikkanen · <a href="https://github.com/valto/crd/blob/main/examples/merge-pull-request.md">Canonical source</a></p>
+      </aside>
+<!-- document-meta:end -->
     </main>
     <footer class="site-footer"><div class="shell footer-content"><p>Capability Documentation by Valto Loikkanen.</p><p><a href="https://github.com/valto/crd/blob/main/LICENSE">CC BY 4.0</a> · <a href="../index.html">Home</a></p></div></footer>
   </body>
