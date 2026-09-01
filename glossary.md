@@ -30,6 +30,14 @@ The smallest contextually meaningful communication unit whose intended meaning s
 
 A software, agent, human-operated, or combined implementation of a capability or one of its interaction contracts.
 
+## Execution mode
+
+A required declaration on every realization stating what controls the capability flow at runtime: `software-primary`, `agent-primary-using-software`, `software-primary-calling-agents`, or `unknown`. A separate axis from a realization's kind or provenance — it answers who is in control while it runs, not how it was built.
+
+## Agent-built software
+
+Implementation provenance, not an execution mode: it records that a realization's implementation was constructed by an agent, not what controls that implementation at runtime. An agent-built implementation can itself run under any execution mode, including one where an agent still directly controls the flow.
+
 ## Operational Capability Documentation
 
 Realization-specific documentation for a particular service or system, including the implementation and operational details that do not belong in the reusable CRD.

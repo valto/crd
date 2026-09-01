@@ -184,6 +184,15 @@ def validate_generated_assets() -> None:
         fail(f"published JSON Schema invalid: {error}")
 
 
+def validate_glossary_parity() -> None:
+    glossary_md = (ROOT / "glossary.md").read_text(encoding="utf-8")
+    terms = re.findall(r"^## (.+)$", glossary_md, flags=re.M)
+    glossary_html = (DOCS / "glossary.html").read_text(encoding="utf-8")
+    for term in terms:
+        if f"<h2>{html.escape(term)}</h2>" not in glossary_html:
+            fail(f"docs/glossary.html: missing rendered term {term!r} present in glossary.md")
+
+
 def validate_sitemap() -> None:
     expected = {page["url"] for page in PAGES}
     sitemap = (DOCS / "sitemap.xml").read_text(encoding="utf-8")
@@ -205,6 +214,7 @@ def main() -> int:
     for page in PAGES:
         validate_page(page, titles, descriptions, canonicals)
     validate_generated_assets()
+    validate_glossary_parity()
     validate_sitemap()
     validate_404()
     if ERRORS:

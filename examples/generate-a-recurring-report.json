@@ -37,7 +37,7 @@
     },
     {
       "name": "Produce report",
-      "actor": "The capability's own realization (agent, agent-built software, or software)",
+      "actor": "An agent (while constructing and running a new implementation), or a previously agent-built implementation (running unattended, or reused under an agent's direct supervision)",
       "commandIntent": "Produce one report instance matching the current definition against current data",
       "currentState": "A standing report definition exists; this occurrence is due (by schedule or on-demand request)",
       "policiesInvariants": [
@@ -99,6 +99,21 @@
       "executionMode": "software-primary",
       "rationaleIntent": "Once Realization A's implementation has been validated, every subsequent due occurrence of Produce report runs that implementation directly and deterministically -- the same Interaction Contract MLE and required outcome, now served by construction provenance (agent-built-software) paired with an ordinary, agent-uninvolved execution mode (software-primary).",
       "exposure": ["workflow", "internal"]
+    },
+    {
+      "name": "Agent-built implementation is reused under direct agent supervision",
+      "kind": "agent-built-software",
+      "executionMode": "agent-primary-using-software",
+      "rationaleIntent": "Report parameters changed since Realization A's implementation was last validated. Rather than trust it to run unattended (Realization B) or discard it and start over, an agent reuses the same agent-built implementation but directly invokes and supervises this occurrence's run, checking its output against the changed parameters before the implementation earns unattended (Realization B) status again. Construction provenance is unchanged from Realization B; only who controls this occurrence's execution differs -- this is the evidence that agent-built-software does not force software-primary execution.",
+      "implementationRequirements": [
+        {
+          "text": "The supervising agent must confirm the agent-built implementation's output against the current parameters before either releasing this occurrence's report or restoring the implementation to unattended (Realization B) use.",
+          "semanticClass": "implementation-requirement",
+          "evidenceStatus": "reasonable-inference",
+          "source": "Illustrative example"
+        }
+      ],
+      "exposure": ["agent", "tool"]
     }
   ],
   "agenticMappings": [
@@ -119,19 +134,19 @@
       "id": "data-access-tool",
       "kind": "tool",
       "relationship": "supports-contract",
-      "notes": "Supports Produce report in both realizations."
+      "notes": "Supports Produce report in all three realizations."
     },
     {
       "id": "agent-built-report-generation-implementation",
       "kind": "tool",
       "relationship": "realizes-capability",
       "capabilityRefs": ["generate-a-recurring-report"],
-      "notes": "Realization B -- the artifact Realization A constructed and validated; not a skill, since no agent reasoning occurs when it runs."
+      "notes": "Realizations B and C -- the artifact Realization A constructed and validated; not a skill in either realization, since no agent reasoning occurs inside the implementation itself, only around it in Realization C."
     }
   ],
   "provenance": [
     {
-      "text": "This is an illustrative example, not extracted from a real reporting system. It exists to make explicit that agent-built-software is implementation provenance, while execution mode is a separate, runtime-control question (specification section 3.3).",
+      "text": "This is an illustrative example, not extracted from a real reporting system. It exists to make explicit that agent-built-software is implementation provenance, while execution mode is a separate, runtime-control question (specification section 3.3), demonstrated across three realizations rather than two so that provenance and execution mode are shown moving independently, not merely differing once: Realizations B and C share kind (agent-built-software) with different execution modes, and Realization A shares neither kind nor execution mode with B or C.",
       "semanticClass": "example",
       "evidenceStatus": "explicit-fact",
       "source": "examples/generate-a-recurring-report.json"
