@@ -105,6 +105,16 @@
       "description": "Optional universal tags for dimensions not already derivable from another required field (e.g. network-touching/local-only, data-sensitive, identity-related, notification-triggering). Not for implementation-specific groupings -- see realization.implementationTags. In a rendered projection this typically drives structure (a grouping/section key) or plain text, not a badge -- the badge convention is reserved for implementationTags.",
       "items": {"type": "string", "minLength": 1},
       "uniqueItems": true
+    },
+    "relatedMLEsByDimension": {
+      "type": "array",
+      "description": "Optional traceability links from this Capability MLE to lower-level discipline-specific MLEs. Not required coverage -- omit a dimension with no genuine content rather than filling it.",
+      "items": {"$ref": "#/$defs/relatedMLE"}
+    },
+    "communicationMLEs": {
+      "type": "array",
+      "description": "Optional Communication MLEs this capability's triggers produce. Reference these from relatedMLEsByDimension entries with dimension=communication.",
+      "items": {"$ref": "#/$defs/communicationMLE"}
     }
   },
   "$defs": {
@@ -262,6 +272,67 @@
         },
         "reference": {"type": "string", "minLength": 1},
         "notes": {"type": "string"}
+      }
+    },
+    "relatedMLE": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dimension", "relationship", "ref"],
+      "properties": {
+        "dimension": {
+          "type": "string",
+          "enum": [
+            "business-domain",
+            "ux-experience",
+            "communication",
+            "interaction-behaviour",
+            "frontend-interface",
+            "backend-execution",
+            "data-information",
+            "api-interoperability",
+            "agentic",
+            "verification",
+            "operations"
+          ]
+        },
+        "relationship": {
+          "type": "string",
+          "enum": ["defines", "implements", "supports", "constrains", "verifies", "exposes", "reused_by"]
+        },
+        "ref": {"type": "string", "minLength": 1},
+        "notes": {"type": "string"}
+      }
+    },
+    "communicationMLE": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "purpose", "trigger", "audience", "requiredMeaning", "possibleRealizations"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "purpose": {"type": "string", "minLength": 1},
+        "trigger": {"type": "string", "minLength": 1},
+        "audience": {"type": "string", "minLength": 1},
+        "requiredMeaning": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "minItems": 1
+        },
+        "terminology": {"type": "string"},
+        "toneStyle": {"type": "string"},
+        "rules": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/statement"}
+        },
+        "recommendedDefaults": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/statement"}
+        },
+        "possibleRealizations": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "minItems": 1
+        },
+        "exampleCopy": {"type": "string"}
       }
     }
   }

@@ -38,6 +38,14 @@ This enables safe reuse without claiming exclusive ownership. It is useful for t
 
 The relationship is many-to-many. A skill is not automatically a capability, and a tool is not automatically a skill. A capability can be the MLE of a skill when the skill has one coherent outcome; otherwise the skill should map to several CRDs.
 
+## Related MLEs by Dimension
+
+A CRD may optionally trace itself to lower-level, discipline-specific MLEs — Business/Domain, UX/Experience, Communication, Interaction/Behaviour, Frontend/Interface, Backend/Execution, Data/Information, API/Interoperability, Agentic, Verification, Operations — using relationship types `defines`, `implements`, `supports`, `constrains`, `verifies`, `exposes`, or `reused_by` (full model: `crd-specification.md` §7.4). This is traceability, not coverage: never fill a dimension that has no genuine content just to appear complete, exactly as with every other optional CRD section.
+
+**Communication** is deliberately first-class here rather than filed under UX, because a message's meaning is usually shaped by business rules, rendered by frontend or delivery infrastructure, and localized independently — no single discipline owns it. A Communication MLE separates canonical meaning from its channel realization and its language realization, so the same intended meaning stays consistent across a toast, an email, a push notification, and a translation of any of those.
+
+One capability-owned Communication MLE and one product-wide Source Context Reference are complementary, not competing: the message itself (its trigger, audience, and required meaning) belongs to the capability that produces it, while a cross-cutting terminology or tone convention that many messages should follow belongs in SCR if the product already has one. See the worked trial in [Reconcile payments](examples/reconcile-payments.md), which resolves this exact question with a concrete example.
+
 ## Why a CRD is not merely a feature or existing artifact
 
 Existing artifacts remain useful, but each answers only part of the capability question:

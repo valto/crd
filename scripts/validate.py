@@ -89,6 +89,32 @@ def validate_example(schema: dict[str, object], path: Path) -> None:
         if projection["audience"] not in audiences:
             raise ValueError(f"{path.relative_to(ROOT)}: unsupported audience projection")
 
+    related_mle_schema = definitions["relatedMLE"]
+    dimensions = set(related_mle_schema["properties"]["dimension"]["enum"])
+    related_relationships = set(related_mle_schema["properties"]["relationship"]["enum"])
+    for related in instance.get("relatedMLEsByDimension", []):
+        if not isinstance(related, dict):
+            raise ValueError(f"{path.relative_to(ROOT)}: related MLE entry must be an object")
+        assert_fields(related, related_mle_schema["required"], str(path.relative_to(ROOT)))
+        if related["dimension"] not in dimensions:
+            raise ValueError(f"{path.relative_to(ROOT)}: unsupported related-MLE dimension")
+        if related["relationship"] not in related_relationships:
+            raise ValueError(f"{path.relative_to(ROOT)}: unsupported related-MLE relationship")
+
+    communication_schema = definitions["communicationMLE"]
+    for communication in instance.get("communicationMLEs", []):
+        if not isinstance(communication, dict):
+            raise ValueError(f"{path.relative_to(ROOT)}: communication MLE must be an object")
+        assert_fields(communication, communication_schema["required"], str(path.relative_to(ROOT)))
+        if not communication["requiredMeaning"] or not communication["possibleRealizations"]:
+            raise ValueError(f"{path.relative_to(ROOT)}: communication MLE needs required meaning and possible realizations")
+        for statement in [*communication.get("rules", []), *communication.get("recommendedDefaults", [])]:
+            assert_fields(statement, ["text", "semanticClass", "evidenceStatus"], str(path.relative_to(ROOT)))
+            if statement["semanticClass"] not in statement_classes:
+                raise ValueError(f"{path.relative_to(ROOT)}: unsupported semantic class")
+            if statement["evidenceStatus"] not in evidence_statuses:
+                raise ValueError(f"{path.relative_to(ROOT)}: unsupported evidence status")
+
     statement_groups = [
         instance["rulesInvariants"],
         instance["recommendedDefaults"],

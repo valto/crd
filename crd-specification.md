@@ -158,6 +158,7 @@ The following are optional and MUST NOT be required merely to classify something
 - shared-element reuse approvals
 - audience projections
 - tags
+- related MLEs by dimension, including Communication MLEs (§7.4)
 
 These become important when documenting a particular operational realization.
 
@@ -205,6 +206,33 @@ Choose the tag whose dimension a statement is actually about, not the nearest-so
 An Operational Capability Documentation extension MAY separately declare **implementation tags** — product-specific groupings (a module, domain, or internal team name) meaningful only within that realization. Implementation tags MUST be clearly distinguished from the CRD's own universal tags and MUST NOT be presented as if they describe the reusable capability generally (a common convention is prefixing each one, e.g. `impl:inbox`).
 
 A rendered projection (e.g. an HTML showcase) SHOULD keep the visual "tag" badge convention exclusive to implementation tags. A universal tag conventionally drives structure instead — a grouping or section key (e.g. one tab segmented by universal tag, another by implementation tag) — or appears as plain text where structure isn't practical, rather than as an inline badge indistinguishable from an implementation tag's.
+
+### 7.4 Related MLEs by Dimension
+
+A CRD MAY declare traceability links from its Capability MLE to lower-level, discipline-specific MLEs across these dimensions: Business/Domain, UX/Experience, Communication, Interaction/Behaviour, Frontend/Interface, Backend/Execution, Data/Information, API/Interoperability, Agentic, Verification, Operations. Each link states a `dimension`, a `relationship` (`defines`, `implements`, `supports`, `constrains`, `verifies`, `exposes`, or `reused_by`), and a reference to the related MLE — by name, or by link when the related MLE is documented elsewhere.
+
+This section is traceability, not required coverage. A capability MUST NOT be required to have an entry in every dimension, and a dimension with no genuine content MUST be omitted rather than filled to appear complete — the same principle that governs every other optional CRD section (§7). A link records provenance and impact visibility (which capabilities does this lower-level MLE support; which lower-level MLEs does this capability depend on) without duplicating the linked MLE's own content into the CRD.
+
+**Communication is a first-class dimension**, not a subcategory of UX. A message's intended meaning is frequently shaped by business rules, rendered by frontend or delivery infrastructure, and localized independently — no single discipline owns it, which is exactly why it needs its own dimension rather than being buried in UX or treated as a frontend string.
+
+A **Communication MLE** is the smallest contextually meaningful communication unit whose intended meaning should remain consistent across channels, interfaces, actors, and languages. Its required core:
+
+| Field | Meaning |
+|---|---|
+| `name` | Concise identifier for the communication. |
+| `purpose` | What understanding or commitment this communication establishes. |
+| `trigger` | The event or state that causes this communication. |
+| `audience` | Who receives it. |
+| `required meaning` | The meaning that MUST survive regardless of channel or language — not the wording. |
+| `possible realizations` | Known or anticipated channels (inline UI, toast, email, push, SMS, agent response, etc.). |
+
+Optional fields (terminology, tone/style, rules, recommended defaults, example copy) follow the same semantic classes as §6 — an example wording is `example`, a commitment like a response-time promise is a `rule/invariant` only if the realization actually guarantees it, otherwise it is at most a `recommended default`.
+
+A Communication MLE's realization chain is: **canonical meaning → channel realization → language realization**. This is stronger than a typical string-key → translation localization model because it separates meaning from both channel and language, not just from source code — a channel realization (e.g. "toast") and a language realization (e.g. a Finnish translation of that toast) are both downstream of one canonical meaning, not siblings of it.
+
+Not every communication needs the full template — a one-line internal toast may need only `purpose`, `trigger`, `audience`, and `required meaning`. Omit fields that add nothing, per §7's general rule for optional sections.
+
+**Relationship to Source Context Reference:** an individual Communication MLE is owned by the capability whose trigger produces it, the same as any other dimension link — it is not, by itself, product-wide context. But the *tone and terminology conventions* multiple Communication MLEs should follow (e.g. "call it a `quote request`, never an `application`, anywhere in the product") often are product-wide and cross-cutting. When a Source Context Reference already exists for a product, a Communication MLE MAY reference it for those shared conventions rather than restating them; this does not change SCR's own scope (§ Source Context Reference — it still preserves context, not capability requirements) and does not make Communication itself an SCR-owned dimension.
 
 ## 8. Boundary rules
 
