@@ -93,7 +93,33 @@
       <a href="index.html">CRD</a><span aria-hidden="true">/</span><span aria-current="page">Capability Requirements Document Examples</span>
     </nav>
 <!-- breadcrumbs:end -->
-    <main><section class="doc-hero"><div class="shell"><p class="eyebrow">Illustrative and real-world CRDs</p><h1>Worked examples</h1><p class="lede">Two illustrative examples show that the Capability MLE test applies across visibility and realization modes. A second pair — GitHub's own pull request lifecycle — is grounded in a real, public system instead: extracted from GitHub's own documentation and independently blind-audited, rather than synthetic.</p></div></section><section class="section shell"><div class="resource-grid"><a class="resource" href="examples/request-moving-quote.html"><h3>Request a moving quote</h3><p>Customer-facing capability with draft, validation, and submission interaction contracts.</p><span>Explore →</span></a><a class="resource" href="examples/reconcile-payments.html"><h3>Reconcile payments</h3><p>Internal capability with a software-primary realization and finance-review outcomes.</p><span>Explore →</span></a><a class="resource" href="examples/open-pull-request.html"><h3>Open a pull request</h3><p>Real-world capability extracted from GitHub's own public docs; multiple known realizations, tags, and audited provenance.</p><span>Explore →</span></a><a class="resource" href="examples/merge-pull-request.html"><h3>Merge a pull request</h3><p>Real-world capability with branch-protection policies, a confirmed automated realization, and audited provenance.</p><span>Explore →</span></a></div></section>
+    <main><section class="doc-hero"><div class="shell"><p class="eyebrow">Illustrative and real-world CRDs</p><h1>Worked examples</h1><p class="lede">Two illustrative examples show that the Capability MLE test applies across visibility and realization modes. A second pair — GitHub's own pull request lifecycle — is grounded in a real, public system instead: extracted from GitHub's own documentation and independently blind-audited, rather than synthetic. A fifth example puts an agent in control of the flow.</p></div></section>
+      <section class="section shell">
+        <div class="section-intro"><p class="eyebrow">Learn the boundary</p><h2>Illustrative examples, synthetic by design.</h2></div>
+        <div class="resource-grid"><a class="resource" href="examples/request-moving-quote.html"><h3>Request a moving quote</h3><p>Customer-facing capability with draft, validation, and submission interaction contracts.</p><span>Explore →</span></a><a class="resource" href="examples/reconcile-payments.html"><h3>Reconcile payments</h3><p>Internal capability with a software-primary realization, finance-review outcomes, and a worked Communication MLE.</p><span>Explore →</span></a></div>
+      </section>
+      <section class="section shell surface">
+        <div class="section-intro"><p class="eyebrow">See CRD extracted from real software</p><h2>The framework's flagship pair.</h2><p>GitHub's own pull request lifecycle, extracted from GitHub's public documentation and independently blind-audited — not invented to illustrate CRD syntax.</p></div>
+        <div class="resource-grid"><a class="resource" href="examples/open-pull-request.html"><h3>Open a pull request</h3><p>Real-world capability extracted from GitHub's own public docs; multiple known realizations, tags, and audited provenance.</p><span>Explore →</span></a><a class="resource" href="examples/merge-pull-request.html"><h3>Merge a pull request</h3><p>The flagship example: branch-protection policies, a confirmed automated realization, and audited provenance — capability meaning stays simple while realization complexity grows.</p><span>Explore →</span></a></div>
+        <div class="note">
+          <p><strong>Too broad, vs. the correct Capability MLEs.</strong> GitHub's own documentation separates opening a pull request from reviewing and merging it — opening proposes a change; merging incorporates it into the base branch, subject to entirely separate rules and permissions. Treating pull-request management as one capability collapses that distinction:</p>
+          <pre><code>Too broad:
+  Manage pull requests
+
+Capability MLEs:
+  Open pull request
+  Review pull request
+  Merge pull request
+  Close pull request
+  Change draft/review state
+  ...</code></pre>
+          <p>Each of those has its own actor, command, current state, and determinable result — the exact test in the specification's §3.1. <a href="examples/open-pull-request.html">Open</a> and <a href="examples/merge-pull-request.html">Merge</a> are the two extracted and audited here; the rest are plausible siblings, not yet extracted.</p>
+        </div>
+      </section>
+      <section class="section shell">
+        <div class="section-intro"><p class="eyebrow">Agentic realizations</p><h2>Making the agentic thesis concrete.</h2></div>
+        <div class="resource-grid"><a class="resource" href="examples/schedule-a-meeting.html"><h3>Schedule a meeting</h3><p>One capability, two realizations — agent-primary-using-software and software-primary — with an explicit approval boundary between them.</p><span>Explore →</span></a></div>
+      </section>
     <!-- document-meta:start -->
       <aside class="document-meta shell" aria-label="Document provenance">
         <p><strong>Example index</strong> · Specification Draft 0.4 · Package 0.6.0 · Updated 2026-08-31 · Valto Loikkanen</p>
