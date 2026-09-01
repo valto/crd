@@ -97,7 +97,7 @@ Dimensions: Business/Domain, UX/Experience, Communication, Interaction/Behaviour
 
 ### Communication MLEs (if any)
 
-Include only when this capability genuinely triggers a communication. Omit optional fields that add nothing.
+Include only when this capability genuinely triggers a communication. Omit optional fields that add nothing. Terminology, tone/style, and example copy each carry a semantic class like any other statement (§6) — tag which is an example wording versus an actual rule/invariant, don't leave the tag implicit.
 
 #### [Communication name]
 

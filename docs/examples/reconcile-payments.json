@@ -174,8 +174,18 @@
         "Where to review it",
         "No automatic write-off has occurred"
       ],
-      "terminology": "Call it a \"discrepancy,\" never an \"exception\" or \"anomaly,\" consistently across every realization.",
-      "toneStyle": "Neutral and operational -- this is routine finance work, not an incident.",
+      "terminology": {
+        "text": "Call it a \"discrepancy,\" never an \"exception\" or \"anomaly,\" consistently across every realization.",
+        "semanticClass": "example",
+        "evidenceStatus": "reasonable-inference",
+        "source": "Illustrative internal-capability example"
+      },
+      "toneStyle": {
+        "text": "Neutral and operational -- this is routine finance work, not an incident.",
+        "semanticClass": "example",
+        "evidenceStatus": "reasonable-inference",
+        "source": "Illustrative internal-capability example"
+      },
       "rules": [
         {
           "text": "Must not state or imply that a discrepancy has been resolved before an authorized finance actor has reviewed it.",
@@ -193,7 +203,12 @@
         }
       ],
       "possibleRealizations": ["internal dashboard queue item", "scheduled email digest", "chat notification"],
-      "exampleCopy": "New discrepancy #4821 -- ambiguous match, $128.40. Review in the reconciliation queue."
+      "exampleCopy": {
+        "text": "New discrepancy #4821 -- ambiguous match, $128.40. Review in the reconciliation queue.",
+        "semanticClass": "example",
+        "evidenceStatus": "reasonable-inference",
+        "source": "Illustrative internal-capability example"
+      }
     }
   ]
 }

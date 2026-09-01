@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/valto/crd/schema/crd.schema.json",
   "title": "Capability Requirements Document (CRD)",
-  "description": "Draft 0.3 machine-readable representation of the required Capability Requirements Document (CRD) core.",
+  "description": "Draft 0.4 machine-readable representation of the required Capability Requirements Document (CRD) core.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -317,8 +317,8 @@
           "items": {"type": "string", "minLength": 1},
           "minItems": 1
         },
-        "terminology": {"type": "string"},
-        "toneStyle": {"type": "string"},
+        "terminology": {"$ref": "#/$defs/statement"},
+        "toneStyle": {"$ref": "#/$defs/statement"},
         "rules": {
           "type": "array",
           "items": {"$ref": "#/$defs/statement"}
@@ -332,7 +332,7 @@
           "items": {"type": "string", "minLength": 1},
           "minItems": 1
         },
-        "exampleCopy": {"type": "string"}
+        "exampleCopy": {"$ref": "#/$defs/statement"}
       }
     }
   }

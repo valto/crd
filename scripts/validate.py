@@ -108,7 +108,14 @@ def validate_example(schema: dict[str, object], path: Path) -> None:
         assert_fields(communication, communication_schema["required"], str(path.relative_to(ROOT)))
         if not communication["requiredMeaning"] or not communication["possibleRealizations"]:
             raise ValueError(f"{path.relative_to(ROOT)}: communication MLE needs required meaning and possible realizations")
-        for statement in [*communication.get("rules", []), *communication.get("recommendedDefaults", [])]:
+        communication_statements = [
+            *communication.get("rules", []),
+            *communication.get("recommendedDefaults", []),
+        ]
+        for singular_field in ("terminology", "toneStyle", "exampleCopy"):
+            if singular_field in communication:
+                communication_statements.append(communication[singular_field])
+        for statement in communication_statements:
             assert_fields(statement, ["text", "semanticClass", "evidenceStatus"], str(path.relative_to(ROOT)))
             if statement["semanticClass"] not in statement_classes:
                 raise ValueError(f"{path.relative_to(ROOT)}: unsupported semantic class")
