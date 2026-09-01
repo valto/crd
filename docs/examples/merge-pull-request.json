@@ -247,5 +247,65 @@
       "evidenceStatus": "explicit-fact",
       "source": "examples/merge-pull-request.json"
     }
+  ],
+  "relatedMLEsByDimension": [
+    {
+      "dimension": "business-domain",
+      "relationship": "constrains",
+      "ref": "Branch-protection policy consumption (required reviews, required status checks, required linear history, admin-bypass default)",
+      "notes": "Already stated under rulesInvariants; referenced here, not restated."
+    },
+    {
+      "dimension": "ux-experience",
+      "relationship": "supports",
+      "ref": "Merge button; disabled/blocked control state when branch-protection conditions are unmet"
+    },
+    {
+      "dimension": "communication",
+      "relationship": "defines",
+      "ref": "Merge Success Confirmation",
+      "notes": "See communicationMLEs."
+    },
+    {
+      "dimension": "frontend-interface",
+      "relationship": "supports",
+      "ref": "Three-way merge-method dropdown (merge commit / squash / rebase)"
+    },
+    {
+      "dimension": "api-interoperability",
+      "relationship": "implements",
+      "ref": "PUT /repos/{owner}/{repo}/pulls/{pull_number}/merge; merge-async pair; GraphQL (existence only); gh pr merge",
+      "notes": "Already stated under realizations; referenced here, not restated."
+    },
+    {
+      "dimension": "agentic",
+      "relationship": "supports",
+      "ref": "GitHub merge queue",
+      "notes": "Already stated under agenticMappings -- a platform-native automated realization, not a skill/tool in the agent sense."
+    },
+    {
+      "dimension": "operations",
+      "relationship": "supports",
+      "ref": "Secondary rate-limiting risk on rapid merges; branch-protection gating"
+    }
+  ],
+  "communicationMLEs": [
+    {
+      "name": "Merge Success Confirmation",
+      "purpose": "Confirm to the actor or calling system that requested the merge that it completed, and identify the resulting commit.",
+      "trigger": "The merge succeeds (200 response).",
+      "audience": "The actor or system that called the merge operation",
+      "requiredMeaning": [
+        "The merge succeeded",
+        "A resulting merge commit SHA now exists"
+      ],
+      "possibleRealizations": ["REST API JSON response field \"message\", confirmed"],
+      "exampleCopy": {
+        "text": "Pull Request successfully merged",
+        "semanticClass": "example",
+        "evidenceStatus": "explicit-fact",
+        "source": "docs.github.com/en/rest/pulls/pulls#merge-a-pull-request -- structured docs data, codeExamples[].response.example"
+      }
+    }
   ]
 }

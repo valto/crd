@@ -135,6 +135,37 @@ Concretely for this capability: a required-review or required-status-check polic
 | `PUT .../pulls/{pull_number}/merge-async` + `GET .../merge-async/{uuid}` | tool | alternate executable primitive pair for the same capability | Existence confirmed 2026-08-26; internal mechanics not fetched — see `github-pull-request-unresolved.md`. |
 | GitHub merge queue | workflow | GitHub-native automated realization of this capability's Interaction Contract | Confirmed 2026-08-26 (see known realizations above); not a "skill" or "tool" in the agent sense — it is the platform performing this capability's own merge action on its own documented policy. |
 
+## Optional: Related MLEs by Dimension
+
+Traceability only, evidence-bound like the rest of this extraction. Four dimensions are omitted, each for a stated reason:
+
+- **Interaction/Behaviour** — self-referential to this capability's own sole Interaction Contract MLE, above.
+- **Backend/Execution** and **Data/Information** — GitHub documents the public REST/GraphQL/webhook contract, not its internal service implementation or data model beyond the public resource schema already covered under Shared elements.
+- **Verification** — the CRD's own Optional: operational realization section already states "Not documented by GitHub as part of this reference material."
+
+Unlike `open-pull-request.md`, **Communication is included here** — GitHub's own documented merge-endpoint response gives an exact, quoted success message to ground it on, which the create-endpoint's documented response does not. This asymmetry reflects what GitHub actually publishes, not an inconsistency between the two extractions.
+
+| Dimension | Relationship | Ref | Notes |
+|---|---|---|---|
+| Business/Domain | constrains | Branch-protection policy consumption (required reviews, required status checks, required linear history, admin-bypass default) | Already stated under Rules/invariants; referenced here, not restated. **[explicit fact]** |
+| UX/Experience | supports | Merge button; disabled/blocked control state when branch-protection conditions are unmet | **[explicit fact — GitHub's own web-UI merging guide]** |
+| Communication | defines | Merge Success Confirmation | See communicationMLEs. |
+| Frontend/Interface | supports | Three-way merge-method dropdown (merge commit / squash / rebase) | **[explicit fact]** |
+| API/Interoperability | implements | `PUT /repos/{owner}/{repo}/pulls/{pull_number}/merge`; merge-async pair; GraphQL (existence only); `gh pr merge` | Already stated under Implementation references; referenced here, not restated. **[explicit fact]** |
+| Agentic | supports | GitHub merge queue | Already stated under Optional: agentic mappings — a platform-native automated realization, not a skill/tool in the agent sense. **[explicit fact]** |
+| Operations | supports | Secondary rate-limiting risk on rapid merges; branch-protection gating | Already stated under Operational constraints. **[explicit fact]** |
+
+### Communication MLE: Merge Success Confirmation
+
+- **Purpose:** Confirm to the actor (or calling system) that requested the merge that it completed, and identify the resulting commit.
+- **Trigger:** The merge succeeds (`200` response).
+- **Audience:** The actor or system that called the merge operation.
+- **Required meaning:** the merge succeeded; a resulting merge commit SHA now exists.
+- **Possible realizations:** REST API JSON response field `message`, confirmed. Whether the web UI or CLI paths surface equivalent wording after a successful merge is `unknown/unresolved` — not confirmed in the material fetched today, and not assumed to match by inference.
+- **Example copy:** `"Pull Request successfully merged"` — the exact response text GitHub's own structured docs data returns in its `200` example. **[explicit fact — see `github-pull-request-provenance.md`, row for the example merge response body]**
+
+Terminology and tone/style are deliberately omitted from this Communication MLE: GitHub's fetched material documents this one exact response string, not a broader terminology or tone convention behind it — adding either field here would mean inferring a policy GitHub hasn't stated, not tracing one that exists. GitHub also documents that a *blocked* merge attempt (pending/rejected reviews) produces "an error message" for the collaborator — its existence is sourced, but its exact wording is not, so no corresponding Communication MLE is written for that case; see Unknown/unresolved.
+
 ## Statement provenance
 
 See `github-pull-request-provenance.md` for the full statement-provenance table covering both CRDs.

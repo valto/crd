@@ -176,5 +176,40 @@
       "evidenceStatus": "explicit-fact",
       "source": "examples/open-pull-request.json"
     }
+  ],
+  "relatedMLEsByDimension": [
+    {
+      "dimension": "business-domain",
+      "relationship": "constrains",
+      "ref": "Write-access/org-membership requirement; draft-PR plan-gating",
+      "notes": "Already stated under rulesInvariants; referenced here, not restated."
+    },
+    {
+      "dimension": "ux-experience",
+      "relationship": "supports",
+      "ref": "Base vs. compare branch selection concept; \"Compare & pull request\" banner"
+    },
+    {
+      "dimension": "frontend-interface",
+      "relationship": "supports",
+      "ref": "Separate \"Create pull request\" vs. \"Create draft pull request\" buttons"
+    },
+    {
+      "dimension": "api-interoperability",
+      "relationship": "implements",
+      "ref": "POST /repos/{owner}/{repo}/pulls; GraphQL (existence only); gh pr create",
+      "notes": "Already stated under realizations; referenced here, not restated."
+    },
+    {
+      "dimension": "agentic",
+      "relationship": "supports",
+      "ref": "Dependabot",
+      "notes": "Already stated under agenticMappings."
+    },
+    {
+      "dimension": "operations",
+      "relationship": "supports",
+      "ref": "Secondary rate-limiting risk on rapid creation; draft-PR plan availability"
+    }
   ]
 }

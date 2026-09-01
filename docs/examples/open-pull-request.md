@@ -120,6 +120,25 @@ Rule / invariant
 | `gh pr create` | tool | executable primitive realizing this capability via the CLI realization | Confirmed 2026-08-26 via cli.github.com. |
 | Dependabot | agent/automation | a documented, GitHub-native automated actor that invokes this capability | Confirmed to open PRs; not confirmed to merge them (see `merge-pull-request.md`). |
 
+## Optional: Related MLEs by Dimension
+
+Traceability only, and evidence-bound like the rest of this extraction — a dimension is included only where GitHub's own fetched material states something to trace to, and omitted (not filled) otherwise. Five dimensions are omitted here, each for a stated, evidence-based reason:
+
+- **Interaction/Behaviour** — this capability's own sole Interaction Contract MLE (`Create a pull request`, above) already is that behaviour; a separate entry would be self-referential.
+- **Communication** — GitHub's docs confirm this action "triggers notifications" (see Tags, above) but do not document those notifications' actual wording, subject line, or channel content anywhere in the material fetched today. Unlike `merge-pull-request.md` (which has an exact quoted success-response string to ground a Communication MLE on), no equivalent quoted text exists for pull request *creation* — writing one here would mean inventing copy GitHub hasn't published, which the framework's evidence discipline forbids.
+- **Backend/Execution** — GitHub's public API/webhook documentation describes the request/response contract, not its own internal service implementation; no sourced fact exists to trace to.
+- **Data/Information** — same reason: the *public* pull-request resource schema is already covered under Shared elements, but GitHub does not document an internal data model beyond that public schema.
+- **Verification** — the CRD's own Optional: operational realization section already states plainly that tests/verification are "Not documented by GitHub as part of this reference material."
+
+| Dimension | Relationship | Ref | Notes |
+|---|---|---|---|
+| Business/Domain | constrains | Write-access/org-membership requirement; draft-PR plan-gating | Already stated under Rules/invariants; referenced here, not restated. **[explicit fact]** |
+| UX/Experience | supports | Base vs. compare branch selection concept; "Compare & pull request" banner | **[explicit fact — GitHub's own web-UI creation guide]** |
+| Frontend/Interface | supports | Separate "Create pull request" vs. "Create draft pull request" buttons | **[explicit fact]** |
+| API/Interoperability | implements | `POST /repos/{owner}/{repo}/pulls`; GraphQL (existence only); `gh pr create` | Already stated under Implementation references; referenced here, not restated. **[explicit fact]** |
+| Agentic | supports | Dependabot | Already stated under Optional: agentic mappings. **[explicit fact]** |
+| Operations | supports | Secondary rate-limiting risk on rapid creation; draft-PR plan availability | Already stated under Operational constraints. **[explicit fact]** |
+
 ## Statement provenance
 
 See `github-pull-request-provenance.md` for the full statement-provenance table covering both CRDs.
