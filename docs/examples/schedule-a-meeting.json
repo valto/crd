@@ -1,0 +1,159 @@
+{
+  "$schema": "../schema/crd.schema.json",
+  "name": "Schedule a meeting",
+  "definition": "Enable a requester to have a meeting arranged with one or more other participants, resulting in a mutually available time being found and confirmed on the relevant calendars, or an intelligible reason why it could not be scheduled.",
+  "capabilityPurpose": "Enable a meeting between people to be arranged without the requester manually coordinating availability.",
+  "boundaries": {
+    "includes": [
+      "Resolving the intended participants",
+      "Determining collective availability within stated constraints",
+      "Proposing and confirming a time",
+      "Placing the event on calendars",
+      "Communicating the outcome"
+    ],
+    "excludes": [
+      "Creating participant contact records",
+      "Rescheduling or canceling an existing meeting",
+      "The organizational calendar-permission system itself"
+    ]
+  },
+  "meaningfulOutcome": "A meeting is confirmed and placed on the calendars of all required participants, or the request is rejected or deferred with an identifiable reason.",
+  "interactionContracts": [
+    {
+      "name": "Request a meeting",
+      "actor": "Requester (a person, or an agent acting on a person's behalf)",
+      "commandIntent": "Propose a meeting with named participants within given constraints (duration, timeframe, purpose)",
+      "currentState": "No scheduling attempt exists for this request",
+      "policiesInvariants": [
+        {
+          "text": "A duration and at least one participant are required.",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "reasonable-inference",
+          "source": "Illustrative example"
+        }
+      ],
+      "transition": "No request to pending scheduling attempt",
+      "result": "Pending attempt acknowledged",
+      "eventsEffects": ["MeetingRequested"],
+      "unknowns": ["Participant-authorization model"]
+    },
+    {
+      "name": "Resolve participant availability",
+      "actor": "The scheduling capability's own realization (agent or software)",
+      "commandIntent": "Determine which time windows are available for all required participants within the requested constraints",
+      "currentState": "A pending scheduling attempt exists",
+      "policiesInvariants": [
+        {
+          "text": "Only calendars this capability is authorized to read may be consulted.",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "reasonable-inference",
+          "source": "Illustrative example"
+        }
+      ],
+      "transition": "Pending attempt to one or more candidate times, or a no-availability outcome",
+      "result": "Candidate time(s), or an identifiable no-availability reason",
+      "eventsEffects": ["AvailabilityResolved"],
+      "unknowns": ["Availability-data source and freshness", "Time-zone handling"]
+    },
+    {
+      "name": "Confirm meeting time",
+      "actor": "The requester, or an authorized participant if confirmation authority is delegated",
+      "commandIntent": "Select and confirm one candidate time",
+      "currentState": "One or more candidate times exist",
+      "policiesInvariants": [
+        {
+          "text": "A meeting must not be placed on a calendar this capability is not authorized to write to.",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "reasonable-inference",
+          "source": "Illustrative example"
+        }
+      ],
+      "transition": "Candidate time(s) to confirmed meeting",
+      "result": "Confirmed meeting placed on calendars, or an expiry/decline outcome",
+      "eventsEffects": ["MeetingConfirmed", "MeetingSchedulingFailed"],
+      "unknowns": ["Conflict-resolution policy when constraints contradict"]
+    }
+  ],
+  "rulesInvariants": [
+    {
+      "text": "A meeting must not be confirmed on a calendar the capability is not authorized to write to.",
+      "semanticClass": "rule-invariant",
+      "evidenceStatus": "reasonable-inference",
+      "source": "Illustrative example"
+    }
+  ],
+  "recommendedDefaults": [
+    {
+      "text": "If no single candidate time satisfies every participant's stated constraints, surface the closest partial match rather than only reporting failure.",
+      "semanticClass": "recommended-default",
+      "evidenceStatus": "reasonable-inference",
+      "source": "Illustrative example"
+    }
+  ],
+  "unknowns": [
+    "Exact availability-data source and freshness",
+    "Participant-authorization model",
+    "Conflict-resolution policy when constraints contradict",
+    "Time-zone handling"
+  ],
+  "terms": ["requester", "participant", "candidate time", "confirmed meeting"],
+  "realizations": [
+    {
+      "name": "Agent-assisted scheduling assistant",
+      "kind": "agent",
+      "executionMode": "agent-primary-using-software",
+      "rationaleIntent": "Let an agent interpret intent and operate tools directly, instead of the requester manually checking calendars.",
+      "implementationRequirements": [
+        {
+          "text": "The agent must obtain requester (or delegated-participant) confirmation before any candidate time is written to a calendar -- the agent proposes, it does not unilaterally commit.",
+          "semanticClass": "implementation-requirement",
+          "evidenceStatus": "reasonable-inference",
+          "source": "Illustrative example"
+        }
+      ],
+      "exposure": ["tool"]
+    },
+    {
+      "name": "Traditional scheduling UI",
+      "kind": "software",
+      "executionMode": "software-primary",
+      "rationaleIntent": "A deterministic calendar-picker UI where the requester reviews availability and clicks to confirm -- no agent involved.",
+      "exposure": ["ui"]
+    }
+  ],
+  "agenticMappings": [
+    {
+      "id": "scheduling-assistant",
+      "kind": "skill",
+      "relationship": "realizes-capability",
+      "capabilityRefs": ["schedule-a-meeting"],
+      "notes": "Realization A only."
+    },
+    {
+      "id": "contact-resolution-tool",
+      "kind": "tool",
+      "relationship": "supports-contract",
+      "notes": "Supports Request a meeting."
+    },
+    {
+      "id": "availability-lookup-tool",
+      "kind": "tool",
+      "relationship": "supports-contract",
+      "notes": "Supports Resolve participant availability."
+    },
+    {
+      "id": "calendar-creation-tool",
+      "kind": "tool",
+      "relationship": "supports-contract",
+      "notes": "Supports Confirm meeting time; Realization A only -- Realization B writes the calendar entry directly from the UI."
+    }
+  ],
+  "provenance": [
+    {
+      "text": "This is an illustrative example, not extracted from a real scheduling system.",
+      "semanticClass": "example",
+      "evidenceStatus": "explicit-fact",
+      "source": "examples/schedule-a-meeting.json"
+    }
+  ]
+}

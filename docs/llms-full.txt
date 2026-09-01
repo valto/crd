@@ -1,6 +1,6 @@
 # Capability Documentation (CRD) — full context
 
-Generated 2026-08-31 from canonical repository sources. Specification status: Draft 0.4. Package release: 0.6.0.
+Generated 2026-09-01 from canonical repository sources. Specification status: Draft 0.4. Package release: 0.7.0.
 
 ---
 
@@ -9,11 +9,11 @@ URL: https://valto.github.io/crd/index.md
 
 # Capability Documentation
 
-Draft 0.4 (package release 0.6.0) — an open, technology- and implementation-agnostic framework for defining, cataloguing, and operating complete capabilities.
+Draft 0.4 (package release 0.7.0) — an open, technology- and implementation-agnostic framework for defining, cataloguing, and operating complete capabilities.
 
 The canonical artifact is a **Capability Requirements Document (CRD)**: the requirement document for one Capability MLE. A capability may belong to a product, service, system, agent, or reusable open inventory; a CRD can be created before implementation or derived from existing systems, and it remains independent of any one realization mechanism.
 
-The core model and Extract-mode workflow are stable and validated: the required-core fields haven't changed since Draft 0.4, and the [CRD Author skill](skills/crd-author/SKILL.md)'s Extract mode has been run against four independent real sources (a PRD, a real codebase, a real API/webhook documentation set) and each result independently blind-audited for both framework conformance and factual accuracy — see [CHANGELOG.md](CHANGELOG.md) for what each audit found and fixed. Define mode and some optional extensions (Arazzo/OpenAPI structured extraction, audience projections, Mermaid diagrams beyond one worked example) are specified but have not yet been exercised and audited the same way — treat those as reasonable but less-proven guidance. It is not a software runtime, a required product-management process, or an attempt to replace domain-specific documentation.
+The core model and Extract-mode workflow are stable and validated: the required-core fields haven't changed since Draft 0.4, and the [CRD Author skill](skills/crd-author/SKILL.md)'s Extract mode has been run against four independent real sources (a PRD, a real codebase, a real API/webhook documentation set) and each result independently blind-audited for both framework conformance and factual accuracy — see [CHANGELOG.md](CHANGELOG.md) for what each audit found and fixed. Define mode and some optional extensions (Arazzo/OpenAPI structured extraction, audience projections, Mermaid diagrams beyond one worked example) are specified but have not yet been exercised and audited the same way — treat those as reasonable but less-proven guidance. **Related MLEs by Dimension and Communication MLEs (§7.4)** are specified and trial-validated on one example (`examples/reconcile-payments.md`) — one real design decision (Communication MLE ownership vs. Source Context Reference) was resolved during that trial, but the section has not yet been exercised across a second capability or independently blind-audited the way the core Extract-mode model has; treat it the same as Define mode above. It is not a software runtime, a required product-management process, or an attempt to replace domain-specific documentation.
 
 ## Start here
 
@@ -65,6 +65,7 @@ Capability Documentation
 - [Worked example](examples/request-moving-quote.md) — an illustrative CRD and realization.
 - [Internal-capability example](examples/reconcile-payments.md) — an illustrative internal CRD with a software-primary realization.
 - [Real-world example: Open a pull request](examples/open-pull-request.md) / [Merge a pull request](examples/merge-pull-request.md) — extracted from GitHub's own public REST API and webhook documentation (not synthetic), independently blind-audited for framework conformance and factual accuracy; see the accompanying [provenance table](examples/github-pull-request-provenance.md) and [decision log](examples/github-pull-request-decision-log.md).
+- [Agentic example: Schedule a meeting](examples/schedule-a-meeting.md) — one illustrative capability with both an `agent-primary-using-software` and a `software-primary` realization, and the explicit approval boundary between them.
 - [JSON Schema](schema/crd.schema.json) — portable machine-readable representation of the required core.
 - [JSON example](examples/request-moving-quote.json) — schema-conforming illustrative instance.
 - [CRD Author skill](skills/crd-author/SKILL.md) — a packaged agent skill that writes CRDs (Define mode) or extracts them from existing material (Extract mode) and maintains a Capability Inventory.
@@ -258,6 +259,7 @@ The following are optional and MUST NOT be required merely to classify something
 - shared-element reuse approvals
 - audience projections
 - tags
+- related MLEs by dimension, including Communication MLEs (§7.4)
 
 These become important when documenting a particular operational realization.
 
@@ -305,6 +307,33 @@ Choose the tag whose dimension a statement is actually about, not the nearest-so
 An Operational Capability Documentation extension MAY separately declare **implementation tags** — product-specific groupings (a module, domain, or internal team name) meaningful only within that realization. Implementation tags MUST be clearly distinguished from the CRD's own universal tags and MUST NOT be presented as if they describe the reusable capability generally (a common convention is prefixing each one, e.g. `impl:inbox`).
 
 A rendered projection (e.g. an HTML showcase) SHOULD keep the visual "tag" badge convention exclusive to implementation tags. A universal tag conventionally drives structure instead — a grouping or section key (e.g. one tab segmented by universal tag, another by implementation tag) — or appears as plain text where structure isn't practical, rather than as an inline badge indistinguishable from an implementation tag's.
+
+### 7.4 Related MLEs by Dimension
+
+A CRD MAY declare traceability links from its Capability MLE to lower-level, discipline-specific MLEs across these dimensions: Business/Domain, UX/Experience, Communication, Interaction/Behaviour, Frontend/Interface, Backend/Execution, Data/Information, API/Interoperability, Agentic, Verification, Operations. Each link states a `dimension`, a `relationship` (`defines`, `implements`, `supports`, `constrains`, `verifies`, `exposes`, or `reused_by`), and a reference to the related MLE — by name, or by link when the related MLE is documented elsewhere.
+
+This section is traceability, not required coverage. A capability MUST NOT be required to have an entry in every dimension, and a dimension with no genuine content MUST be omitted rather than filled to appear complete — the same principle that governs every other optional CRD section (§7). A link records provenance and impact visibility (which capabilities does this lower-level MLE support; which lower-level MLEs does this capability depend on) without duplicating the linked MLE's own content into the CRD.
+
+**Communication is a first-class dimension**, not a subcategory of UX. A message's intended meaning is frequently shaped by business rules, rendered by frontend or delivery infrastructure, and localized independently — no single discipline owns it, which is exactly why it needs its own dimension rather than being buried in UX or treated as a frontend string.
+
+A **Communication MLE** is the smallest contextually meaningful communication unit whose intended meaning should remain consistent across channels, interfaces, actors, and languages. Its required core:
+
+| Field | Meaning |
+|---|---|
+| `name` | Concise identifier for the communication. |
+| `purpose` | What understanding or commitment this communication establishes. |
+| `trigger` | The event or state that causes this communication. |
+| `audience` | Who receives it. |
+| `required meaning` | The meaning that MUST survive regardless of channel or language — not the wording. |
+| `possible realizations` | Known or anticipated channels (inline UI, toast, email, push, SMS, agent response, etc.). |
+
+Optional fields (terminology, tone/style, rules, recommended defaults, example copy) follow the same semantic classes as §6 — an example wording is `example`, a commitment like a response-time promise is a `rule/invariant` only if the realization actually guarantees it, otherwise it is at most a `recommended default`.
+
+A Communication MLE's realization chain is: **canonical meaning → channel realization → language realization**. This is stronger than a typical string-key → translation localization model because it separates meaning from both channel and language, not just from source code — a channel realization (e.g. "toast") and a language realization (e.g. a Finnish translation of that toast) are both downstream of one canonical meaning, not siblings of it.
+
+Not every communication needs the full template — a one-line internal toast may need only `purpose`, `trigger`, `audience`, and `required meaning`. Omit fields that add nothing, per §7's general rule for optional sections.
+
+**Relationship to Source Context Reference:** an individual Communication MLE is owned by the capability whose trigger produces it, the same as any other dimension link — it is not, by itself, product-wide context. But the *tone and terminology conventions* multiple Communication MLEs should follow (e.g. "call it a `quote request`, never an `application`, anywhere in the product") often are product-wide and cross-cutting. When a Source Context Reference already exists for a product, a Communication MLE MAY reference it for those shared conventions rather than restating them; this does not change SCR's own scope (§ Source Context Reference — it still preserves context, not capability requirements) and does not make Communication itself an SCR-owned dimension.
 
 ## 8. Boundary rules
 
@@ -406,6 +435,33 @@ Rule / invariant
 |  | skill | realizes one capability |  |
 |  | tool | executable primitive used by a contract |  |
 
+## Optional: Related MLEs by Dimension
+
+Traceability only — omit any dimension with no genuine content; do not fill every dimension to appear complete.
+
+| Dimension | Relationship | Related MLE | Notes |
+|---|---|---|---|
+|  | defines \| implements \| supports \| constrains \| verifies \| exposes \| reused_by |  |  |
+
+Dimensions: Business/Domain, UX/Experience, Communication, Interaction/Behaviour, Frontend/Interface, Backend/Execution, Data/Information, API/Interoperability, Agentic, Verification, Operations.
+
+### Communication MLEs (if any)
+
+Include only when this capability genuinely triggers a communication. Omit optional fields that add nothing.
+
+#### [Communication name]
+
+- **Purpose:**
+- **Trigger:**
+- **Audience:**
+- **Required meaning:**
+- **Terminology (optional):**
+- **Tone / style (optional):**
+- **Rules (optional):**
+- **Recommended default (optional):**
+- **Possible realizations:** e.g. inline UI, toast, email, push, SMS, agent response
+- **Example copy (optional):**
+
 ## Optional: audience projections
 
 List or link projections for business/domain, UX, frontend, backend, API/MCP/tools, agents, or operations. Each projection must trace back to this CRD and must not create divergent requirements.
@@ -431,7 +487,7 @@ Transform existing material into Capability Requirements Documents (CRDs), Inter
 
 Possible source material includes PRDs, plans, applications, codebases, Storybook, OpenAPI, Arazzo workflow documents, MCP servers, skills, API documentation, database schemas, user stories, tests, and operational runbooks.
 
-Extract mode defaults to a **specific/operational CRD set**. Produce an additional generic/reusable projection only when the user asks for it, or when reuse by a second real consumer is already established or clearly imminent. A generic capability with zero known realizations is an unproven hypothesis, not demonstrated reuse.
+Extract mode defaults to a **specific/operational CRD set**. Produce an additional generic/reusable projection only when the user asks for it, or when reuse by a second real consumer is already established or clearly imminent. A capability with zero known realizations can still be a valid planned requirement — what's unproven is a claim that it's generalized/reusable, not the capability itself. Cross-context reuse specifically remains unproven until a second real consumer exists or is imminent.
 
 For a substantial source that yields multiple capabilities, also produce a [Source Context Reference](source-context-template.md): a companion reference for product-wide and cross-cutting context that belongs to no single CRD.
 
@@ -600,6 +656,14 @@ This enables safe reuse without claiming exclusive ownership. It is useful for t
 | Tool | Executable primitive: API operation, MCP tool, function, command, or workflow step. | May support many skills and capabilities. |
 
 The relationship is many-to-many. A skill is not automatically a capability, and a tool is not automatically a skill. A capability can be the MLE of a skill when the skill has one coherent outcome; otherwise the skill should map to several CRDs.
+
+## Related MLEs by Dimension
+
+A CRD may optionally trace itself to lower-level, discipline-specific MLEs — Business/Domain, UX/Experience, Communication, Interaction/Behaviour, Frontend/Interface, Backend/Execution, Data/Information, API/Interoperability, Agentic, Verification, Operations — using relationship types `defines`, `implements`, `supports`, `constrains`, `verifies`, `exposes`, or `reused_by` (full model: `crd-specification.md` §7.4). This is traceability, not coverage: never fill a dimension that has no genuine content just to appear complete, exactly as with every other optional CRD section.
+
+**Communication** is deliberately first-class here rather than filed under UX, because a message's meaning is usually shaped by business rules, rendered by frontend or delivery infrastructure, and localized independently — no single discipline owns it. A Communication MLE separates canonical meaning from its channel realization and its language realization, so the same intended meaning stays consistent across a toast, an email, a push notification, and a translation of any of those.
+
+One capability-owned Communication MLE and one product-wide Source Context Reference are complementary, not competing: the message itself (its trigger, audience, and required meaning) belongs to the capability that produces it, while a cross-cutting terminology or tone convention that many messages should follow belongs in SCR if the product already has one. See the worked trial in [Reconcile payments](examples/reconcile-payments.md), which resolves this exact question with a concrete example.
 
 ## Why a CRD is not merely a feature or existing artifact
 

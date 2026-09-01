@@ -106,5 +106,94 @@
       "evidenceStatus": "explicit-fact",
       "source": "examples/reconcile-payments.json"
     }
+  ],
+  "relatedMLEsByDimension": [
+    {
+      "dimension": "business-domain",
+      "relationship": "implements",
+      "ref": "Discrepancy classification policy (duplicate / unmatched / ambiguous)",
+      "notes": "example"
+    },
+    {
+      "dimension": "ux-experience",
+      "relationship": "supports",
+      "ref": "Finance-operator discrepancy review queue",
+      "notes": "The one human-facing touchpoint in an otherwise internal capability."
+    },
+    {
+      "dimension": "communication",
+      "relationship": "defines",
+      "ref": "Discrepancy Escalation Notice",
+      "notes": "See communicationMLEs."
+    },
+    {
+      "dimension": "frontend-interface",
+      "relationship": "supports",
+      "ref": "Discrepancy review queue UI",
+      "notes": "implementation choice"
+    },
+    {
+      "dimension": "backend-execution",
+      "relationship": "implements",
+      "ref": "ImportPaymentRecords, RunReconciliation, ReviewDiscrepancy use cases",
+      "notes": "implementation choice"
+    },
+    {
+      "dimension": "data-information",
+      "relationship": "implements",
+      "ref": "PaymentRecord, Discrepancy entities",
+      "notes": "implementation choice"
+    },
+    {
+      "dimension": "agentic",
+      "relationship": "supports",
+      "ref": "Ambiguous-discrepancy triage assistant",
+      "notes": "Illustrative; execution mode agent-primary-using-software; supports, not replaces, the finance operator's review authority."
+    },
+    {
+      "dimension": "verification",
+      "relationship": "verifies",
+      "ref": "An unmatched record is never silently marked resolved; a duplicate payment is not reconciled twice"
+    },
+    {
+      "dimension": "operations",
+      "relationship": "supports",
+      "ref": "Reconciliation run monitoring / schedule",
+      "notes": "implementation choice"
+    }
+  ],
+  "communicationMLEs": [
+    {
+      "name": "Discrepancy Escalation Notice",
+      "purpose": "Alert the responsible finance operator that a payment discrepancy needs review, with enough context to act.",
+      "trigger": "A discrepancy case is created by Run payment reconciliation (PaymentDiscrepancyDetected).",
+      "audience": "Authorized finance operator",
+      "requiredMeaning": [
+        "A discrepancy exists",
+        "Its classification (unmatched / duplicate / ambiguous)",
+        "Where to review it",
+        "No automatic write-off has occurred"
+      ],
+      "terminology": "Call it a \"discrepancy,\" never an \"exception\" or \"anomaly,\" consistently across every realization.",
+      "toneStyle": "Neutral and operational -- this is routine finance work, not an incident.",
+      "rules": [
+        {
+          "text": "Must not state or imply that a discrepancy has been resolved before an authorized finance actor has reviewed it.",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "reasonable-inference",
+          "source": "Illustrative internal-capability example"
+        }
+      ],
+      "recommendedDefaults": [
+        {
+          "text": "If a review-time expectation exists, state it; otherwise do not invent one.",
+          "semanticClass": "recommended-default",
+          "evidenceStatus": "reasonable-inference",
+          "source": "Illustrative internal-capability example"
+        }
+      ],
+      "possibleRealizations": ["internal dashboard queue item", "scheduled email digest", "chat notification"],
+      "exampleCopy": "New discrepancy #4821 -- ambiguous match, $128.40. Review in the reconciliation queue."
+    }
   ]
 }

@@ -3,7 +3,7 @@
 > Capability Documentation is an open, technology-agnostic framework. A Capability Requirements Document specifies one complete Capability MLE for people, agents, applications, and developers.
 
 - Specification status: Draft 0.4
-- Package release: 0.6.0
+- Package release: 0.7.0
 - Creator and steward: [Valto Loikkanen](https://valto.github.io/)
 - License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 - Canonical repository: [github.com/valto/crd](https://github.com/valto/crd)
@@ -38,6 +38,7 @@
 - [Reconcile Payments — CRD Example](https://valto.github.io/crd/examples/reconcile-payments.md): An illustrative Capability Requirements Document for internal payment reconciliation, review outcomes, rules, and a software-primary realization.
 - [Open a Pull Request — Real-World CRD Example](https://valto.github.io/crd/examples/open-pull-request.md): A real-world Capability Requirements Document for opening a GitHub pull request, extracted from public API and webhook documentation with audited provenance.
 - [Merge a Pull Request — Real-World CRD Example](https://valto.github.io/crd/examples/merge-pull-request.md): A real-world Capability Requirements Document for merging a GitHub pull request, including policies, automated realization, and audited provenance.
+- [Schedule a Meeting — Agentic CRD Example](https://valto.github.io/crd/examples/schedule-a-meeting.md): An illustrative Capability Requirements Document for scheduling a meeting, with both an agent-primary and a software-primary realization.
 
 ## Direct machine-readable resources
 

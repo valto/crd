@@ -85,6 +85,33 @@ Rule / invariant
 |  | skill | realizes one capability |  |
 |  | tool | executable primitive used by a contract |  |
 
+## Optional: Related MLEs by Dimension
+
+Traceability only — omit any dimension with no genuine content; do not fill every dimension to appear complete.
+
+| Dimension | Relationship | Related MLE | Notes |
+|---|---|---|---|
+|  | defines \| implements \| supports \| constrains \| verifies \| exposes \| reused_by |  |  |
+
+Dimensions: Business/Domain, UX/Experience, Communication, Interaction/Behaviour, Frontend/Interface, Backend/Execution, Data/Information, API/Interoperability, Agentic, Verification, Operations.
+
+### Communication MLEs (if any)
+
+Include only when this capability genuinely triggers a communication. Omit optional fields that add nothing.
+
+#### [Communication name]
+
+- **Purpose:**
+- **Trigger:**
+- **Audience:**
+- **Required meaning:**
+- **Terminology (optional):**
+- **Tone / style (optional):**
+- **Rules (optional):**
+- **Recommended default (optional):**
+- **Possible realizations:** e.g. inline UI, toast, email, push, SMS, agent response
+- **Example copy (optional):**
+
 ## Optional: audience projections
 
 List or link projections for business/domain, UX, frontend, backend, API/MCP/tools, agents, or operations. Each projection must trace back to this CRD and must not create divergent requirements.

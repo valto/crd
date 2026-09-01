@@ -7,8 +7,8 @@
     "authorUrl": "https://valto.github.io/",
     "license": "https://creativecommons.org/licenses/by/4.0/",
     "specificationVersion": "Draft 0.4",
-    "packageVersion": "0.6.0",
-    "modified": "2026-08-31",
+    "packageVersion": "0.7.0",
+    "modified": "2026-09-01",
     "image": "https://valto.github.io/crd/assets/crd-social-card.png",
     "sameAs": [
       "https://github.com/valto",
@@ -207,6 +207,17 @@
       "classification": "Real-world example",
       "source": "examples/merge-pull-request.md",
       "markdown": "examples/merge-pull-request.md",
+      "priority": "0.8"
+    },
+    {
+      "file": "examples/schedule-a-meeting.html",
+      "url": "https://valto.github.io/crd/examples/schedule-a-meeting.html",
+      "title": "Schedule a Meeting — Agentic CRD Example",
+      "description": "An illustrative Capability Requirements Document for scheduling a meeting, with both an agent-primary and a software-primary realization.",
+      "type": "TechArticle",
+      "classification": "Agentic example",
+      "source": "examples/schedule-a-meeting.md",
+      "markdown": "examples/schedule-a-meeting.md",
       "priority": "0.8"
     },
     {
