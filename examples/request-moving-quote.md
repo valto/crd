@@ -74,6 +74,38 @@ Status: illustrative example. It demonstrates the template; it is not a specific
 - **Implementation choice:** an API may expose separate draft, validation, and submission endpoints
 - **Rationale / intent:** a provider may implement this to obtain qualified leads; this is not part of the reusable capability purpose
 
+## Related MLEs by Dimension
+
+Traceability only — a dimension with no genuine content in this illustrative example is omitted rather than filled. `Interaction/Behaviour` and `API/Interoperability` are omitted here: the three Interaction Contract MLEs above already are this capability's behaviour, and no API shape is stated firmly enough to trace to (the operational realization only says an API "may" expose separate endpoints — a possibility, not a traceable reference).
+
+| Dimension | Relationship | Ref | Notes |
+|---|---|---|---|
+| Business/Domain | constrains | Serviceable-route rejection rule ("a provider may reject a route it does not serve") | **[example]** |
+| UX/Experience | supports | Draft → validate → submit flow; preserve-draft-on-missing-information default | |
+| Communication | defines | Quote Request Submitted Confirmation | See communicationMLEs. |
+| Frontend/Interface | supports | Quote request form (draft/validate/submit) | implementation choice |
+| Backend/Execution | implements | CreateDraftQuoteRequest, ValidateQuoteRequest, SubmitQuoteRequest use cases | implementation choice |
+| Data/Information | implements | QuoteRequest, ServiceableRoute entities | implementation choice |
+| Agentic | supports | `moving-quote-assistant` skill; `submit-quote-request` tool | See agenticMappings — already declared elsewhere in this CRD, referenced here rather than restated. |
+| Verification | verifies | "A submission is never accepted without sufficient identifying information"; "an unsupported route is rejected, not silently accepted" | |
+
+`Operations` is also omitted: nothing in this illustrative example states a monitoring, scheduling, or operational-runbook fact to trace to.
+
+### Communication MLE: Quote Request Submitted Confirmation
+
+- **Purpose:** Confirm that the request was received and set an honest expectation for what happens next.
+- **Trigger:** `Submit quote request` succeeds (`QuoteRequestSubmitted`).
+- **Audience:** The prospective customer or authorized caller who submitted the request.
+- **Required meaning:** the submission succeeded; the request is now stored; no further action is currently required from the requester; there is a next step, even if its exact timing is unknown.
+- **Terminology:** call it a "quote request," not an "application" or "order." **[example]**
+- **Tone / style:** clear, calm, concise — a routine acknowledgement, not a sales pitch. **[example]**
+- **Rule:** must not promise a specific response time unless a realization's operational commitment actually guarantees it. **[rule/invariant — mirrors the capability's own "intelligible rejection" standard: don't imply a certainty the process doesn't have]**
+- **Recommended default:** if no guaranteed response time exists, say something like "we'll be in touch soon" rather than inventing a number. **[recommended default]**
+- **Possible realizations:** inline confirmation screen; email; SMS; agent response.
+- **Example copy:** "Thanks — your moving quote request has been received. We'll be in touch soon." **[example]**
+
+This is the second worked trial of the Related MLEs by Dimension / Communication MLE model (the first, on `reconcile-payments`, tested an internal capability with no direct UI). This one is customer-facing and confirms the model holds for that case too: the confirmation's required meaning is owned entirely by this capability's own `Submit quote request` contract, while the terminology convention ("quote request," never "application") is the kind of cross-cutting rule a Source Context Reference would hold if this illustrative provider had one — consistent with the resolution already recorded on `reconcile-payments`.
+
 ## Provenance
 
 All statements in this document are illustrative examples. They require replacement or confirmation when used for an actual service.

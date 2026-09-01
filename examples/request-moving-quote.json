@@ -146,5 +146,102 @@
       "evidenceStatus": "explicit-fact",
       "source": "examples/request-moving-quote.json"
     }
+  ],
+  "relatedMLEsByDimension": [
+    {
+      "dimension": "business-domain",
+      "relationship": "constrains",
+      "ref": "Serviceable-route rejection rule (a provider may reject a route it does not serve)",
+      "notes": "example"
+    },
+    {
+      "dimension": "ux-experience",
+      "relationship": "supports",
+      "ref": "Draft to validate to submit flow; preserve-draft-on-missing-information default"
+    },
+    {
+      "dimension": "communication",
+      "relationship": "defines",
+      "ref": "Quote Request Submitted Confirmation",
+      "notes": "See communicationMLEs."
+    },
+    {
+      "dimension": "frontend-interface",
+      "relationship": "supports",
+      "ref": "Quote request form (draft/validate/submit)",
+      "notes": "implementation choice"
+    },
+    {
+      "dimension": "backend-execution",
+      "relationship": "implements",
+      "ref": "CreateDraftQuoteRequest, ValidateQuoteRequest, SubmitQuoteRequest use cases",
+      "notes": "implementation choice"
+    },
+    {
+      "dimension": "data-information",
+      "relationship": "implements",
+      "ref": "QuoteRequest, ServiceableRoute entities",
+      "notes": "implementation choice"
+    },
+    {
+      "dimension": "agentic",
+      "relationship": "supports",
+      "ref": "moving-quote-assistant skill; submit-quote-request tool",
+      "notes": "Already declared in agenticMappings; referenced here rather than restated."
+    },
+    {
+      "dimension": "verification",
+      "relationship": "verifies",
+      "ref": "A submission is never accepted without sufficient identifying information; an unsupported route is rejected, not silently accepted"
+    }
+  ],
+  "communicationMLEs": [
+    {
+      "name": "Quote Request Submitted Confirmation",
+      "purpose": "Confirm that the request was received and set an honest expectation for what happens next.",
+      "trigger": "Submit quote request succeeds (QuoteRequestSubmitted).",
+      "audience": "The prospective customer or authorized caller who submitted the request",
+      "requiredMeaning": [
+        "The submission succeeded",
+        "The request is now stored",
+        "No further action is currently required from the requester",
+        "There is a next step, even if its exact timing is unknown"
+      ],
+      "terminology": {
+        "text": "Call it a \"quote request,\" not an \"application\" or \"order.\"",
+        "semanticClass": "example",
+        "evidenceStatus": "reasonable-inference",
+        "source": "Illustrative example"
+      },
+      "toneStyle": {
+        "text": "Clear, calm, concise -- a routine acknowledgement, not a sales pitch.",
+        "semanticClass": "example",
+        "evidenceStatus": "reasonable-inference",
+        "source": "Illustrative example"
+      },
+      "rules": [
+        {
+          "text": "Must not promise a specific response time unless a realization's operational commitment actually guarantees it.",
+          "semanticClass": "rule-invariant",
+          "evidenceStatus": "reasonable-inference",
+          "source": "Illustrative example"
+        }
+      ],
+      "recommendedDefaults": [
+        {
+          "text": "If no guaranteed response time exists, say something like \"we'll be in touch soon\" rather than inventing a number.",
+          "semanticClass": "recommended-default",
+          "evidenceStatus": "reasonable-inference",
+          "source": "Illustrative example"
+        }
+      ],
+      "possibleRealizations": ["inline confirmation screen", "email", "SMS", "agent response"],
+      "exampleCopy": {
+        "text": "Thanks -- your moving quote request has been received. We'll be in touch soon.",
+        "semanticClass": "example",
+        "evidenceStatus": "reasonable-inference",
+        "source": "Illustrative example"
+      }
+    }
   ]
 }
