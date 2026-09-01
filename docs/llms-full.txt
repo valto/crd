@@ -447,7 +447,7 @@ Dimensions: Business/Domain, UX/Experience, Communication, Interaction/Behaviour
 
 ### Communication MLEs (if any)
 
-Include only when this capability genuinely triggers a communication. Omit optional fields that add nothing.
+Include only when this capability genuinely triggers a communication. Omit optional fields that add nothing. Terminology, tone/style, and example copy each carry a semantic class like any other statement (§6) — tag which is an example wording versus an actual rule/invariant, don't leave the tag implicit.
 
 #### [Communication name]
 
@@ -806,6 +806,14 @@ The canonical technology- and implementation-agnostic requirement specification 
 ## Interaction Contract MLE
 
 The smallest contextually meaningful executable behaviour. It identifies the actor, command, relevant state, policies, transition, result, and effects required to perform part of a capability.
+
+## Related MLEs by Dimension
+
+An optional traceability section linking a Capability MLE to lower-level discipline-specific MLEs (Business/Domain, UX/Experience, Communication, Interaction/Behaviour, Frontend/Interface, Backend/Execution, Data/Information, API/Interoperability, Agentic, Verification, Operations). Traceability, not required coverage — a dimension with no genuine content is omitted, not filled.
+
+## Communication MLE
+
+The smallest contextually meaningful communication unit whose intended meaning should stay consistent across channels, interfaces, actors, and languages. Owned by the capability whose trigger produces it; realized through a canonical-meaning → channel-realization → language-realization chain rather than a single fixed wording.
 
 ## Realization
 

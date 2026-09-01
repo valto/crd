@@ -221,6 +221,17 @@
       "priority": "0.8"
     },
     {
+      "file": "examples/generate-a-recurring-report.html",
+      "url": "https://valto.github.io/crd/examples/generate-a-recurring-report.html",
+      "title": "Generate a Recurring Report — Agentic CRD Example",
+      "description": "An illustrative Capability Requirements Document showing agent-built-software as construction provenance, distinct from execution mode.",
+      "type": "TechArticle",
+      "classification": "Agentic example",
+      "source": "examples/generate-a-recurring-report.md",
+      "markdown": "examples/generate-a-recurring-report.md",
+      "priority": "0.8"
+    },
+    {
       "file": "resources.html",
       "url": "https://valto.github.io/crd/resources.html",
       "title": "CRD Learning Resources: Articles, Video, Audio, and PDF",

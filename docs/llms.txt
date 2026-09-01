@@ -39,6 +39,7 @@
 - [Open a Pull Request — Real-World CRD Example](https://valto.github.io/crd/examples/open-pull-request.md): A real-world Capability Requirements Document for opening a GitHub pull request, extracted from public API and webhook documentation with audited provenance.
 - [Merge a Pull Request — Real-World CRD Example](https://valto.github.io/crd/examples/merge-pull-request.md): A real-world Capability Requirements Document for merging a GitHub pull request, including policies, automated realization, and audited provenance.
 - [Schedule a Meeting — Agentic CRD Example](https://valto.github.io/crd/examples/schedule-a-meeting.md): An illustrative Capability Requirements Document for scheduling a meeting, with both an agent-primary and a software-primary realization.
+- [Generate a Recurring Report — Agentic CRD Example](https://valto.github.io/crd/examples/generate-a-recurring-report.md): An illustrative Capability Requirements Document showing agent-built-software as construction provenance, distinct from execution mode.
 
 ## Direct machine-readable resources
 
