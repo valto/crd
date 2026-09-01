@@ -6,7 +6,7 @@ Transform existing material into Capability Requirements Documents (CRDs), Inter
 
 Possible source material includes PRDs, plans, applications, codebases, Storybook, OpenAPI, Arazzo workflow documents, MCP servers, skills, API documentation, database schemas, user stories, tests, and operational runbooks.
 
-Extract mode defaults to a **specific/operational CRD set**. Produce an additional generic/reusable projection only when the user asks for it, or when reuse by a second real consumer is already established or clearly imminent. A generic capability with zero known realizations is an unproven hypothesis, not demonstrated reuse.
+Extract mode defaults to a **specific/operational CRD set**. Produce an additional generic/reusable projection only when the user asks for it, or when reuse by a second real consumer is already established or clearly imminent. A capability with zero known realizations can still be a valid planned requirement — what's unproven is a claim that it's generalized/reusable, not the capability itself. Cross-context reuse specifically remains unproven until a second real consumer exists or is imminent.
 
 For a substantial source that yields multiple capabilities, also produce a [Source Context Reference](source-context-template.md): a companion reference for product-wide and cross-cutting context that belongs to no single CRD.
 
