@@ -306,7 +306,7 @@
     "communicationMLE": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["name", "purpose", "trigger", "audience", "requiredMeaning", "possibleRealizations"],
+      "required": ["name", "purpose", "trigger", "audience", "requiredMeaning", "exampleCopy", "possibleRealizations"],
       "properties": {
         "name": {"type": "string", "minLength": 1},
         "purpose": {"type": "string", "minLength": 1},
@@ -332,7 +332,13 @@
           "items": {"type": "string", "minLength": 1},
           "minItems": 1
         },
-        "exampleCopy": {"$ref": "#/$defs/statement"}
+        "exampleCopy": {
+          "description": "Representative communication text. It is an example, not binding copy: source actual wording when available; otherwise make its illustrative status explicit in text or source.",
+          "allOf": [
+            {"$ref": "#/$defs/statement"},
+            {"properties": {"semanticClass": {"const": "example"}}}
+          ]
+        }
       }
     }
   }

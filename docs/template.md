@@ -97,7 +97,7 @@ Dimensions: Business/Domain, UX/Experience, Communication, Interaction/Behaviour
 
 ### Communication MLEs (if any)
 
-Include only when this capability genuinely triggers a communication. Omit optional fields that add nothing. Terminology, tone/style, and example copy each carry a semantic class like any other statement (§6) — tag which is an example wording versus an actual rule/invariant, don't leave the tag implicit.
+Include only when this capability genuinely triggers a communication. Omit optional fields that add nothing. The representative example text is required for every Communication MLE: classify it as `example`; preserve authoritative wording when sourced, otherwise explicitly label it illustrative so it is never mistaken for shipped copy. Terminology and tone/style also carry a semantic class like any other statement (§6) — do not leave the tag implicit.
 
 #### [Communication name]
 
@@ -105,6 +105,7 @@ Include only when this capability genuinely triggers a communication. Omit optio
 - **Trigger:**
 - **Audience:**
 - **Required meaning:**
+- **Representative example text:** *(example; sourced wording where available, otherwise explicitly illustrative — not binding copy)*
 - **Terminology (optional):**
 - **Tone / style (optional):**
 - **Rules (optional):**

@@ -224,13 +224,16 @@ A **Communication MLE** is the smallest contextually meaningful communication un
 | `trigger` | The event or state that causes this communication. |
 | `audience` | Who receives it. |
 | `required meaning` | The meaning that MUST survive regardless of channel or language — not the wording. |
+| `representative example text` | A concrete rendering of the required meaning, explicitly classified as an `example`; use sourced wording where available, otherwise label it illustrative. |
 | `possible realizations` | Known or anticipated channels (inline UI, toast, email, push, SMS, agent response, etc.). |
 
-Optional fields (terminology, tone/style, rules, recommended defaults, example copy) follow the same semantic classes as §6 — an example wording is `example`, a commitment like a response-time promise is a `rule/invariant` only if the realization actually guarantees it, otherwise it is at most a `recommended default`.
+The representative example text makes the canonical meaning concrete; it does **not** make its wording a requirement. It MUST be semantically classified as an `example`. When an authoritative source supplies the actual communication, preserve that wording and its source. When no authoritative wording exists, provide a clearly labelled illustrative rendering and never imply it is shipped or production copy.
+
+Optional fields (terminology, tone/style, rules, recommended defaults) follow the same semantic classes as §6 — a commitment like a response-time promise is a `rule/invariant` only if the realization actually guarantees it, otherwise it is at most a `recommended default`.
 
 A Communication MLE's realization chain is: **canonical meaning → channel realization → language realization**. This is stronger than a typical string-key → translation localization model because it separates meaning from both channel and language, not just from source code — a channel realization (e.g. "toast") and a language realization (e.g. a Finnish translation of that toast) are both downstream of one canonical meaning, not siblings of it.
 
-Not every communication needs the full template — a one-line internal toast may need only `purpose`, `trigger`, `audience`, and `required meaning`. Omit fields that add nothing, per §7's general rule for optional sections.
+Not every communication needs the full template — a one-line internal toast may need only the required core and its representative example text. Omit optional fields that add nothing, per §7's general rule for optional sections.
 
 **Relationship to Source Context Reference:** an individual Communication MLE is owned by the capability whose trigger produces it, the same as any other dimension link — it is not, by itself, product-wide context. But the *tone and terminology conventions* multiple Communication MLEs should follow (e.g. "call it a `quote request`, never an `application`, anywhere in the product") often are product-wide and cross-cutting. When a Source Context Reference already exists for a product, a Communication MLE MAY reference it for those shared conventions rather than restating them; this does not change SCR's own scope (§ Source Context Reference — it still preserves context, not capability requirements) and does not make Communication itself an SCR-owned dimension.
 

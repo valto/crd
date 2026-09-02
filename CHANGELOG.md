@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Made representative example text a required part of every documented Communication MLE. The text is always semantically an `example`: actual source wording is preserved when available; otherwise the example must be explicitly illustrative and must not be presented as shipped or binding copy. Updated the specification, template, JSON Schema, validator, CRD Author skill, and guidance accordingly.
+
 ## 0.7.0 — 2026-09-01
 
 - Added complete technical SEO metadata across the documentation site: canonical URLs, unique search-focused titles and descriptions, Open Graph and social-card metadata, structured data, breadcrumbs, visible provenance, a complete sitemap, and `noindex` handling for the 404 page.

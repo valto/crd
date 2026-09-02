@@ -121,6 +121,8 @@ def validate_example(schema: dict[str, object], path: Path) -> None:
                 raise ValueError(f"{path.relative_to(ROOT)}: unsupported semantic class")
             if statement["evidenceStatus"] not in evidence_statuses:
                 raise ValueError(f"{path.relative_to(ROOT)}: unsupported evidence status")
+        if communication["exampleCopy"]["semanticClass"] != "example":
+            raise ValueError(f"{path.relative_to(ROOT)}: communication exampleCopy must use semanticClass=example")
 
     statement_groups = [
         instance["rulesInvariants"],
