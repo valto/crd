@@ -7,8 +7,8 @@
     "authorUrl": "https://valto.github.io/",
     "license": "https://creativecommons.org/licenses/by/4.0/",
     "specificationVersion": "Draft 0.4",
-    "packageVersion": "0.7.0",
-    "modified": "2026-09-01",
+    "packageVersion": "0.8.0",
+    "modified": "2026-09-09",
     "image": "https://valto.github.io/crd/assets/crd-social-card.png",
     "sameAs": [
       "https://github.com/valto",

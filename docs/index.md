@@ -1,6 +1,6 @@
 # Capability Documentation
 
-Draft 0.4 (package release 0.7.0) — an open, technology- and implementation-agnostic framework for defining, cataloguing, and operating complete capabilities.
+Draft 0.4 (package release 0.8.0) — an open, technology- and implementation-agnostic framework for defining, cataloguing, and operating complete capabilities.
 
 The canonical artifact is a **Capability Requirements Document (CRD)**: the requirement document for one Capability MLE. A capability may belong to a product, service, system, agent, or reusable open inventory; a CRD can be created before implementation or derived from existing systems, and it remains independent of any one realization mechanism.
 

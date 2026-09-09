@@ -1,8 +1,14 @@
 # Changelog
 
-## Unreleased
+## 0.8.0 — 2026-09-09
 
 - Made representative example text a required part of every documented Communication MLE. The text is always semantically an `example`: actual source wording is preserved when available; otherwise the example must be explicitly illustrative and must not be presented as shipped or binding copy. Updated the specification, template, JSON Schema, validator, CRD Author skill, and guidance accordingly.
+- Added a **capability statement** audience projection (`crd-specification.md` §7.2, `working-with-crds.md`) — a concise `[actor] can [intent] so that [outcome]` sentence assembled from existing fields, not a new CRD field. Gated on semantic class, not presence: renders only when actor, intent, and outcome are each `explicit fact`; a `reasonable inference` or hedged component falls back to the canonical capability purpose instead of a confident-sounding sentence built from uncertain material.
+- Named a **full-detail applicability pass** as an explicit, required step when producing and validating an extracted document (`agent-transformation-instructions.md`, CRD Author skill) — every relevant optional extension deliberately assessed and evidence-backed, not every optional extension filled. Mostly a naming of discipline already implicit in existing rules, not a new mechanism.
+- Expanded the cross-source extraction **source-role/limitation matrix** (`agent-transformation-instructions.md`, `source-context-template.md`, CRD Author skill) to cover every source type the framework already names as canonical: product-facing guides, current application code, API specifications, shared-core implementations, test forks, database schemas, tests/operational runbooks, user stories/interviews, and live running service responses — each with what it can establish alone and what it cannot.
+- Added responsive human-facing projection guidance for HTML/showcase template authors (`working-with-crds.md`) — labelled-field cards over bullet lists, mobile-safe evidence/provenance tables that keep Class and Source visible, and no color-only status signaling. Guidance only, not a specification requirement.
+- Recorded a deferred resolution on an inventory-level capability-relationship view: any future cross-CRD relationship view should be a **generated aggregation** of existing "Related MLEs by Dimension" links, produced by tooling from canonical sources, not a new hand-authored dataset format — every edge would already have to trace to an existing per-CRD relation, so a second hand-authored file would just create a second, driftable source of truth for the same facts.
+- Source for this batch: a proposal (`proposals/2026-09-03-inventory-projection-learnings.md`) grounded in a real multi-CRD pilot, independently reviewed via a 3-lens audit (factual accuracy, evidence-base verification, design-quality/redundancy) before adoption — see the proposal document's "Review outcome" section and `My-world-wiki/crd-framework.md` for the full reasoning and what was adopted vs. adopted-with-changes vs. deferred.
 
 ## 0.7.0 — 2026-09-01
 

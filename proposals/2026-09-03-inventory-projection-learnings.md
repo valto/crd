@@ -1,8 +1,30 @@
 # Proposal: Inventory projection and cross-source extraction learnings
 
-**Status:** proposed for review; non-normative.  
+**Status:** reviewed and resolved, 2026-09-09.  
 **Date:** September 3, 2026.  
 **Evidence base:** a Prifina Individuals pilot comprising three initially validated AI Twin CRDs, seven further cross-source Knowledge CRDs, a canonical ten-node relationship dataset, and an authenticated human-facing inventory projection.
+
+## Review outcome (2026-09-09)
+
+Independently reviewed via a 3-lens audit (factual accuracy, evidence-base verification, design-quality/redundancy), each a fresh non-fork agent, per [[audit-principles]]. The evidence base was independently verified against real local artifacts (`~/Code/crds-for-individuals`, `~/Code/prifina-capability-hub`) and checks out in exact detail — this is not an unsubstantiated claim. The proposal's factual claims about repo state (§Purpose's "already incorporated separately," §1's "no core change") were all confirmed accurate. Two issues were found and are fixed below; one issue is a resolution/deferral, not an implementation.
+
+| Recommendation | Outcome |
+|---|---|
+| 1. Capability statement projection | **Adopted with a fix.** The original guardrail gated on field *presence* ("established" vs. "unknown"), which would let a sentence assembled entirely from `reasonable inference` or hedged fields render with the same confident fluency as one built from `explicit fact` — a false-completeness risk. Fixed to gate on *semantic class*: render only when actor, intent, and outcome are each `explicit fact`; otherwise fall back to the canonical purpose. Shipped in `crd-specification.md` §7.2, `working-with-crds.md`, and the CRD Author skill. |
+| 2. Full-detail applicability pass | **Adopted by merging**, not as a new mechanism. It substantially restated rules already in `agent-transformation-instructions.md` (provenance, §6.1 shared-element handling, execution mode "when known," rules 10-11 on unresolved API/production claims). Its one real contribution — naming this a discrete, required per-CRD pass — is now a named step inside the existing step 7 ("Produce and validate the document"), not a separate section. |
+| 3. Source-role/limitation matrix | **Adopted, expanded.** The original 5-row table omitted source types the framework already names as canonical (`agent-transformation-instructions.md`'s source list): database schemas, tests/operational runbooks, user stories/interviews, and live running service responses. Added those four rows before shipping into `agent-transformation-instructions.md` step 1 and `source-context-template.md`. |
+| 4. Capability Relationship Dataset | **Deferred and reframed — not implemented as proposed.** Every edge in the proposed dataset already has to trace to an existing per-CRD "Related MLEs by Dimension" relation, making this a *generated aggregation* of data that already exists, not new source data needing its own hand-authored format. Its JSON example also used field names inconsistent with existing schema conventions (`type` instead of the schema's `relationship`, a flat `evidence` string instead of the schema's structured `statement` object, `CAP-01`-style ids with no precedent anywhere in this repo). Recorded as a deferred resolution in `working-with-crds.md` ("Deferred: an inventory-level relationship view") — build a generator from existing links when actually needed, don't hand-author a second dataset. |
+| 5. Responsive human-facing projection guidance | **Adopted as-is.** No conflict with existing HTML template guidance. Added to `working-with-crds.md`. |
+| 6. Mermaid — no change | **Confirmed, no action.** Reviewed; the existing rule already covers this correctly. |
+
+**One correction to this proposal's own text:** §"Suggested adoption sequence" step 4 (below) implied that gating schema changes behind "at least two independent inventories" continues established practice. It does not — the framework's most recent prior schema change (Related MLEs by Dimension, commit `e89867f`, 2026-09-01) landed in the *same commit* as its *first* single-example trial, with blind-auditing done afterward, not before. This proposal's threshold is a **new, stricter** bar being adopted going forward for schema changes specifically — Recommendation 4's deferral is its first application — not a continuation of precedent. Treat it as such rather than as a description of how this framework has actually operated.
+
+**Answers to this proposal's four review questions**, based on what shipped:
+
+1. *Specification's audience-projection section, or only `working-with-crds.md` and the skill?* Both — a short normative mention in `crd-specification.md` §7.2 (so it's discoverable from the spec itself), full guidance and the worked example in `working-with-crds.md` and the skill (so the detail doesn't bloat the normative spec). Matches how Tags (§7.3) and Related MLEs by Dimension (§7.4) are already split between spec and guide.
+2. *Should the source-role/limitation matrix become part of `source-context-template.md` now?* Yes — done, expanded to include the four missing source types.
+3. *Minimum evidence threshold for the relationship dataset: a second inventory, or one independent blind audit of the first?* Neither yet — reframed as a generator over existing data rather than a new format, so the threshold question is deferred until that generator is actually designed, not just until an inventory count is reached.
+4. *Should responsive projection guidance be a mandatory skill checklist, or stay in HTML templates only?* Stays in template/guide reference only, as originally proposed — no mandatory checklist added; nothing in the audit found a reason to escalate it.
 
 ## Purpose
 

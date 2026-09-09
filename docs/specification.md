@@ -190,6 +190,8 @@ One canonical CRD MAY be projected into audience-specific views without creating
 
 Projections SHOULD be traceable to the canonical CRD. They MUST NOT silently introduce requirements that are absent from it.
 
+One specific, named projection worth calling out: a **capability statement** —`[actor] can [intent] so that [meaningful outcome]` — assembled from an Interaction Contract MLE's `actor` and `command/intent` plus the capability's `meaningful outcome`. Generate it only when all three source fields are stated as `explicit fact` (§6); if any is a `reasonable inference`, a hedged statement, or `unknown/unresolved`, render the canonical `capability purpose` instead rather than assembling a confident-sounding sentence from uncertain material — a fluent sentence built from uncertain fields is indistinguishable in tone from one built from fact, which is exactly the false-completeness risk this specification's evidence discipline (§6) exists to prevent. Full guidance and a worked example: `working-with-crds.md`.
+
 ### 7.3 Tags
 
 A CRD MAY declare a small set of universal tags for dimensions that are not already derivable from its required fields (§4) and that stay meaningful regardless of which product realizes the capability. Reserve a tag for what isn't already implied elsewhere: do not tag `read-only` when every Interaction Contract's `transition` already states none; do not tag `internal`/`user-facing` when `exposure` (§7) already says so. A hand-authored tag that duplicates a derivable fact tends to drift from that fact over time — prefer deriving over tagging whenever a field already settles the question.
