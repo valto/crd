@@ -30,7 +30,23 @@ For a substantial source that yields multiple capabilities, also produce a [Sour
 
 For each source, record its type, scope, date/version if known, and whether it describes intent, rules, interaction, implementation, operations, or evidence.
 
-When a substantial source contains product-wide context that no one capability should own, create a Source Context Reference. Capture source citation, product/system intent, cross-cutting constraints, platform/client exposure, build sequencing, cross-capability verification material, and material not mapped elsewhere. The SCR carries no binding requirements of its own: every binding constraint must also appear in each CRD it governs.
+Record each source's **role and limit** — what kind of claim it can establish on its own, and what it cannot, so a later step doesn't silently upgrade a source beyond its actual authority:
+
+| Source role | Can establish | Cannot establish alone |
+|---|---|---|
+| Product-facing guide / help content | Documented user intent and described behavior | Current implementation, API shape, storage, or deployment state |
+| Current application code | A traced implementation path | Product intent, policy, or general reusable meaning by itself |
+| API specification | Published interface contract | User-facing capability purpose or actual caller/consumer by itself |
+| Shared-core implementation | Generic primitives and current code paths | That a particular product capability uses them, without a traced connection |
+| Test fork / historical implementation | Comparison patterns and historical implementation choices | Current production behavior or authority |
+| Database schema | Current storage shape | Product intent, API contract, or usage by itself |
+| Tests / operational runbooks | Expected or verified behavior | Product intent by itself |
+| User stories / interviews | A desired outcome | Implementation, or that the outcome was actually delivered |
+| Live running service response | Observed runtime behavior | A documented contract or intent — it's evidence of what happened, not what's promised |
+
+Required extraction rule: do not upgrade generic shared-core/API evidence into a product-specific realization claim without a traceable connection between the product and that implementation surface.
+
+When a substantial source contains product-wide context that no one capability should own, create a Source Context Reference. Capture source citation (including each source's role/limit above, plus revision/version/date/content-hash when reasonably available), product/system intent, cross-cutting constraints, platform/client exposure, build sequencing, cross-capability verification material, and material not mapped elsewhere. The SCR carries no binding requirements of its own: every binding constraint must also appear in each CRD it governs.
 
 ### 2. Extract candidate statements
 
@@ -97,6 +113,14 @@ Add a universal tag only for a dimension not already derivable from another requ
 ### 7. Produce and validate the document
 
 Use the human template. Verify that every required core field is present or explicitly unknown; every claimed fact has provenance; examples are non-binding; and implementation choices are not misrepresented as capability requirements.
+
+Run a **full-detail applicability pass** before returning the document — this names a discipline that's already implicit across the rules above as one explicit, required step, so it isn't skipped for being unnamed. "Full detail" means *every relevant optional extension has been deliberately assessed and evidence-backed*, not *every optional extension is filled*: an extension with no genuine content is correctly omitted, not a gap. For each CRD, check:
+
+- operational realization and execution mode are documented where evidence supports them, otherwise explicitly unknown (§6);
+- shared elements/approved reuse are documented where a shared component, collection, prompt, schema, or workflow is genuinely evidenced, per §6.1;
+- Related MLEs by Dimension are included only where real traceability exists, per `crd-specification.md` §7.4;
+- Communication MLEs exist only when the capability actually triggers a meaningful communication, with representative example text under the existing rule (§7.4);
+- direct production/API/runtime claims remain `unknown/unresolved` unless traced to their governing source (rules 10-11).
 
 ## Required output format
 

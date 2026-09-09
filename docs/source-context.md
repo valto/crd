@@ -12,6 +12,22 @@ An SCR is produced once per source (or per closely related set of sources) that 
 
 For each source document: title, path/URL, version or date if known, stated target audience, and stated purpose (quote or closely paraphrase — don't invent one if the source doesn't say).
 
+Also record each source's **role and limit** — what it can establish on its own, and what it cannot (full table and rationale: `agent-transformation-instructions.md` step 1):
+
+| Source role | Can establish | Cannot establish alone |
+|---|---|---|
+| Product-facing guide / help content | Documented user intent and described behavior | Current implementation, API shape, storage, or deployment state |
+| Current application code | A traced implementation path | Product intent, policy, or general reusable meaning by itself |
+| API specification | Published interface contract | User-facing capability purpose or actual caller/consumer by itself |
+| Shared-core implementation | Generic primitives and current code paths | That a particular product capability uses them, without a traced connection |
+| Test fork / historical implementation | Comparison patterns and historical implementation choices | Current production behavior or authority |
+| Database schema | Current storage shape | Product intent, API contract, or usage by itself |
+| Tests / operational runbooks | Expected or verified behavior | Product intent by itself |
+| User stories / interviews | A desired outcome | Implementation, or that the outcome was actually delivered |
+| Live running service response | Observed runtime behavior | A documented contract or intent |
+
+Do not upgrade generic shared-core/API evidence into a product-specific realization claim without a traceable connection between the product and that implementation surface.
+
 ### Product/system intent
 
 Why this exists, in the source's own terms (business rationale, problem being solved). Mark as `rationale/intent`, not `capability purpose` — this is about the whole product/system, not one ability.

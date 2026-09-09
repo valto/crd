@@ -1,6 +1,6 @@
 # Capability Documentation (CRD) — full context
 
-Generated 2026-09-01 from canonical repository sources. Specification status: Draft 0.4. Package release: 0.7.0.
+Generated 2026-09-09 from canonical repository sources. Specification status: Draft 0.4. Package release: 0.8.0.
 
 ---
 
@@ -9,7 +9,7 @@ URL: https://valto.github.io/crd/index.md
 
 # Capability Documentation
 
-Draft 0.4 (package release 0.7.0) — an open, technology- and implementation-agnostic framework for defining, cataloguing, and operating complete capabilities.
+Draft 0.4 (package release 0.8.0) — an open, technology- and implementation-agnostic framework for defining, cataloguing, and operating complete capabilities.
 
 The canonical artifact is a **Capability Requirements Document (CRD)**: the requirement document for one Capability MLE. A capability may belong to a product, service, system, agent, or reusable open inventory; a CRD can be created before implementation or derived from existing systems, and it remains independent of any one realization mechanism.
 
@@ -291,6 +291,8 @@ One canonical CRD MAY be projected into audience-specific views without creating
 
 Projections SHOULD be traceable to the canonical CRD. They MUST NOT silently introduce requirements that are absent from it.
 
+One specific, named projection worth calling out: a **capability statement** —`[actor] can [intent] so that [meaningful outcome]` — assembled from an Interaction Contract MLE's `actor` and `command/intent` plus the capability's `meaningful outcome`. Generate it only when all three source fields are stated as `explicit fact` (§6); if any is a `reasonable inference`, a hedged statement, or `unknown/unresolved`, render the canonical `capability purpose` instead rather than assembling a confident-sounding sentence from uncertain material — a fluent sentence built from uncertain fields is indistinguishable in tone from one built from fact, which is exactly the false-completeness risk this specification's evidence discipline (§6) exists to prevent. Full guidance and a worked example: `working-with-crds.md`.
+
 ### 7.3 Tags
 
 A CRD MAY declare a small set of universal tags for dimensions that are not already derivable from its required fields (§4) and that stay meaningful regardless of which product realizes the capability. Reserve a tag for what isn't already implied elsewhere: do not tag `read-only` when every Interaction Contract's `transition` already states none; do not tag `internal`/`user-facing` when `exposure` (§7) already says so. A hand-authored tag that duplicates a derivable fact tends to drift from that fact over time — prefer deriving over tagging whenever a field already settles the question.
@@ -515,7 +517,23 @@ For a substantial source that yields multiple capabilities, also produce a [Sour
 
 For each source, record its type, scope, date/version if known, and whether it describes intent, rules, interaction, implementation, operations, or evidence.
 
-When a substantial source contains product-wide context that no one capability should own, create a Source Context Reference. Capture source citation, product/system intent, cross-cutting constraints, platform/client exposure, build sequencing, cross-capability verification material, and material not mapped elsewhere. The SCR carries no binding requirements of its own: every binding constraint must also appear in each CRD it governs.
+Record each source's **role and limit** — what kind of claim it can establish on its own, and what it cannot, so a later step doesn't silently upgrade a source beyond its actual authority:
+
+| Source role | Can establish | Cannot establish alone |
+|---|---|---|
+| Product-facing guide / help content | Documented user intent and described behavior | Current implementation, API shape, storage, or deployment state |
+| Current application code | A traced implementation path | Product intent, policy, or general reusable meaning by itself |
+| API specification | Published interface contract | User-facing capability purpose or actual caller/consumer by itself |
+| Shared-core implementation | Generic primitives and current code paths | That a particular product capability uses them, without a traced connection |
+| Test fork / historical implementation | Comparison patterns and historical implementation choices | Current production behavior or authority |
+| Database schema | Current storage shape | Product intent, API contract, or usage by itself |
+| Tests / operational runbooks | Expected or verified behavior | Product intent by itself |
+| User stories / interviews | A desired outcome | Implementation, or that the outcome was actually delivered |
+| Live running service response | Observed runtime behavior | A documented contract or intent — it's evidence of what happened, not what's promised |
+
+Required extraction rule: do not upgrade generic shared-core/API evidence into a product-specific realization claim without a traceable connection between the product and that implementation surface.
+
+When a substantial source contains product-wide context that no one capability should own, create a Source Context Reference. Capture source citation (including each source's role/limit above, plus revision/version/date/content-hash when reasonably available), product/system intent, cross-cutting constraints, platform/client exposure, build sequencing, cross-capability verification material, and material not mapped elsewhere. The SCR carries no binding requirements of its own: every binding constraint must also appear in each CRD it governs.
 
 ### 2. Extract candidate statements
 
@@ -582,6 +600,14 @@ Add a universal tag only for a dimension not already derivable from another requ
 ### 7. Produce and validate the document
 
 Use the human template. Verify that every required core field is present or explicitly unknown; every claimed fact has provenance; examples are non-binding; and implementation choices are not misrepresented as capability requirements.
+
+Run a **full-detail applicability pass** before returning the document — this names a discipline that's already implicit across the rules above as one explicit, required step, so it isn't skipped for being unnamed. "Full detail" means *every relevant optional extension has been deliberately assessed and evidence-backed*, not *every optional extension is filled*: an extension with no genuine content is correctly omitted, not a gap. For each CRD, check:
+
+- operational realization and execution mode are documented where evidence supports them, otherwise explicitly unknown (§6);
+- shared elements/approved reuse are documented where a shared component, collection, prompt, schema, or workflow is genuinely evidenced, per §6.1;
+- Related MLEs by Dimension are included only where real traceability exists, per `crd-specification.md` §7.4;
+- Communication MLEs exist only when the capability actually triggers a meaningful communication, with representative example text under the existing rule (§7.4);
+- direct production/API/runtime claims remain `unknown/unresolved` unless traced to their governing source (rules 10-11).
 
 ## Required output format
 
@@ -669,6 +695,8 @@ A CRD may optionally trace itself to lower-level, discipline-specific MLEs — B
 
 One capability-owned Communication MLE and one product-wide Source Context Reference are complementary, not competing: the message itself (its trigger, audience, and required meaning) belongs to the capability that produces it, while a cross-cutting terminology or tone convention that many messages should follow belongs in SCR if the product already has one. See the worked trial in [Reconcile payments](examples/reconcile-payments.md), which resolves this exact question with a concrete example.
 
+**Deferred: an inventory-level relationship view.** A capability's Related MLEs by Dimension links, aggregated across a whole inventory, would let a reader navigate many CRDs' relationships at once instead of one CRD at a time. This should be a **generated aggregation** of links that already exist in each CRD, produced by tooling from the canonical sources (the same pattern the site's own build script uses for its other derived artifacts), not a new hand-authored dataset format — every edge in such a view already has to trace to an existing per-CRD relation, so hand-authoring a second file with its own field names and evidence shape would just create a second, driftable source of truth for the same facts. Deferred until that generator is actually designed and validated against a real multi-CRD inventory; see `proposals/2026-09-03-inventory-projection-learnings.md` for the fuller reasoning.
+
 ## Why a CRD is not merely a feature or existing artifact
 
 Existing artifacts remain useful, but each answers only part of the capability question:
@@ -699,6 +727,41 @@ One canonical CRD can be projected for different readers without duplicating or 
 | Operations | Which realization is active? How is it observed, constrained, recovered, and retired? |
 
 The projection is a view of the CRD, not a new source of truth. It must trace back to the canonical document.
+
+### Capability statement
+
+A human-facing inventory MAY render a concise, source-derived sentence for each capability:
+
+> `[actor] can [intent] so that [meaningful outcome].`
+
+For example, canonical fields:
+
+```text
+Actor: AI Twin owner
+Command / intent: Submit a public article URL and approve its draft
+Meaningful outcome: A reviewed web-page draft is approved as AI Twin Knowledge.
+```
+
+project to:
+
+> An AI Twin owner can submit a public article URL and approve its draft **so that a reviewed web-page draft is approved as AI Twin Knowledge.**
+
+This is an audience projection (§7.2), not a new CRD field and not a replacement for `capability purpose`, `meaningful outcome`, or the Interaction Contract MLE. Capability purpose alone often answers *why* but not clearly *who does what and to what end*; the statement makes a large inventory more scannable without duplicating requirements.
+
+**The guardrail gates on semantic class, not on presence.** Generate the sentence only when actor, intent, and meaningful outcome are each stated as `explicit fact` — not merely "known." A `reasonable inference`, a hedged statement ("preferably," "should"), or `unknown/unresolved` component must fall back to rendering the canonical `capability purpose`, exactly the same as a genuinely missing one. A sentence assembled from inferred or hedged fields reads with the same confident, quotable fluency as one assembled from fact — an inventory reader has no way to tell the difference from the sentence alone, so the check has to happen before rendering, not after. The outcome clause may be visually emphasized in a projection; that styling is not semantic priority and does not make the projection normative. The canonical CRD remains the authority if the sentence is abbreviated or awkward.
+
+### Responsive human-facing projection guidance
+
+These are useful defaults for HTML/showcase template authors, not specification requirements — individual products may use their own visual system:
+
+- Put identity/status/evidence metadata in a compact header; don't repeat it unchanged in the body.
+- Render labelled fields as label/value rows or cards, not long undifferentiated bullet lists.
+- Use selective emphasis for `capability purpose`, `meaningful outcome`, `result`, `rules/invariants`, and `required meaning`; don't bold every value.
+- Preserve semantic classes visibly, especially for examples, recommendations, implementation choices, and unknowns.
+- An evidence/provenance table may use Statement/Class/Source columns on wide screens; on narrow screens, convert each row into a labelled card or equivalent stacked representation rather than requiring horizontal scroll or clipping text — don't remove `Class` or `Source` on mobile, provenance is part of the meaning, not decoration.
+- An inventory may use a compact table on wide screens and one capability card per row on narrow screens; avoid using color or typography alone to distinguish evidence maturity or status.
+
+See `~/.claude/skills/crd-author/reference/inventory-html-template.html` and `crd-html-template.html` for where these apply in the bundled templates.
 
 ---
 
